@@ -17,6 +17,7 @@ public class Property {
     // welke informatie heb ik nodig?
     // adres
     // huisnummer
+    // oppervlakte
     // prijs
     // beschikbaar ja of nee
     // match met gebruiker ja of nee
@@ -25,6 +26,7 @@ public class Property {
     private String streetName;
     private Integer houseNumber;
     private Integer numberOfRooms;
+    private Integer surface;
     private Double price;
     private Boolean available;
     private Boolean match;
