@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/properties")
+@RequestMapping("/properties") // Using @RequestMapping sets the endpoint as a standard, unless specified otherwise
 public class PropertyController {
 
     private final PropertyService propertyService;

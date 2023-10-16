@@ -3,10 +3,12 @@ package com.example.eindopdracht.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 
-@Data
+@Data // Lombok imports automatically the Constructor, Getters and Setter by using @Data
 @Entity
+@Table(name="properties")
 public class Property {
 
     @Id //  Primary Key of the entity
@@ -26,14 +28,10 @@ public class Property {
     private String streetName;
     private Integer houseNumber;
     private Integer numberOfRooms;
-    private Integer surface;
+    private String surface;
     private Double price;
     private Boolean available;
     private Boolean match;
 
-    // Constructor of class Property -- niet nodig ivm @Data (want is geimporteerd door Lombok
-
-
-    // Getters and Setters of class Property -- niet nodig ivm @Data (want is geimporteerd door Lombok
 
 }

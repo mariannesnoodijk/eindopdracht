@@ -10,7 +10,7 @@ public class PropertyDto {
     private String streetName;
     private Integer houseNumber;
     private Integer numberOfRooms;
-    private Integer surface;
+    private String surface;
     private Double price;
     private Boolean available;
     private Boolean match;
