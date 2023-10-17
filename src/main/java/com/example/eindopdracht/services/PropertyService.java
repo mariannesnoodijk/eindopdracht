@@ -45,7 +45,7 @@ public class PropertyService {
         pDto.setMatch(p.getMatch());
     }
 
-    private void propertyDtoToProperty(PropertyDto propertyDto, Property property) {
+    private static void propertyDtoToProperty(PropertyDto propertyDto, Property property) {
         property.setId(propertyDto.getId());
         property.setStreetName(propertyDto.getStreetName());
         property.setHouseNumber(propertyDto.getHouseNumber());

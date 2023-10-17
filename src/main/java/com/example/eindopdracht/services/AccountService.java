@@ -5,18 +5,17 @@ import com.example.eindopdracht.exceptions.IdNotFoundException;
 import com.example.eindopdracht.models.User;
 import com.example.eindopdracht.repositories.UserRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class AccountService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public AccountService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -39,7 +38,7 @@ public class UserService {
         uDto.setPassword(u.getPassword());
     }
 
-    private static void userDtoToUser(UserDto userDto, User user) {
+    private void userDtoToUser(UserDto userDto, User user) {
         user.setId(userDto.getId());
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
@@ -55,22 +54,5 @@ public class UserService {
         } else {
             throw new IdNotFoundException("Property not found with ID: " + id);
         }
-    }
-
-
-    public UserDto createUser(UserDto userDto) {
-        User user = new User();
-        userDtoToUser(userDto, user);
-
-        User savedUser = userRepository.save(user);
-
-        UserDto savedUserDto = new UserDto();
-       userToUserDto(savedUser, savedUserDto);
-
-        return savedUserDto;
-    }
-
-    public void deleteUser(@RequestBody Long id) {
-        userRepository.deleteById(id);
     }
 }

@@ -23,6 +23,7 @@ public class Property {
     // prijs
     // beschikbaar ja of nee
     // match met gebruiker ja of nee
+    // favorite?? ja of nee
 
 
     private String streetName;
