@@ -1,12 +1,9 @@
 package com.example.eindopdracht.dto;
 
-
 import lombok.Data;
 
 @Data
-public class UserDto {
+public class AuthDto {
     private String username;
     private String password;
-
-    private String[] roles;
 }

@@ -1,35 +1,49 @@
 package com.example.eindopdracht.controllers;
 
-import com.example.eindopdracht.dto.UserDto;
-import com.example.eindopdracht.services.UserService;
+import com.example.eindopdracht.dto.AccountDto;
+import com.example.eindopdracht.services.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/account") // Using @RequestMapping sets the endpoint as a standard, unless specified otherwise
+@RestController // Handles HTTP requests and returns the response directly to the client
+@RequestMapping("/accounts") // Using @RequestMapping sets the endpoint as a standard, unless specified otherwise
 public class AccountController {
 
-    private final UserService userService;
-
-    public AccountController(UserService userService) {
-        this.userService = userService;
+    private final AccountService accountService;
+    public AccountController(AccountService accountService) {
+        this.accountService = accountService;
     }
 
-    @GetMapping("/users")
-    public ResponseEntity<List<UserDto>> getAllUsers() {
-        List<UserDto> uDto = userService.getAllUsers();
-        return new ResponseEntity<>(uDto, HttpStatus.OK);
+    // This method handles HTTP GET requests to the /accounts endpoint
+    @GetMapping
+    public ResponseEntity<List<AccountDto>> getAllAccounts() {
+        List<AccountDto> aDto = accountService.getAllAccounts();
+        return new ResponseEntity<>(aDto, HttpStatus.OK);
     }
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity<UserDto> getOneUser(@PathVariable Long id) {
-        UserDto uDto = userService.getUser(id);
-        return new ResponseEntity<>(uDto, HttpStatus.OK);
+    // This method handles HTTP GET requests to the /accounts/{id} endpoint
+    @GetMapping("/{id}")
+    public ResponseEntity<AccountDto> getOneAccount(@PathVariable Long id) {
+        AccountDto aDto = accountService.getAccount(id);
+        return new ResponseEntity<>(aDto, HttpStatus.OK);
     }
+
+    // This method handles HTTP POST requests to the /accounts endpoint
+    @PostMapping
+    public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto) {
+        AccountDto newAccount = accountService.createAccount(accountDto);
+        return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
+    }
+
+    // This method handles HTTP DELETE requests to the /accounts/{id} endpoint
+    @DeleteMapping("/{id}")
+    public ResponseEntity<AccountDto> deleteAccount(@PathVariable Long id) {
+        accountService.deleteAccount(id);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }

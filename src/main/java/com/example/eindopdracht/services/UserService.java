@@ -1,11 +1,13 @@
 package com.example.eindopdracht.services;
 
+import com.example.eindopdracht.dto.AccountDto;
 import com.example.eindopdracht.dto.UserDto;
 import com.example.eindopdracht.exceptions.IdNotFoundException;
+import com.example.eindopdracht.models.Account;
 import com.example.eindopdracht.models.User;
+import com.example.eindopdracht.repositories.AccountRepository;
 import com.example.eindopdracht.repositories.UserRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+
     public List<UserDto> getAllUsers() {
         List<User> users = userRepository.findAll();
         List<UserDto> userDtos = new ArrayList<>();
@@ -33,19 +36,7 @@ public class UserService {
         return userDtos;
     }
 
-    private static void userToUserDto(User u, UserDto uDto) {
-        uDto.setId(u.getId());
-        uDto.setUsername(u.getUsername());
-        uDto.setPassword(u.getPassword());
-    }
-
-    private static void userDtoToUser(UserDto userDto, User user) {
-        user.setId(userDto.getId());
-        user.setUsername(userDto.getUsername());
-        user.setPassword(userDto.getPassword());
-    }
-
-    public UserDto getUser(Long id) {
+    public UserDto getUser(String id) {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             User u = user.get();
@@ -57,20 +48,10 @@ public class UserService {
         }
     }
 
-
-    public UserDto createUser(UserDto userDto) {
-        User user = new User();
-        userDtoToUser(userDto, user);
-
-        User savedUser = userRepository.save(user);
-
-        UserDto savedUserDto = new UserDto();
-       userToUserDto(savedUser, savedUserDto);
-
-        return savedUserDto;
+    private static void userToUserDto(User u, UserDto uDto) {
+        uDto.setUsername(u.getUsername());
+        uDto.setPassword(u.getPassword());
     }
 
-    public void deleteUser(@RequestBody Long id) {
-        userRepository.deleteById(id);
-    }
+
 }

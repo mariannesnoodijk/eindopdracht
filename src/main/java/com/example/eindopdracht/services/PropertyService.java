@@ -20,20 +20,6 @@ public class PropertyService {
         this.propertyRepository = propertyRepository;
     }
 
-    public List<PropertyDto> getAllProperties() {
-
-        List<Property> properties = propertyRepository.findAll();
-        List<PropertyDto> propertyDtos = new ArrayList<>();
-
-        for (Property p : properties) {
-            PropertyDto pDto = new PropertyDto();
-            propertyToPropertyDto(p, pDto);
-
-            propertyDtos.add(pDto);
-        }
-        return propertyDtos;
-    }
-
     private static void propertyToPropertyDto(Property p, PropertyDto pDto) {
         pDto.setId(p.getId());
         pDto.setStreetName(p.getStreetName());
@@ -68,6 +54,19 @@ public class PropertyService {
         }
     }
 
+    public List<PropertyDto> getAllProperties() {
+
+        List<Property> properties = propertyRepository.findAll();
+        List<PropertyDto> propertyDtos = new ArrayList<>();
+
+        for (Property p : properties) {
+            PropertyDto pDto = new PropertyDto();
+            propertyToPropertyDto(p, pDto);
+
+            propertyDtos.add(pDto);
+        }
+        return propertyDtos;
+    }
 
     public PropertyDto createProperty(PropertyDto propertyDto) {
         Property property = new Property();

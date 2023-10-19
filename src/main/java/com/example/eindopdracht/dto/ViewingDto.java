@@ -8,6 +8,6 @@ public class ViewingDto {
 
     private String firstName;
     private String lastName;
-    private String email;
-    private Integer phoneNumber;
+    private Long phoneNumber;
+    private String emailAddress;
 }
