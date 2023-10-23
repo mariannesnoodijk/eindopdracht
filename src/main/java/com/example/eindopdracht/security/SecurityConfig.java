@@ -27,15 +27,6 @@ public class SecurityConfig {
         this.userRepository = userRepos;
     }
 
-//    @Bean
-//    public AuthenticationManager authManager(HttpSecurity http, PasswordEncoder encoder, UserDetailsService udService) throws Exception {
-//        return http.getSharedObject(AuthenticationManagerBuilder.class)
-//                .userDetailsService(udService)
-//                .passwordEncoder(encoder)
-//                .and()
-//                .build();
-//    }
-
     @Bean
     public AuthenticationManager authenticationManager(UserDetailsService udService, PasswordEncoder passwordEncoder) throws Exception {
         var auth = new DaoAuthenticationProvider();
@@ -57,14 +48,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/*").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/*").permitAll()
+                .authorizeHttpRequests(auth -> auth // TODO: MAKE SURE ENDPOINTS ETC ARE CORRECTLY SET
+                                .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/auth").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/*").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/*").permitAll()
 
-                        .requestMatchers("/secret").hasRole("ADMIN")
-                        .requestMatchers("/hello").authenticated()
+                                .requestMatchers("/secret").hasRole("ADMIN")
+                                .requestMatchers("/hello").authenticated()
 //                        .anyRequest().denyAll()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
