@@ -29,6 +29,7 @@ public class Property {
     private String streetName;
     private Integer houseNumber;
     private Double price;
+    private String description;
 //    private Boolean available;
 //    private Boolean match; // TODO: OPTIONAL... GA IK DOEN OF NIET?
 

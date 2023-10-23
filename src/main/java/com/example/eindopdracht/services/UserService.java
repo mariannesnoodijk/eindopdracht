@@ -1,6 +1,5 @@
 package com.example.eindopdracht.services;
 
-import com.example.eindopdracht.dto.AccountDto;
 import com.example.eindopdracht.dto.UserDto;
 import com.example.eindopdracht.exceptions.IdNotFoundException;
 import com.example.eindopdracht.models.Account;
@@ -37,22 +36,23 @@ public class UserService {
             userToUserDto(u, uDto);
             return (uDto);
         } else {
-            throw new IdNotFoundException("Property not found with ID: " + id);
+            throw new IdNotFoundException("User not found with ID: " + id);
         }
     }
 
-    public List<UserDto> getAllUsers() {
-        List<User> users = userRepository.findAll();
-        List<UserDto> userDtos = new ArrayList<>();
-
-        for (User u : users) {
-            UserDto uDto = new UserDto();
-            userToUserDto(u, uDto);
-
-            userDtos.add(uDto);
-        }
-        return userDtos;
-    }
+    // TODO: Wil ik hier wel alle users op kunnen vragen?
+//    public List<UserDto> getAllUsers() {
+//        List<User> users = userRepository.findAll();
+//        List<UserDto> userDtos = new ArrayList<>();
+//
+//        for (User u : users) {
+//            UserDto uDto = new UserDto();
+//            userToUserDto(u, uDto);
+//
+//            userDtos.add(uDto);
+//        }
+//        return userDtos;
+//    }
 
     private static void userToUserDto(User u, UserDto uDto) {
         uDto.setUsername(u.getUsername());

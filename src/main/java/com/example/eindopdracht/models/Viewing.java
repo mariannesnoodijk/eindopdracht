@@ -14,8 +14,7 @@ public class Viewing {
     @GeneratedValue
     private Long id;
 
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private Long phoneNumber;
     private String emailAddress;
 

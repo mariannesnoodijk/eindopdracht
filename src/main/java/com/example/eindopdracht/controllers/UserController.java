@@ -21,13 +21,14 @@ public class UserController {
         this.userService = userService;
     }
 
-
-    @GetMapping // This method handles HTTP GET requests to the /users endpoint
-
-    public ResponseEntity<List<UserDto>> getAllUsers() {
-        List<UserDto> dDto = userService.getAllUsers();
-        return new ResponseEntity<>(dDto, HttpStatus.OK);
-    }
+// TODO: Wil ik hier wel alle users op kunnen vragen?
+//
+//    @GetMapping // This method handles HTTP GET requests to the /users endpoint
+//
+//    public ResponseEntity<List<UserDto>> getAllUsers() {
+//        List<UserDto> dDto = userService.getAllUsers();
+//        return new ResponseEntity<>(dDto, HttpStatus.OK);
+//    }
 
     @GetMapping("/{id}") // This method handles HTTP GET requests to the /users/{id} endpoint, where {id} is a path variable representing the property ID
     public ResponseEntity<UserDto> getOneUser(@PathVariable String id) {

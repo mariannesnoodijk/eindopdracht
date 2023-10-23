@@ -21,19 +21,17 @@ public class PropertyService {
     }
 
     private static void propertyToPropertyDto(Property p, PropertyDto pDto) {
-        pDto.setId(p.getId());
         pDto.setStreetName(p.getStreetName());
         pDto.setHouseNumber(p.getHouseNumber());
         pDto.setPrice(p.getPrice());
-        pDto.setAvailable(p.getAvailable());
+        pDto.setDescription(p.getDescription());
     }
 
     private static void propertyDtoToProperty(PropertyDto propertyDto, Property property) {
-        property.setId(propertyDto.getId());
         property.setStreetName(propertyDto.getStreetName());
         property.setHouseNumber(propertyDto.getHouseNumber());
         property.setPrice(propertyDto.getPrice());
-        property.setAvailable(propertyDto.getAvailable());
+        property.setDescription(propertyDto.getDescription());
     }
 
     public PropertyDto getProperty(Long id) {
@@ -74,7 +72,8 @@ public class PropertyService {
         return savedPropertyDto;
     }
 
-    public void deleteProperty(@RequestBody Long id) {
+    public String deleteProperty(@RequestBody Long id) {
         propertyRepository.deleteById(id);
+        return "Property successfully deleted";
     }
 }

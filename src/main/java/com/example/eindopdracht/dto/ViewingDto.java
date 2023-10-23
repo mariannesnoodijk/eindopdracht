@@ -12,7 +12,6 @@ public class ViewingDto { // This class serves as a data structure for transferr
     @NotEmpty(message = "Full name cannot be empty")
     private String fullName;
 
-    @NotEmpty
     @Min(value = 10, message = "A phone number consists of 10 numbers")
     @Max(value = 10, message = "A phone number consists of 10 numbers")
     private Long phoneNumber;

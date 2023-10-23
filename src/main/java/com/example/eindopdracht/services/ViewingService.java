@@ -36,17 +36,13 @@ public class ViewingService {
     }
 
     private static void viewingToViewingDto(Viewing v, ViewingDto vDto) {
-        vDto.setId(v.getId());
-        vDto.setFirstName(v.getFirstName());
-        vDto.setLastName(v.getLastName());
+        vDto.setFullName(v.getFullName());
         vDto.setPhoneNumber(v.getPhoneNumber());
         vDto.setEmailAddress(v.getEmailAddress());
     }
 
     private static void viewingDtoToViewing(ViewingDto viewingDto, Viewing viewing) {
-        viewing.setId(viewingDto.getId());
-        viewing.setFirstName(viewingDto.getFirstName());
-        viewing.setLastName(viewingDto.getLastName());
+        viewing.setFullName(viewingDto.getFullName());
         viewing.setPhoneNumber(viewingDto.getPhoneNumber());
         viewing.setEmailAddress(viewingDto.getEmailAddress());
     }
@@ -63,7 +59,8 @@ public class ViewingService {
         return savedViewingDto;
     }
 
-    public void deleteViewing(@RequestBody Long id) {
+    public String deleteViewing(@RequestBody Long id) {
         viewingRepository.deleteById(id);
+        return "Viewing successfully deleted";
     }
 }
