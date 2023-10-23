@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data // Lombok imports automatically the Constructor, Getters and Setter by using @Data
@@ -37,8 +38,12 @@ public class Account {
             User user;
 
     // RELATION BETWEEN ACCOUNT & PROPERTY
-    @OneToMany(mappedBy = "accounts") // This is the target side of the relation with Viewing. There is nothing in the database.
+    @ManyToMany(fetch = FetchType.EAGER) // The FetchType. EAGER option indicates that the associated entity should be fetched eagerly, which means that it will be fetched at the same time as the parent entity.
+    private List<Property> properties = new ArrayList<>();
+
+    // RELATION BETWEEN ACCOUNT & VIEWING
+    @OneToMany(mappedBy = "account") // This is the target side of the relation with Viewing. There is nothing in the database.
     @JsonIgnore
-    private List<Property> properties;
+    List<Viewing> viewings;
 
 }

@@ -34,19 +34,14 @@ public class Property {
 //    private Boolean match; // TODO: OPTIONAL... GA IK DOEN OF NIET?
 
 
-    // RELATION BETWEEN PROPERTY & USER
+    // RELATION BETWEEN PROPERTY & ACCOUNT
     @ManyToMany(mappedBy = "properties") // This is the target side of the relation with Account. There is nothing in the database.
-    private List<User> users;
+    private List<Account> accounts;
 
     // RELATION BETWEEN PROPERTY & VIEWING
     @OneToMany(mappedBy = "properties") // This is the target side of the relation with Viewing. There is nothing in the database.
     @JsonIgnore
     private List<Viewing> viewings;
-
-    // RELATION BETWEEN PROPERTY & ACCOUNT
-    @ManyToOne(fetch = FetchType.EAGER) // This is the owner of the relation with Property. There is a Foreign Key in the database
-    @JoinColumn(name = "account_id")
-    private Account accounts;
 
 
 }
