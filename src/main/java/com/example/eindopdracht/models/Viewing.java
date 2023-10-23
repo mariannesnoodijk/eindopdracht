@@ -1,9 +1,10 @@
 package com.example.eindopdracht.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data // Lombok imports automatically the Constructor, Getters and Setter by using @Data
 @Entity
@@ -18,6 +19,9 @@ public class Viewing {
     private Long phoneNumber;
     private String emailAddress;
 
+    private String dateViewing; // Welk Data Type valt een datum onder?
+    private String timeViewing; // Welk Data Type val een tijd onder?
+
     //  Variables of class Viewing
     // welke informatie heb ik nodig?
 // voornaam
@@ -26,8 +30,17 @@ public class Viewing {
     // telefoonnummer
 
 
-    // Constructor of class Viewing
+    // RELATION BETWEEN VIEWING & USER
+    @ManyToOne(fetch = FetchType.EAGER) // This is the owner of the relation with User. There is a Foreign Key in the database
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    // RELATION BETWEEN VIEWING & PROPERTY
+    @ManyToOne(fetch = FetchType.EAGER) // This is the owner of the relation with Property. There is a Foreign Key in the database
+    @JoinColumn(name = "property_id")
+    private Property properties;
 
 
-    // Getters and Setters of class Viewing
+    @ManyToMany(fetch = FetchType.EAGER) // The FetchType. EAGER option indicates that the associated entity should be fetched eagerly, which means that it will be fetched at the same time as the parent entity.
+    private List<User> users = new ArrayList<>();
 }

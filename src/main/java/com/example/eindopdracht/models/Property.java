@@ -1,10 +1,10 @@
 package com.example.eindopdracht.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data // Lombok imports automatically the Constructor, Getters and Setter by using @Data
 @Entity
@@ -28,11 +28,24 @@ public class Property {
 
     private String streetName;
     private Integer houseNumber;
-    private Integer numberOfRooms;
-    private String surface;
     private Double price;
     private Boolean available;
-    private Boolean match;
+//    private Boolean match; // TODO: OPTIONAL... GA IK DOEN OF NIET?
+
+
+    // RELATION BETWEEN PROPERTY & USER
+    @ManyToMany(mappedBy = "properties") // This is the target side of the relation with Account. There is nothing in the database.
+    private List<User> users;
+
+    // RELATION BETWEEN PROPERTY & VIEWING
+    @OneToMany(mappedBy = "properties") // This is the target side of the relation with Viewing. There is nothing in the database.
+    @JsonIgnore
+    private List<Viewing> viewings;
+
+    // RELATION BETWEEN PROPERTY & ACCOUNT
+    @ManyToOne(fetch = FetchType.EAGER) // This is the owner of the relation with Property. There is a Foreign Key in the database
+    @JoinColumn(name = "account_id")
+    private Account accounts;
 
 
 }
