@@ -17,29 +17,28 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    // This method handles HTTP GET requests to the /accounts endpoint
-    @GetMapping
+
+    @GetMapping// This method handles HTTP GET requests to the /accounts endpoint
     public ResponseEntity<List<AccountDto>> getAllAccounts() {
         List<AccountDto> aDto = accountService.getAllAccounts();
         return new ResponseEntity<>(aDto, HttpStatus.OK);
     }
 
-    // This method handles HTTP GET requests to the /accounts/{id} endpoint
-    @GetMapping("/{id}")
+
+    @GetMapping("/{id}") // This method handles HTTP GET requests to the /accounts/{id} endpoint
     public ResponseEntity<AccountDto> getOneAccount(@PathVariable Long id) {
         AccountDto aDto = accountService.getAccount(id);
         return new ResponseEntity<>(aDto, HttpStatus.OK);
     }
 
-    // This method handles HTTP POST requests to the /accounts endpoint
-    @PostMapping
+
+    @PostMapping // This method handles HTTP POST requests to the /accounts endpoint creating an account
     public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto) {
         AccountDto newAccount = accountService.createAccount(accountDto);
         return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
     }
 
-    // This method handles HTTP DELETE requests to the /accounts/{id} endpoint
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") // This method handles HTTP DELETE requests to the /accounts/{id} endpoint
     public ResponseEntity<AccountDto> deleteAccount(@PathVariable Long id) {
         accountService.deleteAccount(id);
 

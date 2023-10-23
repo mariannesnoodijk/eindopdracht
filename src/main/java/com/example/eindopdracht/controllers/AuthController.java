@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController // Handles HTTP requests and returns the response directly to the client
-@RequestMapping("/auth")
+@RequestMapping("/auth") // Using @RequestMapping sets the endpoint as a standard, unless specified otherwise
 public class AuthController {
     private final AuthenticationManager authManager;
     private final JwtService jwtService;
@@ -26,8 +26,7 @@ public class AuthController {
         this.jwtService = service;
     }
 
-    // This method handles HTTP POST requests to the /auth endpoint
-    @PostMapping
+    @PostMapping  // This method handles HTTP POST requests to the /auth endpoint
     public ResponseEntity<Object> signIn(@RequestBody AuthDto authDto) {
         UsernamePasswordAuthenticationToken up =
                 new UsernamePasswordAuthenticationToken(authDto.getUsername(), authDto.getPassword());

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController // Handles HTTP requests and returns the response directly to the client
 @RequestMapping("/properties") // Using @RequestMapping sets the endpoint as a standard, unless specified otherwise
 public class PropertyController {
 
@@ -18,25 +18,25 @@ public class PropertyController {
         this.propertyService = propertyService;
     }
 
-    @GetMapping
+    @GetMapping // This method handles HTTP GET requests to the /properties endpoint
     public ResponseEntity<List<PropertyDto>> getAllProperties() {
         List<PropertyDto> pDto = propertyService.getAllProperties();
         return new ResponseEntity<>(pDto, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // This method handles HTTP GET requests to the /properties/{id} endpoint, where {id} is a path variable representing the property ID
     public ResponseEntity<PropertyDto> getOneProperty(@PathVariable Long id) {
         PropertyDto pDto = propertyService.getProperty(id);
         return new ResponseEntity<>(pDto, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping // This method handles HTTP POST requests to the /properties endpoint creating a property
     public ResponseEntity<PropertyDto> createProperty(@RequestBody PropertyDto propertyDto) {
         PropertyDto newProperty = propertyService.createProperty(propertyDto);
         return new ResponseEntity<>(newProperty, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") // This method handles HTTP DELETE requests to the /properties/{id} endpoint, where {id} is a path variable representing the property ID
     public ResponseEntity<PropertyDto> deleteProperty(@PathVariable Long id) {
         propertyService.deleteProperty(id);
 

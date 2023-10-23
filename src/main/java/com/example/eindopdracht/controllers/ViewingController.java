@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/viewings")
+@RestController // Handles HTTP requests and returns the response directly to the client
+@RequestMapping("/viewings") // Using @RequestMapping sets the endpoint as a standard, unless specified otherwise
 public class ViewingController {
 
     private final ViewingService viewingService;
@@ -19,14 +19,22 @@ public class ViewingController {
         this.viewingService = viewingService;
     }
 
-    @GetMapping
+    @GetMapping // This method handles HTTP GET requests to the /viewings endpoint
     public ResponseEntity<List<ViewingDto>> getAllViewings() {
         List<ViewingDto> vDto = viewingService.getAllViewings();
         return new ResponseEntity<>(vDto, HttpStatus.OK);
     }
-    @PostMapping
+    @PostMapping // This method handles HTTP POST requests to the /viewings endpoint creating a viewing
     public ResponseEntity<ViewingDto> createViewing(@RequestBody ViewingDto viewingDto) {
         ViewingDto newViewing = viewingService.createViewing(viewingDto);
         return new ResponseEntity<>(newViewing, HttpStatus.CREATED);
+    }
+
+    // ADD DELETE A VIEWING
+    @DeleteMapping("/{id}") // This method handles HTTP DELETE requests to the /viewings/{id} endpoint, where {id} is a path variable representing the property ID
+    public ResponseEntity<ViewingDto> deleteViewing(@PathVariable Long id) {
+        viewingService.deleteViewing(id);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
