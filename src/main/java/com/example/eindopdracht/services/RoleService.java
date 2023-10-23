@@ -18,12 +18,12 @@ public class RoleService {
     }
 
     public List<RoleDto> getAllRoles() {
-            List<RoleDto> roleDtos = new ArrayList<>();
-            for (Role r : roleRepository.findAll()) {
-                RoleDto rdto = new RoleDto();
-                rdto.setRolename(r.getRolename());
-                roleDtos.add(rdto);
-            }
-            return roleDtos;
+        List<RoleDto> roleDtos = new ArrayList<>();
+        for (Role r : roleRepository.findAll()) {
+            RoleDto rdto = new RoleDto();
+            rdto.setRolename(r.getRolename());
+            roleDtos.add(rdto);
         }
+        return roleDtos;
     }
+}

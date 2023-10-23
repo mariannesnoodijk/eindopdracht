@@ -1,86 +1,67 @@
-package com.example.eindopdracht.services;
+package com.example.eindopdracht.security;
 
-import com.example.eindopdracht.dto.AccountDto;
-import com.example.eindopdracht.exceptions.IdNotFoundException;
-import com.example.eindopdracht.models.Account;
-import com.example.eindopdracht.repositories.AccountRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.example.eindopdracht.repositories.UserRepository;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+    private final JwtService jwtService;
+    private final UserRepository userRepository;
 
-@Service
-public class AccountService {
-
-    private final AccountRepository accountRepository;
-
-    public AccountService(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
+    public SecurityConfig(JwtService service, UserRepository userRepos) {
+        this.jwtService = service;
+        this.userRepository = userRepos;
     }
 
-
-    public List<AccountDto> getAllAccounts() {
-        List<Account> accounts = accountRepository.findAll();
-        List<AccountDto> accountDtos = new ArrayList<>();
-
-        for (Account a : accounts) {
-            AccountDto aDto = new AccountDto();
-            accountToAccountDto(a, aDto);
-
-            accountDtos.add(aDto);
-        }
-        return accountDtos;
+    @Bean
+    public AuthenticationManager authenticationManager(UserDetailsService udService, PasswordEncoder passwordEncoder) throws Exception {
+        var auth = new DaoAuthenticationProvider();
+        auth.setPasswordEncoder(passwordEncoder);
+        auth.setUserDetailsService(udService);
+        return new ProviderManager(auth);
     }
 
-    public AccountDto getAccount(Long id) {
-        Optional<Account> account = accountRepository.findById(id);
-        if (account.isPresent()) {
-            Account a = account.get();
-            AccountDto aDto = new AccountDto();
-            accountToAccountDto(a, aDto);
-            return (aDto);
-        } else {
-            throw new IdNotFoundException("Property not found with ID: " + id);
-        }
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new MyUserDetailsService(this.userRepository);
     }
 
-    public AccountDto createAccount(AccountDto accountDto) {
-        Account account = new Account();
-        accountDtoToAccount(accountDto, account);
-
-        Account savedAccount = accountRepository.save(account);
-
-        AccountDto savedAccountDto = new AccountDto();
-        accountToAccountDto(savedAccount, savedAccountDto);
-
-        return savedAccountDto;
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
-    public void deleteAccount(@RequestBody Long id) {
-            accountRepository.deleteById(id);
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests(auth -> auth // TODO: MAKE SURE ENDPOINTS ETC ARE CORRECTLY SET
+                                .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/auth").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/*").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/*").permitAll()
+
+                                .requestMatchers("/secret").hasRole("ADMIN")
+                                .requestMatchers("/hello").authenticated()
+//                        .anyRequest().denyAll()
+                )
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .csrf(csrf -> csrf.disable())
+                .addFilterBefore(new JwtRequestFilter(jwtService, userDetailsService()), UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
     }
-
-
-    private static void accountToAccountDto(Account a, AccountDto aDto) {
-        aDto.setId(a.getId());
-        aDto.setUsername(a.getUsername());
-        aDto.setPassword(a.getPassword());
-        aDto.setFirstName(a.getFirstName());
-        aDto.setLastName(a.getLastName());
-        aDto.setPhoneNumber(a.getPhoneNumber());
-        aDto.setEmailAddress(a.getEmailAddress());
-    }
-
-    private static void accountDtoToAccount(AccountDto accountDto, Account account) {
-        account.setId(accountDto.getId());
-        account.setUsername(accountDto.getUsername());
-        account.setPassword(accountDto.getPassword());
-        account.setFirstName(accountDto.getFirstName());
-        account.setLastName(accountDto.getLastName());
-        account.setPhoneNumber(accountDto.getPhoneNumber());
-        account.setEmailAddress(accountDto.getEmailAddress());
-    }
-
 }

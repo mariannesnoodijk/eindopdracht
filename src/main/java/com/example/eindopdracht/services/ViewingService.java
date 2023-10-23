@@ -6,6 +6,7 @@ import com.example.eindopdracht.models.Property;
 import com.example.eindopdracht.models.Viewing;
 import com.example.eindopdracht.repositories.ViewingRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,4 +63,7 @@ public class ViewingService {
         return savedViewingDto;
     }
 
+    public void deleteViewing(@RequestBody Long id) {
+        viewingRepository.deleteById(id);
+    }
 }

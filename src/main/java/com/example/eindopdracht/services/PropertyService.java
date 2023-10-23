@@ -24,22 +24,16 @@ public class PropertyService {
         pDto.setId(p.getId());
         pDto.setStreetName(p.getStreetName());
         pDto.setHouseNumber(p.getHouseNumber());
-        pDto.setNumberOfRooms(p.getNumberOfRooms());
-        pDto.setSurface(p.getSurface());
         pDto.setPrice(p.getPrice());
         pDto.setAvailable(p.getAvailable());
-        pDto.setMatch(p.getMatch());
     }
 
     private static void propertyDtoToProperty(PropertyDto propertyDto, Property property) {
         property.setId(propertyDto.getId());
         property.setStreetName(propertyDto.getStreetName());
         property.setHouseNumber(propertyDto.getHouseNumber());
-        property.setNumberOfRooms(propertyDto.getNumberOfRooms());
-        property.setSurface(propertyDto.getSurface());
         property.setPrice(propertyDto.getPrice());
         property.setAvailable(propertyDto.getAvailable());
-        property.setMatch(propertyDto.getMatch());
     }
 
     public PropertyDto getProperty(Long id) {
