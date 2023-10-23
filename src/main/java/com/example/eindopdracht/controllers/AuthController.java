@@ -2,6 +2,7 @@ package com.example.eindopdracht.controllers;
 
 import com.example.eindopdracht.dto.AuthDto;
 import com.example.eindopdracht.security.JwtService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class AuthController {
     }
 
     @PostMapping  // This method handles HTTP POST requests to the /auth endpoint
-    public ResponseEntity<Object> signIn(@RequestBody AuthDto authDto) {
+    public ResponseEntity<Object> signIn(@Valid @RequestBody AuthDto authDto) {
         UsernamePasswordAuthenticationToken up =
                 new UsernamePasswordAuthenticationToken(authDto.getUsername(), authDto.getPassword());
 

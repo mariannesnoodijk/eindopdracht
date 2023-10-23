@@ -3,6 +3,7 @@ package com.example.eindopdracht.controllers;
 import com.example.eindopdracht.dto.PropertyDto;
 import com.example.eindopdracht.dto.ViewingDto;
 import com.example.eindopdracht.services.ViewingService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class ViewingController {
         return new ResponseEntity<>(vDto, HttpStatus.OK);
     }
     @PostMapping // This method handles HTTP POST requests to the /viewings endpoint creating a viewing
-    public ResponseEntity<ViewingDto> createViewing(@RequestBody ViewingDto viewingDto) {
+    public ResponseEntity<ViewingDto> createViewing(@Valid @RequestBody ViewingDto viewingDto) {
         ViewingDto newViewing = viewingService.createViewing(viewingDto);
         return new ResponseEntity<>(newViewing, HttpStatus.CREATED);
     }

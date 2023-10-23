@@ -2,6 +2,7 @@ package com.example.eindopdracht.controllers;
 
 import com.example.eindopdracht.dto.PropertyDto;
 import com.example.eindopdracht.services.PropertyService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,7 @@ public class PropertyController {
     }
 
     @PostMapping // This method handles HTTP POST requests to the /properties endpoint creating a property
-    public ResponseEntity<PropertyDto> createProperty(@RequestBody PropertyDto propertyDto) {
+    public ResponseEntity<PropertyDto> createProperty(@Valid @RequestBody PropertyDto propertyDto) {
         PropertyDto newProperty = propertyService.createProperty(propertyDto);
         return new ResponseEntity<>(newProperty, HttpStatus.CREATED);
     }

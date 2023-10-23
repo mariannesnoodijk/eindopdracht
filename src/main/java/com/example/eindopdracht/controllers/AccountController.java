@@ -4,6 +4,7 @@ import com.example.eindopdracht.dto.AccountDto;
 import com.example.eindopdracht.services.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,8 +33,8 @@ public class AccountController {
     }
 
 
-    @PostMapping // This method handles HTTP POST requests to the /accounts endpoint creating an account
-    public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto) {
+    @PostMapping// This method handles HTTP POST requests to the /accounts endpoint creating an account
+    public ResponseEntity<AccountDto> createAccount(@Valid @RequestBody AccountDto accountDto) {
         AccountDto newAccount = accountService.createAccount(accountDto);
         return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
     }
