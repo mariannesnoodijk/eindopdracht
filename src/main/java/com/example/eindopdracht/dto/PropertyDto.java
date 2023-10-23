@@ -3,7 +3,7 @@ package com.example.eindopdracht.dto;
 import lombok.Data;
 
 @Data
-public class PropertyDto {
+public class PropertyDto { // This class serves as a data structure for transferring data related to properties between different parts of the application
 
     private Long id;
 
@@ -12,6 +12,6 @@ public class PropertyDto {
     private Integer numberOfRooms;
     private String surface;
     private Double price;
-    private Boolean available;
-    private Boolean match;
+//    private Boolean available;
+    // private Boolean match;
 }
