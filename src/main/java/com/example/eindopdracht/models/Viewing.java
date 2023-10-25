@@ -3,8 +3,8 @@ package com.example.eindopdracht.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data // Lombok imports automatically the Constructor, Getters and Setter by using @Data
 @Entity
@@ -12,22 +12,17 @@ public class Viewing {
 
     @Id //  Primary Key of the entity
     @GeneratedValue
-    private Long id;
+    private Long viewingId;
 
-    private String fullName;
-    private Long phoneNumber;
-    private String emailAddress;
+    private String fullname;
+    private String phonenumber;
+    private String emailaddress;
 
-    private String dateViewing; // Welk Data Type valt een datum onder?
-    private String timeViewing; // Welk Data Type val een tijd onder?
+    private LocalDate viewingdate; // Welk Data Type valt een datum onder?
+    private LocalTime viewingtime; // Welk Data Type val een tijd onder?
 
-    //  Variables of class Viewing
-    // welke informatie heb ik nodig?
-// voornaam
-    // achternaam
-    // email
-    // telefoonnummer
 
+    // Relations between entities:
 
     // RELATION BETWEEN VIEWING & ACCOUNT
     @ManyToOne(fetch = FetchType.EAGER) // This is the owner of the relation with User. There is a Foreign Key in the database

@@ -21,28 +21,28 @@ public class PropertyService {
     }
 
     private static void propertyToPropertyDto(Property p, PropertyDto pDto) {
-        pDto.setStreetName(p.getStreetName());
-        pDto.setHouseNumber(p.getHouseNumber());
+        pDto.setStreetname(p.getStreetname());
+        pDto.setHousenumber(p.getHousenumber());
         pDto.setPrice(p.getPrice());
         pDto.setDescription(p.getDescription());
     }
 
     private static void propertyDtoToProperty(PropertyDto propertyDto, Property property) {
-        property.setStreetName(propertyDto.getStreetName());
-        property.setHouseNumber(propertyDto.getHouseNumber());
+        property.setStreetname(propertyDto.getStreetname());
+        property.setHousenumber(propertyDto.getHousenumber());
         property.setPrice(propertyDto.getPrice());
         property.setDescription(propertyDto.getDescription());
     }
 
-    public PropertyDto getProperty(Long id) {
-        Optional<Property> property = propertyRepository.findById(id);
+    public PropertyDto getProperty(Long propertyId) {
+        Optional<Property> property = propertyRepository.findById(propertyId);
         if (property.isPresent()) {
             Property p = property.get();
             PropertyDto pDto = new PropertyDto();
             propertyToPropertyDto(p, pDto);
             return (pDto);
         } else {
-            throw new IdNotFoundException("Property not found with ID: " + id);
+            throw new IdNotFoundException("Property not found with ID: " + propertyId);
         }
     }
 
@@ -72,8 +72,8 @@ public class PropertyService {
         return savedPropertyDto;
     }
 
-    public String deleteProperty(@RequestBody Long id) {
-        propertyRepository.deleteById(id);
+    public String deleteProperty(@RequestBody Long propertyId) {
+        propertyRepository.deleteById(propertyId);
         return "Property successfully deleted";
     }
 }

@@ -13,26 +13,27 @@ public class Property {
 
     @Id //  Primary Key of the entity
     @GeneratedValue
-    Long id;
+    Long propertyId;
 
     //  Variables of class Property
     // welke informatie heb ik nodig?
     // adres
     // huisnummer
-    // oppervlakte
     // prijs
     // beschikbaar ja of nee
-    // match met gebruiker ja of nee
+    // match met gebruiker ja of nee -- Like to have!!
     // favorite?? ja of nee
 
 
-    private String streetName;
-    private Integer houseNumber;
+    private String streetname;
+    private Integer housenumber;
     private Double price;
     private String description;
-//    private Boolean available;
-//    private Boolean match; // TODO: OPTIONAL... GA IK DOEN OF NIET?
+//    private Boolean available;// TODO: OPTIONAL... GA IK DOEN OF NIET? Like to have -- NEE, deze moet er wel nog in
+//    private Boolean match; // TODO: OPTIONAL... GA IK DOEN OF NIET? Like to have
 
+
+    // Relations between entities:
 
     // RELATION BETWEEN PROPERTY & ACCOUNT
     @ManyToMany(mappedBy = "properties") // This is the target side of the relation with Account. There is nothing in the database.

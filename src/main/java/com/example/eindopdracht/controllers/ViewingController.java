@@ -31,10 +31,9 @@ public class ViewingController {
         return new ResponseEntity<>(newViewing, HttpStatus.CREATED);
     }
 
-    // ADD DELETE A VIEWING
-    @DeleteMapping("/{id}") // This method handles HTTP DELETE requests to the /viewings/{id} endpoint, where {id} is a path variable representing the property ID
-    public ResponseEntity<ViewingDto> deleteViewing(@PathVariable Long id) {
-        viewingService.deleteViewing(id);
+    @DeleteMapping("/{viewingId}") // This method handles HTTP DELETE requests to the /viewings/{viewingId} endpoint, where {id} is a path variable representing the property ID
+    public ResponseEntity<ViewingDto> deleteViewing(@PathVariable Long viewingId) {
+        viewingService.deleteViewing(viewingId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

@@ -49,14 +49,21 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth // TODO: MAKE SURE ENDPOINTS ETC ARE CORRECTLY SET
-                                .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/auth").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/*").permitAll()
-                                .requestMatchers(HttpMethod.DELETE, "/*").permitAll()
+//
+//                                .requestMatchers(HttpMethod.POST, "/users").permitAll()
+//                                .requestMatchers(HttpMethod.POST, "/auth").permitAll()
+//                                .requestMatchers(HttpMethod.GET, "/*").permitAll()
+//                                .requestMatchers(HttpMethod.DELETE, "/*").permitAll()
 
-                                .requestMatchers("/secret").hasRole("ADMIN")
-                                .requestMatchers("/hello").authenticated()
+//                                .requestMatchers("/secret").hasRole("ADMIN")
+//                                .requestMatchers("/hello").authenticated()
 //                        .anyRequest().denyAll()
+
+
+                                .requestMatchers("/*").permitAll()
+                                .requestMatchers("/**").permitAll()
+//                                .anyRequest().denyAll()
+                                .anyRequest().permitAll()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(csrf -> csrf.disable())

@@ -15,15 +15,12 @@ public class Account {
 
     @Id //  Primary Key of the entity
     @GeneratedValue(strategy = GenerationType.IDENTITY) // This specifies that the ID is automatically generated
-    private Long id;
+    private Long accountId;
 
-    private String username;
-    private String password;
-
-    private String firstName;
-    private String lastName;
-    private Long phoneNumber;
-    private String emailAddress;
+    private String firstname;
+    private String lastname;
+    private String phonenumber;
+    private String emailaddress;
 
     // contactgegevens toevoegen???
     // // welke informatie heb ik nodig?
@@ -32,6 +29,8 @@ public class Account {
     //    // telefoonnummer
     //    // emailadres
 
+
+    // Relations between entities:
 
     // RELATION BETWEEN ACCOUNT & USER
     @OneToOne // This is the owner side of the relation. There is a Foreign Key in the database.

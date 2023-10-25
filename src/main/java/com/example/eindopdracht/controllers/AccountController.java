@@ -26,9 +26,9 @@ public class AccountController {
     }
 
 
-    @GetMapping("/{id}") // This method handles HTTP GET requests to the /accounts/{id} endpoint
-    public ResponseEntity<AccountDto> getOneAccount(@PathVariable Long id) {
-        AccountDto aDto = accountService.getAccount(id);
+    @GetMapping("/{accountId}") // This method handles HTTP GET requests to the /accounts/{accountId} endpoint
+    public ResponseEntity<AccountDto> getOneAccount(@PathVariable Long accountId) {
+        AccountDto aDto = accountService.getAccount(accountId);
         return new ResponseEntity<>(aDto, HttpStatus.OK);
     }
 
@@ -39,9 +39,10 @@ public class AccountController {
         return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}") // This method handles HTTP DELETE requests to the /accounts/{id} endpoint
-    public ResponseEntity<AccountDto> deleteAccount(@PathVariable Long id) {
-        accountService.deleteAccount(id);
+
+    @DeleteMapping("/{accountId}") // This method handles HTTP DELETE requests to the /accounts/{accountId} endpoint
+    public ResponseEntity<AccountDto> deleteAccount(@PathVariable Long accountId) {
+        accountService.deleteAccount(accountId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

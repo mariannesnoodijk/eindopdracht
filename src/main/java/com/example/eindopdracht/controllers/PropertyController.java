@@ -25,9 +25,9 @@ public class PropertyController {
         return new ResponseEntity<>(pDto, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}") // This method handles HTTP GET requests to the /properties/{id} endpoint, where {id} is a path variable representing the property ID
-    public ResponseEntity<PropertyDto> getOneProperty(@PathVariable Long id) {
-        PropertyDto pDto = propertyService.getProperty(id);
+    @GetMapping("/{propertyId}") // This method handles HTTP GET requests to the /properties/{propertyId} endpoint, where {id} is a path variable representing the property ID
+    public ResponseEntity<PropertyDto> getOneProperty(@PathVariable Long propertyId) {
+        PropertyDto pDto = propertyService.getProperty(propertyId);
         return new ResponseEntity<>(pDto, HttpStatus.OK);
     }
 
@@ -37,9 +37,9 @@ public class PropertyController {
         return new ResponseEntity<>(newProperty, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}") // This method handles HTTP DELETE requests to the /properties/{id} endpoint, where {id} is a path variable representing the property ID
-    public ResponseEntity<PropertyDto> deleteProperty(@PathVariable Long id) {
-        propertyService.deleteProperty(id);
+    @DeleteMapping("/{propertyId}") // This method handles HTTP DELETE requests to the /properties/{propertyId} endpoint, where {id} is a path variable representing the property ID
+    public ResponseEntity<PropertyDto> deleteProperty(@PathVariable Long propertyId) {
+        propertyService.deleteProperty(propertyId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

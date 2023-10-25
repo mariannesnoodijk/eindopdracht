@@ -1,8 +1,6 @@
 package com.example.eindopdracht.services;
 
-import com.example.eindopdracht.dto.PropertyDto;
 import com.example.eindopdracht.dto.ViewingDto;
-import com.example.eindopdracht.models.Property;
 import com.example.eindopdracht.models.Viewing;
 import com.example.eindopdracht.repositories.ViewingRepository;
 import org.springframework.stereotype.Service;
@@ -36,15 +34,19 @@ public class ViewingService {
     }
 
     private static void viewingToViewingDto(Viewing v, ViewingDto vDto) {
-        vDto.setFullName(v.getFullName());
-        vDto.setPhoneNumber(v.getPhoneNumber());
-        vDto.setEmailAddress(v.getEmailAddress());
+        vDto.setFullname(v.getFullname());
+        vDto.setPhonenumber(v.getPhonenumber());
+        vDto.setEmailaddress(v.getEmailaddress());
+        vDto.setViewingdate(v.getViewingdate());
+        vDto.setViewingtime(v.getViewingtime());
     }
 
     private static void viewingDtoToViewing(ViewingDto viewingDto, Viewing viewing) {
-        viewing.setFullName(viewingDto.getFullName());
-        viewing.setPhoneNumber(viewingDto.getPhoneNumber());
-        viewing.setEmailAddress(viewingDto.getEmailAddress());
+        viewing.setFullname(viewingDto.getFullname());
+        viewing.setPhonenumber(viewingDto.getPhonenumber());
+        viewing.setEmailaddress(viewingDto.getEmailaddress());
+        viewing.setViewingdate(viewingDto.getViewingdate());
+        viewing.setViewingtime(viewingDto.getViewingtime());
     }
 
     public ViewingDto createViewing(ViewingDto viewingDto) {
@@ -59,8 +61,8 @@ public class ViewingService {
         return savedViewingDto;
     }
 
-    public String deleteViewing(@RequestBody Long id) {
-        viewingRepository.deleteById(id);
+    public String deleteViewing(@RequestBody Long viewingId) {
+        viewingRepository.deleteById(viewingId);
         return "Viewing successfully deleted";
     }
 }

@@ -1,13 +1,11 @@
 package com.example.eindopdracht.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.HashSet; // Set deed het niet, dus veranderd naar List. Waarom List gebruikt? Voor tech documentatie
 import java.util.List;
-import java.util.Set;
 
 @Data // Lombok imports automatically the Constructor, Getters and Setter by using @Data
 @Entity

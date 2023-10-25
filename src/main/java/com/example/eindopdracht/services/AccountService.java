@@ -34,15 +34,15 @@ public class AccountService {
         return accountDtos;
     }
 
-    public AccountDto getAccount(Long id) {
-        Optional<Account> account = accountRepository.findById(id);
+    public AccountDto getAccount(Long accountId) {
+        Optional<Account> account = accountRepository.findById(accountId);
         if (account.isPresent()) {
             Account a = account.get();
             AccountDto aDto = new AccountDto();
             accountToAccountDto(a, aDto);
             return (aDto);
         } else {
-            throw new IdNotFoundException("Account not found with ID: " + id);
+            throw new IdNotFoundException("Account not found with ID: " + accountId);
         }
     }
 
@@ -58,28 +58,24 @@ public class AccountService {
         return savedAccountDto;
     }
 
-    public String deleteAccount(@RequestBody Long id) {
-        accountRepository.deleteById(id);
+    public String deleteAccount(@RequestBody Long accountId) {
+        accountRepository.deleteById(accountId);
         return "Account successfully created";
     }
 
 
     private static void accountToAccountDto(Account a, AccountDto aDto) {
-        aDto.setFirstName(a.getFirstName());
-        aDto.setLastName(a.getLastName());
-        aDto.setPhoneNumber(a.getPhoneNumber());
-        aDto.setEmailAddress(a.getEmailAddress());
-        //username toevoegen
-        //password toevoegen
+        aDto.setFirstname(a.getFirstname());
+        aDto.setLastname(a.getLastname());
+        aDto.setPhonenumber(a.getPhonenumber());
+        aDto.setEmailaddress(a.getEmailaddress());
     }
 
     private static void accountDtoToAccount(AccountDto accountDto, Account account) {
-        account.setFirstName(accountDto.getFirstName());
-        account.setLastName(accountDto.getLastName());
-        account.setPhoneNumber(accountDto.getPhoneNumber());
-        account.setEmailAddress(accountDto.getEmailAddress());
-        //username toevoegen
-        //password toevoegen
+        account.setFirstname(accountDto.getFirstname());
+        account.setLastname(accountDto.getLastname());
+        account.setPhonenumber(accountDto.getPhonenumber());
+        account.setEmailaddress(accountDto.getEmailaddress());
     }
 
 }

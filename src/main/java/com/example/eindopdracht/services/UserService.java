@@ -2,10 +2,8 @@ package com.example.eindopdracht.services;
 
 import com.example.eindopdracht.dto.UserDto;
 import com.example.eindopdracht.exceptions.IdNotFoundException;
-import com.example.eindopdracht.models.Account;
 import com.example.eindopdracht.models.Role;
 import com.example.eindopdracht.models.User;
-import com.example.eindopdracht.repositories.AccountRepository;
 import com.example.eindopdracht.repositories.RoleRepository;
 import com.example.eindopdracht.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,31 +26,31 @@ public class UserService {
         this.roleRepository = roleRepository;
     }
 
-    public UserDto getUser(String id) {
-        Optional<User> user = userRepository.findById(id);
+    public UserDto getUser(String userId) {
+        Optional<User> user = userRepository.findById(userId);
         if (user.isPresent()) {
             User u = user.get();
             UserDto uDto = new UserDto();
             userToUserDto(u, uDto);
             return (uDto);
         } else {
-            throw new IdNotFoundException("User not found with ID: " + id);
+            throw new IdNotFoundException("User not found with ID: " + userId);
         }
     }
 
     // TODO: Wil ik hier wel alle users op kunnen vragen?
-//    public List<UserDto> getAllUsers() {
-//        List<User> users = userRepository.findAll();
-//        List<UserDto> userDtos = new ArrayList<>();
-//
-//        for (User u : users) {
-//            UserDto uDto = new UserDto();
-//            userToUserDto(u, uDto);
-//
-//            userDtos.add(uDto);
-//        }
-//        return userDtos;
-//    }
+    public List<UserDto> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        List<UserDto> userDtos = new ArrayList<>();
+
+        for (User u : users) {
+            UserDto uDto = new UserDto();
+            userToUserDto(u, uDto);
+
+            userDtos.add(uDto);
+        }
+        return userDtos;
+    }
 
     private static void userToUserDto(User u, UserDto uDto) {
         uDto.setUsername(u.getUsername());
