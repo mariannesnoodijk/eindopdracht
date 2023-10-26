@@ -11,7 +11,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +27,7 @@ class ViewingServiceTest {
 
     @Test
     void getAllViewings() {
-        // arrange
+        // arrange - creating/adding a new viewing
         Viewing viewing1 = new Viewing();
         viewing1.setFullname("Jan Jansen");
         viewing1.setPhonenumber("0611122333");
@@ -39,7 +38,6 @@ class ViewingServiceTest {
         viewing2.setPhonenumber("0611122333");
         viewing2.setEmailaddress("jannie@deboer.com");
 
-//        List<Viewing> viewings = Arrays.asList(viewing1, viewing2);
         List<Viewing> viewings = new ArrayList<>();
         viewings.add(viewing1);
         viewings.add(viewing2);

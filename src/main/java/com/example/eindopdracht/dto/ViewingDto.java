@@ -18,6 +18,7 @@ public class ViewingDto { // This class serves as a data structure for transferr
 //    @Max(value = 0699999999, message = "A phone number consists of 10 numbers")
     // REGEX gebruiken voor telefoonnummer. Zoek Google !
     @NotEmpty
+//    @Pattern - look up how to use pattern for phone number
     private String phonenumber = "^\\+(?:[0-9] ?){6,14}[0-9]$";
 
     @NotEmpty

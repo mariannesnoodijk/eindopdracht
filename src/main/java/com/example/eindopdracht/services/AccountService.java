@@ -60,7 +60,7 @@ public class AccountService {
 
     public String deleteAccount(@RequestBody Long accountId) {
         accountRepository.deleteById(accountId);
-        return "Account successfully created";
+        return "Account successfully deleted";
     }
 
 
@@ -78,4 +78,8 @@ public class AccountService {
         account.setEmailaddress(accountDto.getEmailaddress());
     }
 
+    public boolean validateEmailPattern(String emailaddress) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return emailaddress.matches(emailRegex);
+    }
 }
