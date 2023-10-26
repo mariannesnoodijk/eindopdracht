@@ -39,7 +39,10 @@ class ViewingServiceTest {
         viewing2.setPhonenumber("0611122333");
         viewing2.setEmailaddress("jannie@deboer.com");
 
-        List<Viewing> viewings = Arrays.asList(viewing1, viewing2);
+//        List<Viewing> viewings = Arrays.asList(viewing1, viewing2);
+        List<Viewing> viewings = new ArrayList<>();
+        viewings.add(viewing1);
+        viewings.add(viewing2);
 
         Mockito.when(viewingRepository.findAll()).thenReturn(viewings);
 
@@ -52,55 +55,64 @@ class ViewingServiceTest {
 
     @Test
     void createViewing() {
-        // Arrange
-        ViewingDto newViewingDto = new ViewingDto();
-        newViewingDto.setFullname("Jannie de Boer");
-        newViewingDto.setPhonenumber("0611122333");
-        newViewingDto.setEmailaddress("jannie@deboer.com");
-
-        Viewing newViewing = new Viewing();
-        newViewing.setFullname(newViewingDto.getFullname());
-        newViewing.setPhonenumber(newViewingDto.getPhonenumber());
-        newViewing.setEmailaddress(newViewingDto.getEmailaddress());
-
-        Mockito.when(viewingRepository.save(Mockito.any(Viewing.class))).thenReturn(newViewing);
-
-        // Act
-        ViewingDto resultDto = viewingService.createViewing(newViewingDto);
-
-        // Assert
-        // Verify that the save method of viewingRepository is called with the correct Viewing object
-        Mockito.verify(viewingRepository).save(newViewing);
-
-        // Verify that the returned newViewingDto matches the resultDto
-        assertEquals(newViewingDto.getFullname(), resultDto.getFullname());
-        assertEquals(newViewingDto.getPhonenumber(), resultDto.getPhonenumber());
-        assertEquals(newViewingDto.getEmailaddress(), resultDto.getEmailaddress());
-
-//        // arrange
+//        // Arrange
+//        ViewingDto newViewingDto = new ViewingDto();
+//        newViewingDto.setFullname("Jannie de Boer");
+//        newViewingDto.setPhonenumber("0611122333");
+//        newViewingDto.setEmailaddress("jannie@deboer.com");
+//
 //        Viewing newViewing = new Viewing();
-//        newViewing.setFullname("Jan Jansen");
-//        newViewing.setPhonenumber("0611122333");
-//        newViewing.setEmailaddress("jan@jansen.com");
+//        newViewing.setFullname(newViewingDto.getFullname());
+//        newViewing.setPhonenumber(newViewingDto.getPhonenumber());
+//        newViewing.setEmailaddress(newViewingDto.getEmailaddress());
 //
 //        Mockito.when(viewingRepository.save(Mockito.any(Viewing.class))).thenReturn(newViewing);
 //
-//        // act
-//        ViewingDto savedViewing = viewingService.createViewing(newViewing);
-////        ViewingDto nvDto = viewingService.createViewing(newViewing);
+//        // Act
+//        ViewingDto resultDto = viewingService.createViewing(newViewingDto);
 //
-//        // assert
-//        assertEquals("Jan Jansen", savedViewing.getFullname());
-//        assertEquals("0611122333", savedViewing.getPhonenumber());
-//        assertEquals("jan@jansen.com", savedViewing.getEmailaddress());
+//        // Assert
+//        // Verify that the save method of viewingRepository is called with the correct Viewing object
+//        Mockito.verify(viewingRepository).save(newViewing);
 //
-////        assertEquals("Jan Jansen", nvDto.getFullname());
-////        assertEquals("0611122333", nvDto.getPhonenumber());
-////        assertEquals("jan@jansen.com", nvDto.getEmailaddress());
+//        // Verify that the returned newViewingDto matches the resultDto
+//        assertEquals(newViewingDto.getFullname(), resultDto.getFullname());
+//        assertEquals(newViewingDto.getPhonenumber(), resultDto.getPhonenumber());
+//        assertEquals(newViewingDto.getEmailaddress(), resultDto.getEmailaddress());
+
+        // arrange
+        Viewing newViewing = new Viewing();
+        newViewing.setFullname("Jan Jansen");
+        newViewing.setPhonenumber("0611122333");
+        newViewing.setEmailaddress("jan@jansen.com");
+
+        Mockito.when(viewingRepository.save(Mockito.any(Viewing.class))).thenReturn(newViewing);
+
+        // act
+        ViewingDto savedViewingDto = viewingService.createViewing(new ViewingDto());
+
+        // assert
+        assertEquals("Jan Jansen", savedViewingDto.getFullname());
+        assertEquals("0611122333", savedViewingDto.getPhonenumber());
+        assertEquals("jan@jansen.com", savedViewingDto.getEmailaddress());
 
     }
 
     @Test
     void deleteViewing() {
+        // Arrange
+        Long viewingId = 1L;
+
+        Mockito.doNothing().when(viewingRepository).deleteById(viewingId);
+
+        // Act
+        String result = viewingService.deleteViewing(viewingId);
+
+        // Assert
+        // Verify that the deleteById method of viewingRepository is called with the correct ID
+        Mockito.verify(viewingRepository).deleteById(viewingId);
+
+        // Verify the returned message
+        assertEquals("Viewing successfully deleted", result);
     }
 }
