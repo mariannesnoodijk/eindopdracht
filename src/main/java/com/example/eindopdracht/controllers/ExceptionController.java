@@ -1,6 +1,7 @@
 package com.example.eindopdracht.controllers;
 
 import com.example.eindopdracht.exceptions.IdNotFoundException;
+import com.example.eindopdracht.exceptions.IncorrectEmailException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,5 +14,11 @@ public class ExceptionController {
     @ExceptionHandler(value = IdNotFoundException.class)
     public ResponseEntity<Object> exceptionId(IdNotFoundException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    //    When an exception of IncorrectEmailException is thrown in the application, this method catches it and returns a ResponseEntity with the exception message and an HTTP status of NOT_FOUND (404).
+    @ExceptionHandler(value = IncorrectEmailException.class)
+    public ResponseEntity<Object> exceptionId(IncorrectEmailException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.I_AM_A_TEAPOT);
     }
 }
