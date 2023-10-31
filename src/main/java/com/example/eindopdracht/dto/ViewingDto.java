@@ -19,7 +19,8 @@ public class ViewingDto { // This class serves as a data structure for transferr
     // REGEX gebruiken voor telefoonnummer. Zoek Google !
     @NotEmpty
 //    @Pattern - look up how to use pattern for phone number
-    private String phonenumber = "^\\+(?:[0-9] ?){6,14}[0-9]$";
+    private String phonenumber;
+    //  private String phonenumber = "^\\+(?:[0-9] ?){6,14}[0-9]$";
 
     @NotEmpty
     @Email(message = "This needs to be an email address")
