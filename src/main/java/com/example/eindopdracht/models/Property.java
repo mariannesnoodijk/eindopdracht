@@ -12,7 +12,7 @@ import java.util.List;
 public class Property {
 
     @Id //  Primary Key of the entity
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // This specifies that the ID is automatically generated
     Long propertyId;
 
     //  Variables of class Property

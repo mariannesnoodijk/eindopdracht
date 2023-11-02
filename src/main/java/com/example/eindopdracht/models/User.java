@@ -24,7 +24,7 @@ public class User {
             Account account;
 
     // RELATION BETWEEN USER & ROLE
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER) // The owner side of the relation with Role.
     // The FetchType. EAGER option indicates that the associated entity should be fetched eagerly, which means that it will be fetched at the same time as the parent entity.
     private List<Role> roles = new ArrayList<>();
 

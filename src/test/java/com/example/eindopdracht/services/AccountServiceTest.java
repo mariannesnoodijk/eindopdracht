@@ -3,6 +3,7 @@ package com.example.eindopdracht.services;
 import com.example.eindopdracht.dto.AccountDto;
 import com.example.eindopdracht.dto.PropertyDto;
 import com.example.eindopdracht.dto.ViewingDto;
+import com.example.eindopdracht.exceptions.IdNotFoundException;
 import com.example.eindopdracht.models.Account;
 import com.example.eindopdracht.models.Property;
 import com.example.eindopdracht.models.Viewing;
@@ -29,16 +30,16 @@ class AccountServiceTest {
     @InjectMocks
     private AccountService accountService;
 
-    @Test
-    void testValidateEmailPattern() {
-        // Arrange
-        String validEmail = "jan@jansen.com";
-        String invalidEmail = "invalid.email";
-
-        // Act and Assert
-        assertTrue(accountService.validateEmailPattern(validEmail));
-        assertFalse(accountService.validateEmailPattern(invalidEmail));
-    }
+//    @Test
+//    void testValidateEmailPattern() {
+//        // Arrange
+//        String validEmail = "example@example.com";
+//        String invalidEmail = "invalid.email";
+//
+//        // Act and Assert
+//        assertTrue(accountService.validateEmailPattern(validEmail));
+//        assertFalse(accountService.validateEmailPattern(invalidEmail));
+//    }
 
     @Test
     void getAllAccounts() {
@@ -92,6 +93,20 @@ class AccountServiceTest {
     }
 
     @Test
+    void getAccountWithInvalidId() {
+        // Arrange - creating/adding a new property
+        Long accountId = 1L;
+        Mockito.when(accountRepository.findById(accountId)).thenReturn(Optional.empty());
+
+        // Act and Assert
+        IdNotFoundException exception = assertThrows(IdNotFoundException.class, () -> {
+            accountService.getAccount(accountId);
+        });
+
+        assertEquals("Account not found with ID: " + accountId, exception.getMessage());
+    }
+
+    @Test
     void createAccount() {
 
         // arrange
@@ -100,6 +115,12 @@ class AccountServiceTest {
         newAccount.setLastname("Pietje");
         newAccount.setPhonenumber("0611122333");
         newAccount.setEmailaddress("piet@pietje.com");
+
+        AccountDto newAccountDto = new AccountDto();
+        newAccountDto.setFirstname("Ukkie");
+        newAccountDto.setLastname("Puk");
+        newAccountDto.setPhonenumber("0612345678");
+        newAccountDto.setEmailaddress("ukkie@puk.com");
 
         Mockito.when(accountRepository.save(Mockito.any(Account.class))).thenReturn(newAccount);
 

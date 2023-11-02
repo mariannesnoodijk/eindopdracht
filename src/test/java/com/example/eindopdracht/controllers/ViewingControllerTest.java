@@ -44,18 +44,6 @@ class ViewingControllerTest {
     @MockBean
     JwtService jwtService;
 
-    // TODO: CODE HIERONDER DOET HET NIET. JAMMER, WANT DE @BEFORE EACH SET UP IS WEL ERG HANDIG EN VOORKOMT REPETITIVE CODING
-//    Viewing viewing1;
-//    Viewing viewing2;
-//    ViewingDto viewingDto1;
-//    ViewingDto viewingDto2;
-//
-//
-//    @BeforeEach
-//    public void setUp() {
-//        viewing1 = new Viewing("Jan Jansen", "0611122333", "janjansen@test.com");
-//    }
-
     @Test
     void shouldGetAllViewings() throws Exception {
 
@@ -120,20 +108,4 @@ class ViewingControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.emailaddress", is("test@test.com")));
 
     }
-
-//    @Test
-//    void saveAuthor()  throws Exception {
-//        given(authorService.saveAuthor(authorDto1)).willReturn(authorDto1);
-//
-//        mockMvc.perform(post("/authors")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(asJsonString(authorDto1)))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("id").value("1"))
-//                .andExpect(jsonPath("initials").value("J.K."))
-//                .andExpect(jsonPath("firstname").value( "Joanne Kathleen"))
-//                .andExpect(jsonPath("lastname").value( "Rowling"))
-//                .andExpect(jsonPath("dateOfBirth").value("1965-07-31"))
-//                .andExpect(jsonPath("gender").value( "FEMALE"));
-//    }
 }

@@ -4,6 +4,7 @@ import com.example.eindopdracht.dto.UserDto;
 import com.example.eindopdracht.exceptions.IdNotFoundException;
 import com.example.eindopdracht.models.Role;
 import com.example.eindopdracht.models.User;
+import com.example.eindopdracht.repositories.AccountRepository;
 import com.example.eindopdracht.repositories.RoleRepository;
 import com.example.eindopdracht.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,11 +20,13 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final AccountRepository accountRepository;
 
     public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.accountRepository = accountRepository;
     }
 
     public UserDto getUser(String userId) {
@@ -39,32 +42,19 @@ public class UserService {
     }
 
     // TODO: Wil ik hier wel alle users op kunnen vragen?
-    public List<UserDto> getAllUsers() {
-        List<User> users = userRepository.findAll();
-        List<UserDto> userDtos = new ArrayList<>();
+//    public List<UserDto> getAllUsers() {
+//        List<User> users = userRepository.findAll();
+//        List<UserDto> userDtos = new ArrayList<>();
+//
+//        for (User u : users) {
+//            UserDto uDto = new UserDto();
+//            userToUserDto(u, uDto);
+//
+//            userDtos.add(uDto);
+//        }
+//        return userDtos;
+//    }
 
-        for (User u : users) {
-            UserDto uDto = new UserDto();
-            userToUserDto(u, uDto);
-
-            userDtos.add(uDto);
-        }
-        return userDtos;
-    }
-
-    private static void userToUserDto(User u, UserDto uDto) {
-        uDto.setUsername(u.getUsername());
-        uDto.setPassword(u.getPassword());
-        ArrayList<String> roles = new ArrayList<>();
-        for (Role role : u.getRoles()){
-            roles.add(role.getRolename());
-        }
-        uDto.setRoles(roles.toArray(new String [0]));
-    }
-    private static void userDtoToUser(User u, UserDto uDto) {
-        u.setUsername(uDto.getUsername());
-        u.setPassword(uDto.getPassword());
-    }
     public String createUser(UserDto userDto) {
         User newUser = new User();
         newUser.setUsername(userDto.getUsername());
@@ -82,6 +72,20 @@ public class UserService {
         return "User successfully created";
     }
 
+
+    private static void userToUserDto(User u, UserDto uDto) {
+        uDto.setUsername(u.getUsername());
+        uDto.setPassword(u.getPassword());
+        ArrayList<String> roles = new ArrayList<>();
+        for (Role role : u.getRoles()){
+            roles.add(role.getRolename());
+        }
+        uDto.setRoles(roles.toArray(new String [0]));
+    }
+    private static void userDtoToUser(User u, UserDto uDto) {
+        u.setUsername(uDto.getUsername());
+        u.setPassword(uDto.getPassword());
+    }
 }
 
 
