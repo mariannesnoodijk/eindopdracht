@@ -12,7 +12,7 @@ import java.util.List;
 public class Property {
 
     @Id //  Primary Key of the entity
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // This specifies that the ID is automatically generated
     Long propertyId;
 
     //  Variables of class Property
@@ -26,7 +26,7 @@ public class Property {
 
 
     private String streetname;
-    private Integer housenumber;
+    private String housenumber;
     private Double price;
     private String description;
 //    private Boolean available;// TODO: OPTIONAL... GA IK DOEN OF NIET? Like to have -- NEE, deze moet er wel nog in

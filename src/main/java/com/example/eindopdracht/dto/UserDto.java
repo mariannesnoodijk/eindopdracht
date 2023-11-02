@@ -12,8 +12,8 @@ public class UserDto { // This class serves as a data structure for transferring
     private String username;
 
     @NotEmpty(message = "Password cannot be empty")
-//    @Size(min = 8, max = 20, message = "Your password must contain at least 8 characters and at most 20 characters")
     private String password;
 
+    @NotEmpty
     private String[] roles;
 }

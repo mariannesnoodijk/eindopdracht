@@ -22,6 +22,7 @@ public class Account {
     private String phonenumber;
     private String emailaddress;
 
+
     // contactgegevens toevoegen???
     // // welke informatie heb ik nodig?
     //    // voornaam

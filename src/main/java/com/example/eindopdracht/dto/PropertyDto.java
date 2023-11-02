@@ -8,16 +8,16 @@ import lombok.Data;
 @Data
 public class PropertyDto { // This class serves as a data structure for transferring data related to properties between different parts of the application
 
-    @NotEmpty(message = "Streetname cannot be empty")
+    @NotEmpty(message = "Streetname must not be empty")
     private String streetname;
 
-    @Min(value = 1, message = "A housenumber cannot be 0")
-    private Integer housenumber;
+   @NotEmpty(message = "Housenumber must not be empty")
+    private String housenumber;
 
     @DecimalMin(value = "0.0", inclusive = true, message = "Price must be greater than or equal to 0")
     private Double price;
 
-    @NotEmpty(message = "Description cannot be empty")
+    @NotEmpty(message = "Description must not be empty")
     private String description;
 
     // private Boolean available; // TODO: OPTIONAL... GA IK DOEN OF NIET? Like to have

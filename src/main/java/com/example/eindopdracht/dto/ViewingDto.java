@@ -17,10 +17,12 @@ public class ViewingDto { // This class serves as a data structure for transferr
 //    @Min(value = 0600000000, message = "A phone number consists of 10 numbers")
 //    @Max(value = 0699999999, message = "A phone number consists of 10 numbers")
     // REGEX gebruiken voor telefoonnummer. Zoek Google !
-    @NotEmpty
-    private String phonenumber = "^\\+(?:[0-9] ?){6,14}[0-9]$";
 
     @NotEmpty
+//    @Pattern - look up how to use pattern for phone number
+    private String phonenumber;
+    //  private String phonenumber = "^\\+(?:[0-9] ?){6,14}[0-9]$";
+
     @Email(message = "This needs to be an email address")
     private String emailaddress;
 
@@ -30,4 +32,5 @@ public class ViewingDto { // This class serves as a data structure for transferr
 
     @Future
     private LocalTime viewingtime;
+
 }
