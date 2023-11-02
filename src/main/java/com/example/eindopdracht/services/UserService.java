@@ -73,6 +73,57 @@ public class UserService {
     }
 
 
+    // TODO: CONTINUE WITH OVERZETTEN INFO NAAR ACCOUNT EN USER
+    public UserDto createUserWithAccount(AccountDto accountDto) {
+
+        // User gedeelte van de AccountDTO
+        UserDto userDto = new UserDto();
+        userDto.setUsername(accountDto.getUsername());
+        userDto.setPassword(passwordEncoder.encode(accountDto.getPassword()));
+
+        User user = new User();
+        if (accountDto.getRoles() != null) {
+            List<Role> userRoles = new ArrayList<>();
+            for (String rolename : accountDto.getRoles()) {
+                Optional<Role> or = roleRepository.findById("ROLE_" + rolename);
+                if (or.isPresent()) {
+                    userRoles.add(or.get());
+                }
+            }
+
+            // Aanmaken User
+            userDtoToUser(user, userDto);
+            user.setRoles(userRoles);
+        }
+        // Aanmaken Profile
+        Account account = new Account();
+        accountDtoToAccount(accountDto, account);
+
+        // OneToOne relatie tussen User en Account
+        user.setAccount(account);
+
+        // Beide opslaan in Repository
+        accountRepository.save(account);
+        userRepository.save(user);
+
+        // User -> UserDTO om terug te geven naar de controller
+        UserDto savedUserDto = new UserDto();
+        userToUserDto(user, savedUserDto);
+
+        return savedUserDto;
+    }
+
+    private void accountDtoToAccount(AccountDto aDto, Account a) {
+        a.setUsername(aDto.getUsername()); // TODO: TOEVOEGEN AAN ACCOUNT ALLES, DTO, SERVICE, CONTROLLER ETC
+        a.setPassword(aDto.getPassword()); // TODO: TOEVOEGEN AAN ACCOUNT ALLES, DTO, SERVICE, CONTROLLER ETC
+        a.setRole
+        a.setFirstname(aDto.getFirstname());
+        a.setLastname(aDto.getLastname());
+        a.setPhonenumber(aDto.getPhonenumber());
+        a.setEmailaddress(aDto.getEmailaddress());
+    }
+
+
     private static void userToUserDto(User u, UserDto uDto) {
         uDto.setUsername(u.getUsername());
         uDto.setPassword(u.getPassword());
