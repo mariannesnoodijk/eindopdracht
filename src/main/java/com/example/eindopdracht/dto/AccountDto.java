@@ -24,4 +24,5 @@ public class AccountDto { //This class serves as a data structure for transferri
 
     @Email(message = "This needs to be a valid email address")
     public String emailaddress;
+
 }
