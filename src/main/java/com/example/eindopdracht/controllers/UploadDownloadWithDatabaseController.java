@@ -30,8 +30,8 @@ public class UploadDownloadWithDatabaseController {
         // next line makes url. example "http://localhost:8080/download/naam.jpg"
         FileDocument fileDocument = databaseService.uploadFileDocument(file);
         String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFromDB/").path(Objects.requireNonNull(file.getOriginalFilename())).toUriString();
-        String contentType = file.getContentType();
 
+        String contentType = file.getContentType();
 
         return new FileUploadResponse(fileDocument.getFileName(), url, contentType );
     }

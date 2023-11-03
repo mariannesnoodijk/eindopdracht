@@ -20,9 +20,9 @@ public class DatabaseService {
         this.doc = doc;
     }
 
-    public Collection<FileDocument> getALlFromDB() {
-        return doc.findAll();
-    }
+//    public Collection<FileDocument> getALlFromDB() {
+//        return doc.findAll();
+//    }
 
     public FileDocument uploadFileDocument(MultipartFile file) throws IOException {
         String name = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
