@@ -48,11 +48,11 @@ public class UploadDownloadWithDatabaseController {
 
     // TODO: DETERMINE WHETHER A MULTI UPLOAD IS POSSIBLE AND DESIRED
     //    post for multiple uploads to database
-//    @PostMapping("/multiple/upload/db")
+//    @PostMapping("/multiple/uploadDB")
 //    List<FileUploadResponse> multipleUpload(@RequestParam("files") MultipartFile [] files) {
 //
 //        if(files.length > 7) {
-//            throw new RuntimeException("to many files selected");
+//            throw new RuntimeException("too many files selected");
 //        }
 //
 //        return databaseService.createMultipleUpload(files);
@@ -60,7 +60,7 @@ public class UploadDownloadWithDatabaseController {
 //    }
 
     // TODO: HERACTIVEREN ALS MULTI UPLOAD TE DOEN IS
-//    @GetMapping("/getAll/db")
+//    @GetMapping("/downloadAllFromDB")
 //    public Collection<FileDocument> getAllFromDB(){
 //        return databaseService.getALlFromDB();
 //    }

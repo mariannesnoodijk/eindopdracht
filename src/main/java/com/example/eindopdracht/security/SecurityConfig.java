@@ -48,8 +48,39 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(auth -> auth // TODO: MAKE SURE ENDPOINTS ETC ARE CORRECTLY SET
-//
+                .authorizeHttpRequests(auth -> auth
+
+//                                .requestMatchers("/*").hasRole("ADMIN")
+//                                .requestMatchers("/**").hasRole("ADMIN")
+
+                                .requestMatchers(HttpMethod.POST, "/users").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/users/{userId}").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
+
+                                .requestMatchers(HttpMethod.POST, "/accounts").hasAnyRole("ADMIN", "USER")
+                                .requestMatchers(HttpMethod.GET, "/accounts/{accountId}").hasAnyRole("ADMIN", "USER")
+                                .requestMatchers(HttpMethod.GET, "/accounts").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/accounts/{accountId}").hasRole("ADMIN")
+
+                                .requestMatchers(HttpMethod.POST, "/properties").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/properties/{propertyId}").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/properties").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/properties/{propertyId}").hasRole("ADMIN")
+
+                                .requestMatchers(HttpMethod.GET, "/roles").hasRole("ADMIN")
+
+                                .requestMatchers(HttpMethod.POST, "/viewings").hasAnyRole("ADMIN", "USER")
+                                .requestMatchers(HttpMethod.GET, "/viewings").hasAnyRole("ADMIN", "USER")
+                                .requestMatchers(HttpMethod.DELETE, "/viewings/{viewingId}").hasAnyRole("ADMIN", "USER")
+
+                        //TODO: Toevoegen AUTH, maar vraag Mark eerst van hoe en wat
+                                .requestMatchers(HttpMethod.POST, "/auth").hasRole("ADMIN")
+                        
+                                .requestMatchers(HttpMethod.POST, "/single/uploadDB").hasRole("ADMIN") // single upload
+                                .requestMatchers(HttpMethod.GET, "/downloadFromDB/{fileName}").hasRole("ADMIN") // single download
+//                                .requestMatchers(HttpMethod.POST, "/multiple/uploadDB").hasRole("ADMIN") // multiple upload
+//                                .requestMatchers(HttpMethod.GET, "/downloadAllFromDB").hasRole("ADMIN") // multiple download
+
 //                                .requestMatchers(HttpMethod.POST, "/users").permitAll()
 //                                .requestMatchers(HttpMethod.POST, "/auth").permitAll()
 //                                .requestMatchers(HttpMethod.GET, "/*").permitAll()

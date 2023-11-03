@@ -27,10 +27,9 @@ public class ViewingDto { // This class serves as a data structure for transferr
     private String emailaddress;
 
     @Future
-    @DateTimeFormat(pattern="dd/mm/yyyy")
+    @DateTimeFormat(pattern="dd/mm/yyyy") // Dit checken wanneer Frontend klaar is
     private LocalDate viewingdate;
 
     @Future
     private LocalTime viewingtime;
-
 }

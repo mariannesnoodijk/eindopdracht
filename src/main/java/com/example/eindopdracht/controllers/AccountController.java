@@ -18,21 +18,6 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-
-    @GetMapping// This method handles HTTP GET requests to the /accounts endpoint
-    public ResponseEntity<List<AccountDto>> getAllAccounts() {
-        List<AccountDto> aDto = accountService.getAllAccounts();
-        return new ResponseEntity<>(aDto, HttpStatus.OK);
-    }
-
-
-    @GetMapping("/{accountId}") // This method handles HTTP GET requests to the /accounts/{accountId} endpoint
-    public ResponseEntity<AccountDto> getOneAccount(@PathVariable Long accountId) {
-        AccountDto aDto = accountService.getAccount(accountId);
-        return new ResponseEntity<>(aDto, HttpStatus.OK);
-    }
-
-
     @PostMapping// This method handles HTTP POST requests to the /accounts endpoint creating an account
     public ResponseEntity<AccountDto> createAccount(@Valid @RequestBody AccountDto accountDto) {
 //        if (!accountService.validateEmailPattern(accountDto.getEmailaddress())) {
@@ -43,6 +28,17 @@ public class AccountController {
         return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
     }
 
+    @GetMapping("/{accountId}") // This method handles HTTP GET requests to the /accounts/{accountId} endpoint
+    public ResponseEntity<AccountDto> getOneAccount(@PathVariable Long accountId) {
+        AccountDto aDto = accountService.getAccount(accountId);
+        return new ResponseEntity<>(aDto, HttpStatus.OK);
+    }
+
+    @GetMapping// This method handles HTTP GET requests to the /accounts endpoint
+    public ResponseEntity<List<AccountDto>> getAllAccounts() {
+        List<AccountDto> aDto = accountService.getAllAccounts();
+        return new ResponseEntity<>(aDto, HttpStatus.OK);
+    }
 
     @DeleteMapping("/{accountId}") // This method handles HTTP DELETE requests to the /accounts/{accountId} endpoint
     public ResponseEntity<AccountDto> deleteAccount(@PathVariable Long accountId) {

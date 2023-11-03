@@ -18,10 +18,10 @@ public class Viewing {
     private String phonenumber;
     private String emailaddress;
 
-    private LocalDate viewingdate; // Welk Data Type valt een datum onder?
-    private LocalTime viewingtime; // Welk Data Type val een tijd onder?
+    private LocalDate viewingdate;
+    private LocalTime viewingtime;
 
-    // Relations between entities:
+
     // RELATION BETWEEN VIEWING & ACCOUNT
     @ManyToOne(fetch = FetchType.EAGER) // This is the owner of the relation with User. There is a Foreign Key in the database
     @JoinColumn(name = "account_id")
@@ -31,5 +31,4 @@ public class Viewing {
     @ManyToOne(fetch = FetchType.EAGER) // This is the owner of the relation with Property. There is a Foreign Key in the database
     @JoinColumn(name = "property_id")
     private Property properties;
-
 }

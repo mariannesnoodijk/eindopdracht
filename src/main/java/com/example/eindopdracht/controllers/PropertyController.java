@@ -19,10 +19,10 @@ public class PropertyController {
         this.propertyService = propertyService;
     }
 
-    @GetMapping // This method handles HTTP GET requests to the /properties endpoint
-    public ResponseEntity<List<PropertyDto>> getAllProperties() {
-        List<PropertyDto> pDto = propertyService.getAllProperties();
-        return new ResponseEntity<>(pDto, HttpStatus.OK);
+    @PostMapping // This method handles HTTP POST requests to the /properties endpoint creating a property
+    public ResponseEntity<PropertyDto> createProperty(@Valid @RequestBody PropertyDto propertyDto) {
+        PropertyDto newProperty = propertyService.createProperty(propertyDto);
+        return new ResponseEntity<>(newProperty, HttpStatus.CREATED);
     }
 
     @GetMapping("/{propertyId}") // This method handles HTTP GET requests to the /properties/{propertyId} endpoint, where {id} is a path variable representing the property ID
@@ -31,10 +31,10 @@ public class PropertyController {
         return new ResponseEntity<>(pDto, HttpStatus.OK);
     }
 
-    @PostMapping // This method handles HTTP POST requests to the /properties endpoint creating a property
-    public ResponseEntity<PropertyDto> createProperty(@Valid @RequestBody PropertyDto propertyDto) {
-        PropertyDto newProperty = propertyService.createProperty(propertyDto);
-        return new ResponseEntity<>(newProperty, HttpStatus.CREATED);
+    @GetMapping // This method handles HTTP GET requests to the /properties endpoint
+    public ResponseEntity<List<PropertyDto>> getAllProperties() {
+        List<PropertyDto> pDto = propertyService.getAllProperties();
+        return new ResponseEntity<>(pDto, HttpStatus.OK);
     }
 
     @DeleteMapping("/{propertyId}") // This method handles HTTP DELETE requests to the /properties/{propertyId} endpoint, where {id} is a path variable representing the property ID

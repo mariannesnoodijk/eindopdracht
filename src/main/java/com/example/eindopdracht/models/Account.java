@@ -23,16 +23,6 @@ public class Account {
     private String emailaddress;
 
 
-    // contactgegevens toevoegen???
-    // // welke informatie heb ik nodig?
-    //    // voornaam
-    //    // achternaam
-    //    // telefoonnummer
-    //    // emailadres
-
-
-    // Relations between entities:
-
     // RELATION BETWEEN ACCOUNT & USER
     @OneToOne // This is the owner side of the relation. There is a Foreign Key in the database.
             User user;
@@ -45,5 +35,4 @@ public class Account {
     @OneToMany(mappedBy = "account") // This is the target side of the relation with Viewing. There is nothing in the database.
     @JsonIgnore
     List<Viewing> viewings;
-
 }

@@ -20,15 +20,16 @@ public class ViewingController {
         this.viewingService = viewingService;
     }
 
-    @GetMapping // This method handles HTTP GET requests to the /viewings endpoint
-    public ResponseEntity<List<ViewingDto>> getAllViewings() {
-        List<ViewingDto> vDto = viewingService.getAllViewings();
-        return new ResponseEntity<>(vDto, HttpStatus.OK);
-    }
     @PostMapping // This method handles HTTP POST requests to the /viewings endpoint creating a viewing
     public ResponseEntity<ViewingDto> createViewing(@Valid @RequestBody ViewingDto viewingDto) {
         ViewingDto newViewing = viewingService.createViewing(viewingDto);
         return new ResponseEntity<>(newViewing, HttpStatus.CREATED);
+    }
+
+    @GetMapping // This method handles HTTP GET requests to the /viewings endpoint
+    public ResponseEntity<List<ViewingDto>> getAllViewings() {
+        List<ViewingDto> vDto = viewingService.getAllViewings();
+        return new ResponseEntity<>(vDto, HttpStatus.OK);
     }
 
     @DeleteMapping("/{viewingId}") // This method handles HTTP DELETE requests to the /viewings/{viewingId} endpoint, where {id} is a path variable representing the property ID

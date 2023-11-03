@@ -2,7 +2,6 @@ package com.example.eindopdracht.dto;
 
 
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data

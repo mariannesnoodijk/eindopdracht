@@ -15,16 +15,6 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // This specifies that the ID is automatically generated
     Long propertyId;
 
-    //  Variables of class Property
-    // welke informatie heb ik nodig?
-    // adres
-    // huisnummer
-    // prijs
-    // beschikbaar ja of nee
-    // match met gebruiker ja of nee -- Like to have!!
-    // favorite?? ja of nee
-
-
     private String streetname;
     private String housenumber;
     private Double price;
@@ -32,8 +22,6 @@ public class Property {
 //    private Boolean available;// TODO: OPTIONAL... GA IK DOEN OF NIET? Like to have -- NEE, deze moet er wel nog in
 //    private Boolean match; // TODO: OPTIONAL... GA IK DOEN OF NIET? Like to have
 
-
-    // Relations between entities:
 
     // RELATION BETWEEN PROPERTY & ACCOUNT
     @ManyToMany(mappedBy = "properties") // This is the target side of the relation with Account. There is nothing in the database.
@@ -43,6 +31,4 @@ public class Property {
     @OneToMany(mappedBy = "properties") // This is the target side of the relation with Viewing. There is nothing in the database.
     @JsonIgnore
     private List<Viewing> viewings;
-
-
 }

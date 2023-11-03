@@ -17,15 +17,12 @@ public class User {
     private String password;
 
 
-    // Relations between entities:
-
-    // RELATION BETWEEN USER & ACCOUNT
+    // One-to-One relation between USER & ACCOUNT
     @OneToOne(mappedBy = "user") // This is the target side of the relation with Account. There is nothing in the database.
             Account account;
 
-    // RELATION BETWEEN USER & ROLE
+    // Many-to-Many relation between USER & ROLE
     @ManyToMany(fetch = FetchType.EAGER) // The owner side of the relation with Role.
     // The FetchType. EAGER option indicates that the associated entity should be fetched eagerly, which means that it will be fetched at the same time as the parent entity.
     private List<Role> roles = new ArrayList<>();
-
 }

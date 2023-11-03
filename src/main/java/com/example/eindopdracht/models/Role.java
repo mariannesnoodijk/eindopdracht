@@ -14,8 +14,6 @@ public class Role {
     private String rolename;
 
 
-    // Relations between entities:
-
     // RELATION BETWEEN ROLE & USER
     @ManyToMany(mappedBy = "roles") // This is the target side, non owner side, of the relation with User. There is nothing in the database.
     private List<User> users;

@@ -10,7 +10,6 @@ public class FileDocument {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // This specifies that the ID is automatically generated
     private Long id;
-
     private String fileName;
 
     @Lob
