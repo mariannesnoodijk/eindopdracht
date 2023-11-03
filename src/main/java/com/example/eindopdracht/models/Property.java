@@ -13,7 +13,7 @@ public class Property {
 
     @Id //  Primary Key of the entity
     @GeneratedValue(strategy = GenerationType.IDENTITY) // This specifies that the ID is automatically generated
-    Long propertyId;
+    private Long propertyId;
 
     private String streetname;
     private String housenumber;

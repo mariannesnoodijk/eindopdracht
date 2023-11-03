@@ -8,6 +8,8 @@ import lombok.Data;
 @Data
 public class PropertyDto { // This class serves as a data structure for transferring data related to properties between different parts of the application
 
+    private Long propertyId;
+
     @NotEmpty(message = "Streetname must not be empty")
     private String streetname;
 

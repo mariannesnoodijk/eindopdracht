@@ -11,6 +11,8 @@ import java.util.Date;
 @Data
 public class ViewingDto { // This class serves as a data structure for transferring data related to viewings between different parts of the application
 
+    private Long viewingId;
+
     @NotEmpty(message = "Full name cannot be empty")
     private String fullname;
 
