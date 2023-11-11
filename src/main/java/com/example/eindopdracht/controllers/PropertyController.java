@@ -1,6 +1,7 @@
 package com.example.eindopdracht.controllers;
 
 import com.example.eindopdracht.dto.PropertyDto;
+import com.example.eindopdracht.repositories.PropertyRepository;
 import com.example.eindopdracht.services.PropertyService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController // Handles HTTP requests and returns the response directly to the client
 @RequestMapping("/properties") // Using @RequestMapping sets the endpoint as a standard, unless specified otherwise
@@ -17,12 +19,18 @@ public class PropertyController {
 
     public PropertyController(PropertyService propertyService) {
         this.propertyService = propertyService;
-    }
+            }
 
     @PostMapping // This method handles HTTP POST requests to the /properties endpoint creating a property
     public ResponseEntity<PropertyDto> createProperty(@Valid @RequestBody PropertyDto propertyDto) {
         PropertyDto newProperty = propertyService.createProperty(propertyDto);
         return new ResponseEntity<>(newProperty, HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/{propertyId}/favorite")
+    public ResponseEntity<PropertyDto> updateFavoriteStatus(@PathVariable Long propertyId, @RequestBody Boolean isFavorite) {
+        PropertyDto updatedPropertyDto = propertyService.updateFavoriteStatus(propertyId, isFavorite);
+        return new ResponseEntity<>(updatedPropertyDto, HttpStatus.OK);
     }
 
     @GetMapping("/{propertyId}") // This method handles HTTP GET requests to the /properties/{propertyId} endpoint, where {id} is a path variable representing the property ID

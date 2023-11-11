@@ -6,7 +6,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 @Data
 public class ViewingDto { // This class serves as a data structure for transferring data related to viewings between different parts of the application
@@ -30,8 +29,8 @@ public class ViewingDto { // This class serves as a data structure for transferr
 
     @Future
     @DateTimeFormat(pattern="dd/mm/yyyy") // Dit checken wanneer Frontend klaar is
-    private LocalDate viewingdate;
+    private LocalDate date;
 
     @Future
-    private LocalTime viewingtime;
+    private LocalTime time;
 }

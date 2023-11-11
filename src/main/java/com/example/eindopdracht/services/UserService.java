@@ -44,20 +44,20 @@ public class UserService {
     }
 
     // TODO: Wil ik hier wel alle users op kunnen vragen?
-//    public List<UserDto> getAllUsers() {
-//        List<User> users = userRepository.findAll();
-//        List<UserDto> userDtos = new ArrayList<>();
-//
-//        for (User u : users) {
-//            UserDto uDto = new UserDto();
-//            userToUserDto(u, uDto);
-//
-//            userDtos.add(uDto);
-//        }
-//        return userDtos;
-//    }
+    public List<UserDto> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        List<UserDto> userDtos = new ArrayList<>();
 
-    public String createUser(UserDto userDto) {
+        for (User u : users) {
+            UserDto uDto = new UserDto();
+            userToUserDto(u, uDto);
+
+            userDtos.add(uDto);
+        }
+        return userDtos;
+    }
+
+    public User createUser(UserDto userDto) {
         User newUser = new User();
         newUser.setUsername(userDto.getUsername());
         newUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
@@ -69,9 +69,9 @@ public class UserService {
                 userRoles.add(or.get());
             }
         }
+        return
         userRepository.save(newUser);
 
-        return "User successfully created";
     }
 
 

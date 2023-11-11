@@ -1,6 +1,6 @@
 package com.example.eindopdracht.controllers;
 
-import com.example.eindopdracht.FileUploadResponse.FileUploadResponse;
+import com.example.eindopdracht.fileUploadResponse.FileUploadResponse;
 import com.example.eindopdracht.models.FileDocument;
 import com.example.eindopdracht.services.DatabaseService;
 import jakarta.servlet.http.HttpServletRequest;

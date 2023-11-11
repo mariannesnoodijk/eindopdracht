@@ -1,11 +1,11 @@
 package com.example.eindopdracht.services;
 
 import com.example.eindopdracht.dto.AccountDto;
+import com.example.eindopdracht.dto.UserDto;
 import com.example.eindopdracht.exceptions.IdNotFoundException;
-import com.example.eindopdracht.exceptions.IncorrectEmailException;
 import com.example.eindopdracht.models.Account;
+import com.example.eindopdracht.models.User;
 import com.example.eindopdracht.repositories.AccountRepository;
-import jakarta.validation.constraints.Email;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -17,9 +17,11 @@ import java.util.Optional;
 public class AccountService {
 
     private final AccountRepository accountRepository;
+    private final UserService userService;
 
-    public AccountService(AccountRepository accountRepository) {
+    public AccountService(AccountRepository accountRepository, UserService userService) {
         this.accountRepository = accountRepository;
+        this.userService = userService;
     }
 
 
@@ -49,9 +51,16 @@ public class AccountService {
     }
 
     public AccountDto createAccount(AccountDto accountDto) {
+        UserDto userDto = new UserDto();
+        userDto.setUsername(accountDto.getUsername());
+        userDto.setPassword(accountDto.getPassword());
+        userDto.setRoles(new String[]{"USER"});
+        User user = userService.createUser(userDto);
+
         Account account = new Account();
         accountDtoToAccount(accountDto, account);
 
+        account.setUser(user);
         Account savedAccount = accountRepository.save(account);
 
         AccountDto savedAccountDto = new AccountDto();
@@ -59,6 +68,7 @@ public class AccountService {
 
         return savedAccountDto;
     }
+
 
     //TODO: Need to add a throw IncorrectEmailException exception here. Right now Postman sees when email is invalid, but i don't get an exception message. If succeeded, do the same for phone number.
 //    public AccountDto createAccount(AccountDto accountDto) {
@@ -104,13 +114,16 @@ public class AccountService {
 
 
     private static void accountToAccountDto(Account a, AccountDto aDto) {
+        aDto.setAccountId(a.getAccountId());
         aDto.setFirstname(a.getFirstname());
         aDto.setLastname(a.getLastname());
         aDto.setPhonenumber(a.getPhonenumber());
         aDto.setEmailaddress(a.getEmailaddress());
+        aDto.setUsername(a.getUser().getUsername());
     }
 
     private static void accountDtoToAccount(AccountDto accountDto, Account account) {
+        account.setAccountId(accountDto.getAccountId());
         account.setFirstname(accountDto.getFirstname());
         account.setLastname(accountDto.getLastname());
         account.setPhonenumber(accountDto.getPhonenumber());

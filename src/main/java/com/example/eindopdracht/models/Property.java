@@ -15,10 +15,10 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // This specifies that the ID is automatically generated
     private Long propertyId;
 
-    private String streetname;
-    private String housenumber;
+    private String address;
     private Double price;
     private String description;
+    private Boolean isFavorite;
 //    private Boolean available;// TODO: OPTIONAL... GA IK DOEN OF NIET? Like to have -- NEE, deze moet er wel nog in
 //    private Boolean match; // TODO: OPTIONAL... GA IK DOEN OF NIET? Like to have
 

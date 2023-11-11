@@ -53,28 +53,34 @@ public class SecurityConfig {
 //                                .requestMatchers("/*").hasRole("ADMIN")
 //                                .requestMatchers("/**").hasRole("ADMIN")
 
-                                .requestMatchers(HttpMethod.POST, "/users").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET, "/users/{userId}").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
-
-                                .requestMatchers(HttpMethod.POST, "/accounts").hasAnyRole("ADMIN", "USER")
-                                .requestMatchers(HttpMethod.GET, "/accounts/{accountId}").hasAnyRole("ADMIN", "USER")
-                                .requestMatchers(HttpMethod.GET, "/accounts").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.DELETE, "/accounts/{accountId}").hasRole("ADMIN")
-
-                                .requestMatchers(HttpMethod.POST, "/properties").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET, "/properties/{propertyId}").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/properties").permitAll()
-                                .requestMatchers(HttpMethod.DELETE, "/properties/{propertyId}").hasRole("ADMIN")
-
-                                .requestMatchers(HttpMethod.GET, "/roles").hasRole("ADMIN")
-
-                                .requestMatchers(HttpMethod.POST, "/viewings").hasAnyRole("ADMIN", "USER")
-                                .requestMatchers(HttpMethod.GET, "/viewings").hasAnyRole("ADMIN", "USER")
-                                .requestMatchers(HttpMethod.DELETE, "/viewings/{viewingId}").hasAnyRole("ADMIN", "USER")
+//                                .requestMatchers(HttpMethod.POST, "/users").hasRole("ADMIN")
+//                                .requestMatchers(HttpMethod.GET, "/users/{userId}").hasRole("ADMIN")
+//                                .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
+//
+//                                .requestMatchers(HttpMethod.POST, "/accounts").hasAnyRole("ADMIN", "USER")
+////                                .requestMatchers(HttpMethod.GET, "/accounts/{accountId}").hasAnyRole("ADMIN", "USER")
+//                                .requestMatchers(HttpMethod.GET, "/accounts/{accountId}").permitAll()
+////                                .requestMatchers(HttpMethod.GET, "/accounts").hasRole("ADMIN")
+//                                .requestMatchers(HttpMethod.GET, "/accounts").permitAll()
+//                                .requestMatchers(HttpMethod.DELETE, "/accounts/{accountId}").hasRole("ADMIN")
+//
+////                                .requestMatchers(HttpMethod.POST, "/properties").hasRole("ADMIN")
+//                                .requestMatchers(HttpMethod.POST, "/properties").permitAll()
+//                                .requestMatchers(HttpMethod.GET, "/properties/{propertyId}").permitAll()
+//                                .requestMatchers(HttpMethod.GET, "/properties").permitAll()
+//                                .requestMatchers(HttpMethod.DELETE, "/properties/{propertyId}").hasRole("ADMIN")
+//
+//                                .requestMatchers(HttpMethod.GET, "/roles").hasRole("ADMIN")
+//
+////                                .requestMatchers(HttpMethod.POST, "/viewings").hasAnyRole("ADMIN", "USER")
+//                                .requestMatchers(HttpMethod.POST, "/viewings").permitAll()
+////                                .requestMatchers(HttpMethod.GET, "/viewings").hasAnyRole("ADMIN", "USER")
+//                                .requestMatchers(HttpMethod.GET, "/viewings").permitAll()
+////                                .requestMatchers(HttpMethod.DELETE, "/viewings/{viewingId}").hasAnyRole("ADMIN", "USER")
+//                                .requestMatchers(HttpMethod.DELETE, "/viewings").permitAll()
 
                         //TODO: Toevoegen AUTH, maar vraag Mark eerst van hoe en wat
-                                .requestMatchers(HttpMethod.POST, "/auth").hasRole("ADMIN")
+//                                .requestMatchers(HttpMethod.POST, "/auth").hasRole("ADMIN")
                         
                                 .requestMatchers(HttpMethod.POST, "/single/uploadDB").hasRole("ADMIN") // single upload
                                 .requestMatchers(HttpMethod.GET, "/downloadFromDB/{fileName}").hasRole("ADMIN") // single download
@@ -88,7 +94,7 @@ public class SecurityConfig {
 
 //                                .requestMatchers("/secret").hasRole("ADMIN")
 //                                .requestMatchers("/hello").authenticated()
-//                        .anyRequest().denyAll()
+//                        .anyRequest().permitAll()
 
 
                                 .requestMatchers("/*").permitAll()

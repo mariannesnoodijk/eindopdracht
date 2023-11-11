@@ -24,24 +24,16 @@ public class UserController {
     }
 
 
-    @PostMapping // This method handles HTTP POST requests to the /users endpoint creating a user
-    public ResponseEntity<String> createUser(@Valid @RequestBody UserDto userDto) {
-        String result = userService.createUser(userDto);
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
     @GetMapping("/{userId}") // This method handles HTTP GET requests to the /users/{userId} endpoint, where {id} is a path variable representing the property ID
     public ResponseEntity<UserDto> getOneUser(@PathVariable String userId) {
         UserDto uDto = userService.getUser(userId);
         return new ResponseEntity<>(uDto, HttpStatus.OK);
     }
 
-// TODO: Wil ik hier wel alle users op kunnen vragen? Of wil ik de mogelijkheid om alle ACCOUNTS op te vragen?
+    @GetMapping // This method handles HTTP GET requests to the /users endpoint
 
-//    @GetMapping // This method handles HTTP GET requests to the /users endpoint
-//
-//    public ResponseEntity<List<UserDto>> getAllUsers() {
-//        List<UserDto> dDto = userService.getAllUsers();
-//        return new ResponseEntity<>(dDto, HttpStatus.OK);
-//    }
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        List<UserDto> dDto = userService.getAllUsers();
+        return new ResponseEntity<>(dDto, HttpStatus.OK);
+    }
 }

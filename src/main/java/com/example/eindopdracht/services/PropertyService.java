@@ -21,15 +21,13 @@ public class PropertyService {
     }
 
     private static void propertyToPropertyDto(Property p, PropertyDto pDto) {
-        pDto.setStreetname(p.getStreetname());
-        pDto.setHousenumber(p.getHousenumber());
+        pDto.setAddress(p.getAddress());
         pDto.setPrice(p.getPrice());
         pDto.setDescription(p.getDescription());
     }
 
     private static void propertyDtoToProperty(PropertyDto propertyDto, Property property) {
-        property.setStreetname(propertyDto.getStreetname());
-        property.setHousenumber(propertyDto.getHousenumber());
+        property.setAddress(propertyDto.getAddress());
         property.setPrice(propertyDto.getPrice());
         property.setDescription(propertyDto.getDescription());
     }
@@ -40,7 +38,24 @@ public class PropertyService {
             Property p = property.get();
             PropertyDto pDto = new PropertyDto();
             propertyToPropertyDto(p, pDto);
-            return (pDto);
+            return pDto;
+        } else {
+            throw new IdNotFoundException("Property not found with ID: " + propertyId);
+        }
+    }
+
+    public PropertyDto updateFavoriteStatus(Long propertyId, Boolean isFavorite) {
+        Optional<Property> optionalProperty = propertyRepository.findById(propertyId);
+        if (optionalProperty.isPresent()) {
+            Property property = optionalProperty.get();
+            property.setIsFavorite(isFavorite);
+            propertyRepository.save(property);
+
+            PropertyDto propertyDto = new PropertyDto();
+            propertyToPropertyDto(property, propertyDto);
+            propertyDto.setIsFavorite(isFavorite);
+
+            return propertyDto;
         } else {
             throw new IdNotFoundException("Property not found with ID: " + propertyId);
         }

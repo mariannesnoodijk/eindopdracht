@@ -34,8 +34,7 @@ class PropertyServiceTest {
         // Arrange - creating/adding a new property
         Long propertyId = 1L;
         Property property = new Property();
-        property.setStreetname("Winkelstraat");
-        property.setHousenumber("123");
+        property.setAddress("Teststraat 123");
         property.setPrice(100000.0);
         property.setDescription("This is a test description for test getProperties");
 
@@ -45,8 +44,7 @@ class PropertyServiceTest {
         PropertyDto propertyDto = propertyService.getProperty(propertyId);
 
         // Assert
-        assertEquals("Winkelstraat", propertyDto.getStreetname());
-        assertEquals("123", propertyDto.getHousenumber());
+        assertEquals("Teststraat 123", propertyDto.getAddress());
         assertEquals(100000.0, propertyDto.getPrice());
         assertEquals("This is a test description for test getProperties", propertyDto.getDescription());
     }
@@ -65,14 +63,12 @@ class PropertyServiceTest {
     void getAllProperties() {
         // arrange
         Property property1 = new Property();
-        property1.setStreetname("Teststraat");
-        property1.setHousenumber("1");
+        property1.setAddress("Test Hoofdstraat 1");
         property1.setPrice(200000.0);
         property1.setDescription("This is a test description for test getAllProperties");
 
         Property property2 = new Property();
-        property2.setStreetname("Hoofdstraat");
-        property2.setHousenumber("5");
+        property2.setAddress("Test Hoofdstraat 2");
         property2.setPrice(500000.0);
         property2.setDescription("This is another test description for test getAllProperties");
 
@@ -94,8 +90,7 @@ class PropertyServiceTest {
     void createProperty() {
         // arrange
         Property newProperty = new Property();
-        newProperty.setStreetname("Teststraat");
-        newProperty.setHousenumber("1");
+        newProperty.setAddress("Test Hoofdstraat 1");
         newProperty.setPrice(200000.0);
         newProperty.setDescription("This is a test description for test createProperty");
 
@@ -105,8 +100,7 @@ class PropertyServiceTest {
         PropertyDto savedPropertyDto = propertyService.createProperty(new PropertyDto());
 
         // assert
-        assertEquals("Teststraat", savedPropertyDto.getStreetname());
-        assertEquals("1", savedPropertyDto.getHousenumber());
+        assertEquals("Test Hoofdstraat 1", savedPropertyDto.getAddress());
         assertEquals(200000.0, savedPropertyDto.getPrice());
         assertEquals("This is a test description for test createProperty", savedPropertyDto.getDescription());
     }

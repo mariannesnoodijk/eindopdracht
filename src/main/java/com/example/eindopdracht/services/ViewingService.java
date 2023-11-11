@@ -37,16 +37,16 @@ public class ViewingService {
         vDto.setFullname(v.getFullname());
         vDto.setPhonenumber(v.getPhonenumber());
         vDto.setEmailaddress(v.getEmailaddress());
-        vDto.setViewingdate(v.getViewingdate());
-        vDto.setViewingtime(v.getViewingtime());
+        vDto.setDate(v.getDate());
+        vDto.setTime(v.getTime());
     }
 
     private static void viewingDtoToViewing(ViewingDto viewingDto, Viewing viewing) {
         viewing.setFullname(viewingDto.getFullname());
         viewing.setPhonenumber(viewingDto.getPhonenumber());
         viewing.setEmailaddress(viewingDto.getEmailaddress());
-        viewing.setViewingdate(viewingDto.getViewingdate());
-        viewing.setViewingtime(viewingDto.getViewingtime());
+        viewing.setDate(viewingDto.getDate());
+        viewing.setTime(viewingDto.getTime());
     }
 
     public ViewingDto createViewing(ViewingDto viewingDto) {

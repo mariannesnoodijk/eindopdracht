@@ -18,8 +18,8 @@ public class Viewing {
     private String phonenumber;
     private String emailaddress;
 
-    private LocalDate viewingdate;
-    private LocalTime viewingtime;
+    private LocalDate date;
+    private LocalTime time;
 
 
     // RELATION BETWEEN VIEWING & ACCOUNT

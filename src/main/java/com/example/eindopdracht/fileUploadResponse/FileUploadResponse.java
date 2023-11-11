@@ -1,4 +1,4 @@
-package com.example.eindopdracht.FileUploadResponse;
+package com.example.eindopdracht.fileUploadResponse;
 
 import lombok.Data;
 
