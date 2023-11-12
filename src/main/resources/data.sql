@@ -7,9 +7,9 @@ VALUES ('username', 'password');
 -- TODO: bcrypt password opzoeken en copy paste ^
 
 -- ACCOUNTS DATABASE
-INSERT INTO accounts(firstname, lastname, phonenumber, emailaddress)
-VALUES ('marianne', 'test', '0611122333', 'marianne@test.com'),
-       ('koen', 'banaan', '0611122333', 'koen@banaan.com');
+INSERT INTO accounts(firstname, lastname, emailaddress)
+VALUES ('marianne', 'test', 'marianne@test.com'),
+       ('koen', 'banaan', 'koen@banaan.com');
 
 
 -- PROPERTIES DATABASE
