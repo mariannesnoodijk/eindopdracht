@@ -12,8 +12,6 @@ public class AccountDto { //This class serves as a data structure for transferri
     public String firstname;
     @NotEmpty(message = "Last name cannot be empty")
     public String lastname;
-    @NotEmpty(message = "Phonenumber cannot be empty")
-    public String phonenumber;
     @Email(message = "This needs to be a valid email address")
     public String emailaddress;
 

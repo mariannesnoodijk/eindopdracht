@@ -117,7 +117,6 @@ public class AccountService {
         aDto.setAccountId(a.getAccountId());
         aDto.setFirstname(a.getFirstname());
         aDto.setLastname(a.getLastname());
-        aDto.setPhonenumber(a.getPhonenumber());
         aDto.setEmailaddress(a.getEmailaddress());
         aDto.setUsername(a.getUser().getUsername());
     }
@@ -126,7 +125,6 @@ public class AccountService {
         account.setAccountId(accountDto.getAccountId());
         account.setFirstname(accountDto.getFirstname());
         account.setLastname(accountDto.getLastname());
-        account.setPhonenumber(accountDto.getPhonenumber());
         account.setEmailaddress(accountDto.getEmailaddress());
     }
 

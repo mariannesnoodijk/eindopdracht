@@ -47,13 +47,11 @@ class AccountServiceTest {
         Account account1 = new Account();
         account1.setFirstname("Jan");
         account1.setLastname("Jansen");
-        account1.setPhonenumber("0611122333");
         account1.setEmailaddress("jan@jansen.com");
 
         Account account2 = new Account();
         account2.setFirstname("Piet");
         account2.setLastname("Pietje");
-        account2.setPhonenumber("0611122333");
         account2.setEmailaddress("piet@pietje.com");
 
         List<Account> accounts = new ArrayList<>();
@@ -77,7 +75,6 @@ class AccountServiceTest {
 
         account.setFirstname("Piet");
         account.setLastname("Pietje");
-        account.setPhonenumber("0611122333");
         account.setEmailaddress("piet@pietje.com");
 
         Mockito.when(accountRepository.findById(accountId)).thenReturn(Optional.of(account));
@@ -88,7 +85,6 @@ class AccountServiceTest {
         // Assert
         assertEquals("Piet", accountDto.getFirstname());
         assertEquals("Pietje", accountDto.getLastname());
-        assertEquals("0611122333", accountDto.getPhonenumber());
         assertEquals("piet@pietje.com", accountDto.getEmailaddress());
     }
 
@@ -113,13 +109,11 @@ class AccountServiceTest {
         Account newAccount = new Account();
         newAccount.setFirstname("Piet");
         newAccount.setLastname("Pietje");
-        newAccount.setPhonenumber("0611122333");
         newAccount.setEmailaddress("piet@pietje.com");
 
         AccountDto newAccountDto = new AccountDto();
         newAccountDto.setFirstname("Ukkie");
         newAccountDto.setLastname("Puk");
-        newAccountDto.setPhonenumber("0612345678");
         newAccountDto.setEmailaddress("ukkie@puk.com");
 
         Mockito.when(accountRepository.save(Mockito.any(Account.class))).thenReturn(newAccount);
@@ -130,7 +124,6 @@ class AccountServiceTest {
         // assert
         assertEquals("Piet", savedAccountDto.getFirstname());
         assertEquals("Pietje", savedAccountDto.getLastname());
-        assertEquals("0611122333", savedAccountDto.getPhonenumber());
         assertEquals("piet@pietje.com", savedAccountDto.getEmailaddress());
     }
 

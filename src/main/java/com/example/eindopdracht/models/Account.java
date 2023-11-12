@@ -19,7 +19,6 @@ public class Account {
 
     private String firstname;
     private String lastname;
-    private String phonenumber;
     private String emailaddress;
 
 
