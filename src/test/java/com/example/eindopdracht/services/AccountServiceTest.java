@@ -1,13 +1,9 @@
 package com.example.eindopdracht.services;
 
 import com.example.eindopdracht.dto.AccountDto;
-import com.example.eindopdracht.dto.PropertyDto;
-import com.example.eindopdracht.dto.ViewingDto;
 import com.example.eindopdracht.exceptions.IdNotFoundException;
 import com.example.eindopdracht.models.Account;
-import com.example.eindopdracht.models.Property;
 import com.example.eindopdracht.models.User;
-import com.example.eindopdracht.models.Viewing;
 import com.example.eindopdracht.repositories.AccountRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,12 +27,8 @@ class AccountServiceTest {
     @InjectMocks
     private AccountService accountService;
 
-    @Mock
-    private UserService userservice;
-
-
     @Test
-    void testGetAllAccounts() {
+    void testShouldGetAllAccounts() {
         // arrange - creating/adding a new account
         Account account1 = new Account();
         account1.setFirstname("Jan");
@@ -47,7 +39,6 @@ class AccountServiceTest {
         user.setUsername("username");
         user.setPassword("password");
         user.setRoles(null);
-
 
         Account account2 = new Account();
         account2.setFirstname("Piet");
@@ -70,7 +61,7 @@ class AccountServiceTest {
     }
 
     @Test
-    void testGetAccount() {
+    void testShouldGetAccount() {
         // Arrange - creating/adding a new account
         Long accountId = 1L;
         Account account = new Account();
@@ -87,7 +78,6 @@ class AccountServiceTest {
 
         account.setUser(user);
 
-
         Mockito.when(accountRepository.findById(accountId)).thenReturn(Optional.of(account));
 
         // Act
@@ -100,7 +90,7 @@ class AccountServiceTest {
     }
 
     @Test
-    void testGetAccountWithInvalidId() {
+    void testShouldGetAccountWithInvalidId() {
         // Arrange - creating/adding a new account
         Long accountId = 1L;
         Mockito.when(accountRepository.findById(accountId)).thenReturn(Optional.empty());
@@ -114,8 +104,7 @@ class AccountServiceTest {
     }
 
     @Test
-    void testCreateAccount() {
-
+    void testShouldCreateAccount() {
         // arrange
         Account newAccount = new Account();
         newAccount.setFirstname("Piet");
@@ -147,7 +136,7 @@ class AccountServiceTest {
     }
 
     @Test
-    void testDeleteAccount() {
+    void testShouldDeleteAccount() {
         // Arrange
         Long accountId = 1L;
 

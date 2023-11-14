@@ -1,12 +1,9 @@
 package com.example.eindopdracht.services;
 
 import com.example.eindopdracht.dto.PropertyDto;
-import com.example.eindopdracht.dto.ViewingDto;
 import com.example.eindopdracht.exceptions.IdNotFoundException;
 import com.example.eindopdracht.models.Property;
-import com.example.eindopdracht.models.Viewing;
 import com.example.eindopdracht.repositories.PropertyRepository;
-import com.example.eindopdracht.repositories.ViewingRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,7 +27,7 @@ class PropertyServiceTest {
     private PropertyService propertyService;
 
     @Test
-    void testGetProperty() {
+    void testShouldGetProperty() {
         // Arrange - creating/adding a new property
         Long propertyId = 1L;
         Property property = new Property();
@@ -50,7 +47,7 @@ class PropertyServiceTest {
     }
 
     @Test
-    void testGetPropertyNotFound() {
+    void testShouldGetPropertyNotFound() {
         // Arrange
         Long nonExistingPropertyId = 2L;
         Mockito.when(propertyRepository.findById(nonExistingPropertyId)).thenReturn(Optional.empty());
@@ -60,7 +57,7 @@ class PropertyServiceTest {
     }
 
     @Test
-    void testGetAllProperties() {
+    void testShouldGetAllProperties() {
         // arrange
         Property property1 = new Property();
         property1.setAddress("Test Hoofdstraat 1");
@@ -87,7 +84,7 @@ class PropertyServiceTest {
     }
 
     @Test
-    void testCreateProperty() {
+    void testShouldCreateProperty() {
         // arrange
         Property newProperty = new Property();
         newProperty.setAddress("Test Hoofdstraat 1");
@@ -106,7 +103,7 @@ class PropertyServiceTest {
     }
 
     @Test
-    void testDeleteProperty() {
+    void testShouldDeleteProperty() {
         // Arrange
         Long propertyId = 1L;
 

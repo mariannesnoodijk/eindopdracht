@@ -7,7 +7,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
-@AutoConfigureMockMvc(addFilters = false) // This is to turn off the security
+@AutoConfigureMockMvc(addFilters = false) // This turns off the security
 @ActiveProfiles("test")
 class AccountServiceIntegrationTest {
 
