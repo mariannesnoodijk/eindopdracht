@@ -27,11 +27,10 @@ public class Account {
             User user;
 
     // RELATION BETWEEN ACCOUNT & PROPERTY
-    @ManyToMany(fetch = FetchType.EAGER) // The FetchType. EAGER option indicates that the associated entity should be fetched eagerly, which means that it will be fetched at the same time as the parent entity.
-    private List<Property> properties = new ArrayList<>();
+//    @ManyToMany(fetch = FetchType.EAGER) // The FetchType. EAGER option indicates that the associated entity should be fetched eagerly, which means that it will be fetched at the same time as the parent entity.
+//    private List<Property> properties = new ArrayList<>();
 
     // RELATION BETWEEN ACCOUNT & VIEWING
     @OneToMany(mappedBy = "account") // This is the target side of the relation with Viewing. There is nothing in the database.
-    @JsonIgnore
     List<Viewing> viewings;
 }

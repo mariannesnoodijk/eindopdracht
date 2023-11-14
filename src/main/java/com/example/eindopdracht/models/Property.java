@@ -24,11 +24,11 @@ public class Property {
 
 
     // RELATION BETWEEN PROPERTY & ACCOUNT
-    @ManyToMany(mappedBy = "properties") // This is the target side of the relation with Account. There is nothing in the database.
-    private List<Account> accounts;
+//    @ManyToMany(mappedBy = "properties") // This is the target side of the relation with Account. There is nothing in the database.
+//    private List<Account> accounts;
 
     // RELATION BETWEEN PROPERTY & VIEWING
-    @OneToMany(mappedBy = "properties") // This is the target side of the relation with Viewing. There is nothing in the database.
-    @JsonIgnore
-    private List<Viewing> viewings;
+//    @OneToMany(mappedBy = "properties") // This is the target side of the relation with Viewing. There is nothing in the database.
+//    @JsonIgnore
+//    private List<Viewing> viewings;
 }

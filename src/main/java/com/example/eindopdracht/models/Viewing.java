@@ -23,12 +23,12 @@ public class Viewing {
 
 
     // RELATION BETWEEN VIEWING & ACCOUNT
-    @ManyToOne(fetch = FetchType.EAGER) // This is the owner of the relation with User. There is a Foreign Key in the database
+    @ManyToOne(fetch = FetchType.EAGER) // This is the owner of the relation with Account. There is a Foreign Key in the database
     @JoinColumn(name = "account_id")
     private Account account;
 
     // RELATION BETWEEN VIEWING & PROPERTY
-    @ManyToOne(fetch = FetchType.EAGER) // This is the owner of the relation with Property. There is a Foreign Key in the database
-    @JoinColumn(name = "property_id")
-    private Property properties;
+//    @ManyToOne(fetch = FetchType.EAGER) // This is the owner of the relation with Property. There is a Foreign Key in the database
+//    @JoinColumn(name = "property_id")
+//    private Property properties;
 }

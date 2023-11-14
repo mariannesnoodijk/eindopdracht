@@ -22,7 +22,7 @@ public class ViewingController {
 
     @PostMapping // This method handles HTTP POST requests to the /viewings endpoint creating a viewing
     public ResponseEntity<ViewingDto> createViewing(@Valid @RequestBody ViewingDto viewingDto) {
-        ViewingDto newViewing = viewingService.createViewing(viewingDto);
+        ViewingDto newViewing = viewingService.createViewing(viewingDto, viewingDto.getAccountId());
         return new ResponseEntity<>(newViewing, HttpStatus.CREATED);
     }
 

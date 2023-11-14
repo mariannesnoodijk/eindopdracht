@@ -9,6 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +28,9 @@ class ViewingServiceTest {
     @InjectMocks
     private ViewingService viewingService;
 
+
     @Test
-    void getAllViewings() {
+    void testShouldGetAllViewings() {
         // arrange - creating/adding a new viewing
         Viewing viewing1 = new Viewing();
         viewing1.setFullname("Jan Jansen");
@@ -49,35 +53,13 @@ class ViewingServiceTest {
 
         // assert
         assertEquals(2, result.size());
+
+        // Verify that the getAllViewings method is called
+        Mockito.verify(viewingService, Mockito.times(1)).getAllViewings();
     }
 
     @Test
-    void createViewing() {
-//        // Arrange
-//        ViewingDto newViewingDto = new ViewingDto();
-//        newViewingDto.setFullname("Jannie de Boer");
-//        newViewingDto.setPhonenumber("0611122333");
-//        newViewingDto.setEmailaddress("jannie@deboer.com");
-//
-//        Viewing newViewing = new Viewing();
-//        newViewing.setFullname(newViewingDto.getFullname());
-//        newViewing.setPhonenumber(newViewingDto.getPhonenumber());
-//        newViewing.setEmailaddress(newViewingDto.getEmailaddress());
-//
-//        Mockito.when(viewingRepository.save(Mockito.any(Viewing.class))).thenReturn(newViewing);
-//
-//        // Act
-//        ViewingDto resultDto = viewingService.createViewing(newViewingDto);
-//
-//        // Assert
-//        // Verify that the save method of viewingRepository is called with the correct Viewing object
-//        Mockito.verify(viewingRepository).save(newViewing);
-//
-//        // Verify that the returned newViewingDto matches the resultDto
-//        assertEquals(newViewingDto.getFullname(), resultDto.getFullname());
-//        assertEquals(newViewingDto.getPhonenumber(), resultDto.getPhonenumber());
-//        assertEquals(newViewingDto.getEmailaddress(), resultDto.getEmailaddress());
-
+    void testShouldCreateViewing() {
         // arrange
         Viewing newViewing = new Viewing();
         newViewing.setFullname("Jan Jansen");
@@ -94,10 +76,12 @@ class ViewingServiceTest {
         assertEquals("0611122333", savedViewingDto.getPhonenumber());
         assertEquals("jan@jansen.com", savedViewingDto.getEmailaddress());
 
+        // Verify that the createViewing method is called with the correct argument
+        Mockito.verify(viewingService, Mockito.times(1)).createViewing(Mockito.any(ViewingDto.class));
     }
 
     @Test
-    void deleteViewing() {
+    void testShouldDeleteViewing() {
         // Arrange
         Long viewingId = 1L;
 
@@ -114,3 +98,24 @@ class ViewingServiceTest {
         assertEquals("Viewing successfully deleted", result);
     }
 }
+
+//    @Test
+//    void testShouldDeleteViewing() {
+//        // Create a ViewingDto for testing
+//        ViewingDto vDto = new ViewingDto();
+//        vDto.setFullname("John Doe");
+//        vDto.setPhonenumber("0612345678");
+//        vDto.setEmailaddress("john.doe@example.com");
+//
+//        // Mock the deleteViewing method
+//        Mockito.doNothing().when(viewingService).deleteViewing(Mockito.anyLong());
+//
+//        // Perform the delete request
+//        this.mockMvc
+//                .perform(MockMvcRequestBuilders.delete("/viewings/{viewingId}", 1L))
+//                .andDo(MockMvcResultHandlers.print())
+//                .andExpect(MockMvcResultMatchers.status().isNoContent());
+//
+//        // Verify that the deleteViewing method is called with the correct argument
+//        Mockito.verify(viewingService, Mockito.times(1)).deleteViewing(1L);
+//    }

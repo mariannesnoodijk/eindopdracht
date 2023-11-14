@@ -30,7 +30,7 @@ class PropertyServiceTest {
     private PropertyService propertyService;
 
     @Test
-    void getProperty() {
+    void testGetProperty() {
         // Arrange - creating/adding a new property
         Long propertyId = 1L;
         Property property = new Property();
@@ -60,7 +60,7 @@ class PropertyServiceTest {
     }
 
     @Test
-    void getAllProperties() {
+    void testGetAllProperties() {
         // arrange
         Property property1 = new Property();
         property1.setAddress("Test Hoofdstraat 1");
@@ -87,7 +87,7 @@ class PropertyServiceTest {
     }
 
     @Test
-    void createProperty() {
+    void testCreateProperty() {
         // arrange
         Property newProperty = new Property();
         newProperty.setAddress("Test Hoofdstraat 1");
@@ -106,7 +106,7 @@ class PropertyServiceTest {
     }
 
     @Test
-    void deleteProperty() {
+    void testDeleteProperty() {
         // Arrange
         Long propertyId = 1L;
 

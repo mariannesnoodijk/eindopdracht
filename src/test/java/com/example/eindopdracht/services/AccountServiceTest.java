@@ -6,6 +6,7 @@ import com.example.eindopdracht.dto.ViewingDto;
 import com.example.eindopdracht.exceptions.IdNotFoundException;
 import com.example.eindopdracht.models.Account;
 import com.example.eindopdracht.models.Property;
+import com.example.eindopdracht.models.User;
 import com.example.eindopdracht.models.Viewing;
 import com.example.eindopdracht.repositories.AccountRepository;
 import org.junit.jupiter.api.Test;
@@ -30,30 +31,28 @@ class AccountServiceTest {
     @InjectMocks
     private AccountService accountService;
 
-//    @Test
-//    void testValidateEmailPattern() {
-//        // Arrange
-//        String validEmail = "example@example.com";
-//        String invalidEmail = "invalid.email";
-//
-//        // Act and Assert
-//        assertTrue(accountService.validateEmailPattern(validEmail));
-//        assertFalse(accountService.validateEmailPattern(invalidEmail));
-//    }
 
     @Test
-    void getAllAccounts() {
-        // arrange - creating/adding a new viewing
+    void testGetAllAccounts() {
+        // arrange - creating/adding a new account
         Account account1 = new Account();
         account1.setFirstname("Jan");
         account1.setLastname("Jansen");
         account1.setEmailaddress("jan@jansen.com");
+
+        User user = new User();
+        user.setUsername("username");
+        user.setPassword("password");
+        user.setRoles(null);
+
 
         Account account2 = new Account();
         account2.setFirstname("Piet");
         account2.setLastname("Pietje");
         account2.setEmailaddress("piet@pietje.com");
 
+        account1.setUser(user);
+        account2.setUser(user);
         List<Account> accounts = new ArrayList<>();
         accounts.add(account1);
         accounts.add(account2);
@@ -68,14 +67,22 @@ class AccountServiceTest {
     }
 
     @Test
-    void getAccount() {
-        // Arrange - creating/adding a new property
+    void testGetAccount() {
+        // Arrange - creating/adding a new account
         Long accountId = 1L;
         Account account = new Account();
 
         account.setFirstname("Piet");
         account.setLastname("Pietje");
         account.setEmailaddress("piet@pietje.com");
+
+        User user = new User();
+
+        user.setUsername("username");
+        user.setPassword("password");
+        user.setRoles(null);
+
+
 
         Mockito.when(accountRepository.findById(accountId)).thenReturn(Optional.of(account));
 
@@ -89,8 +96,8 @@ class AccountServiceTest {
     }
 
     @Test
-    void getAccountWithInvalidId() {
-        // Arrange - creating/adding a new property
+    void testGetAccountWithInvalidId() {
+        // Arrange - creating/adding a new account
         Long accountId = 1L;
         Mockito.when(accountRepository.findById(accountId)).thenReturn(Optional.empty());
 
@@ -103,7 +110,7 @@ class AccountServiceTest {
     }
 
     @Test
-    void createAccount() {
+    void testCreateAccount() {
 
         // arrange
         Account newAccount = new Account();
@@ -128,7 +135,7 @@ class AccountServiceTest {
     }
 
     @Test
-    void deleteAccount() {
+    void testDeleteAccount() {
         // Arrange
         Long accountId = 1L;
 

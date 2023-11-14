@@ -1,6 +1,7 @@
 package com.example.eindopdracht.controllers;
 
 import com.example.eindopdracht.dto.ViewingDto;
+import com.example.eindopdracht.models.Account;
 import com.example.eindopdracht.models.Viewing;
 import com.example.eindopdracht.repositories.ViewingRepository;
 import com.example.eindopdracht.security.JwtService;
@@ -45,7 +46,7 @@ class ViewingControllerTest {
     JwtService jwtService;
 
     @Test
-    void shouldGetAllViewings() throws Exception {
+    void testShouldGetAllViewings() throws Exception {
 
         ViewingDto vDto = new ViewingDto();
         vDto.setFullname("Jan Jansen");
@@ -77,14 +78,22 @@ class ViewingControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].fullname", is("Pietje Puk")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].phonenumber", is("0611100222")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].emailaddress", is("pietjepuk@test.com")));
+
+        // Verify that the getAllViewings method is called
+        Mockito.verify(viewingService, Mockito.times(1)).getAllViewings();
     }
 
     @Test
-    void shouldCreateViewing() throws Exception {
+    void testShouldCreateViewing() throws Exception {
         Viewing newViewing = new Viewing();
         newViewing.setFullname("Marianne test");
         newViewing.setPhonenumber("0612308024");
         newViewing.setEmailaddress("test@test.com");
+
+        Account account1 = new Account();
+        account1.setFirstname("Jan");
+        account1.setLastname("Jansen");
+        account1.setEmailaddress("jan@jansen.com");
 
         viewingRepository.save(newViewing);
 
@@ -107,5 +116,27 @@ class ViewingControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.phonenumber", is("0612308024")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.emailaddress", is("test@test.com")));
 
+        Mockito.verify(viewingService, Mockito.times(1)).createViewing(Mockito.any(ViewingDto.class));
+    }
+
+    @Test
+    void testShouldDeleteViewing() throws Exception {
+        // Create a ViewingDto for testing
+        ViewingDto vDto = new ViewingDto();
+        vDto.setFullname("John Doe");
+        vDto.setPhonenumber("0612345678");
+        vDto.setEmailaddress("john.doe@example.com");
+
+        // Mock the deleteViewing method
+        Mockito.doNothing().when(viewingService).deleteViewing(Mockito.anyLong());
+
+        // Perform the delete request
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.delete("/viewings/{viewingId}", 1L))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
+
+        // Verify that the deleteViewing method is called with the correct argument
+        Mockito.verify(viewingService, Mockito.times(1)).deleteViewing(1L);
     }
 }
