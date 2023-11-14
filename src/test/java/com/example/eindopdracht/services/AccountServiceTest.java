@@ -31,6 +31,9 @@ class AccountServiceTest {
     @InjectMocks
     private AccountService accountService;
 
+    @Mock
+    private UserService userservice;
+
 
     @Test
     void testGetAllAccounts() {
@@ -82,6 +85,7 @@ class AccountServiceTest {
         user.setPassword("password");
         user.setRoles(null);
 
+        account.setUser(user);
 
 
         Mockito.when(accountRepository.findById(accountId)).thenReturn(Optional.of(account));
@@ -122,6 +126,14 @@ class AccountServiceTest {
         newAccountDto.setFirstname("Ukkie");
         newAccountDto.setLastname("Puk");
         newAccountDto.setEmailaddress("ukkie@puk.com");
+
+        User user = new User();
+
+        user.setUsername("username");
+        user.setPassword("password");
+        user.setRoles(null);
+
+        newAccount.setUser(user);
 
         Mockito.when(accountRepository.save(Mockito.any(Account.class))).thenReturn(newAccount);
 

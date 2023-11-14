@@ -26,7 +26,7 @@ public class ViewingDto { // This class serves as a data structure for transferr
     @DateTimeFormat(pattern="dd/mm/yyyy") // Dit checken wanneer Frontend klaar is
     private LocalDate date;
 
-    @Future
+    @NotNull
     private LocalTime time;
 
     @NotNull(message = "ProductId cannot be empty")

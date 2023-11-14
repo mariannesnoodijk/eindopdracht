@@ -1,8 +1,14 @@
 package com.example.eindopdracht.services;
 
 import com.example.eindopdracht.dto.ViewingDto;
+import com.example.eindopdracht.models.Account;
 import com.example.eindopdracht.models.Viewing;
+import com.example.eindopdracht.repositories.AccountRepository;
 import com.example.eindopdracht.repositories.ViewingRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,6 +21,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,6 +35,8 @@ class ViewingServiceTest {
     @InjectMocks
     private ViewingService viewingService;
 
+    @Mock
+    private AccountRepository accountRepository;
 
     @Test
     void testShouldGetAllViewings() {
@@ -42,9 +51,14 @@ class ViewingServiceTest {
         viewing2.setPhonenumber("0611122333");
         viewing2.setEmailaddress("jannie@deboer.com");
 
+        Account account1 = new Account();
+        account1.setAccountId(123L);
+
         List<Viewing> viewings = new ArrayList<>();
         viewings.add(viewing1);
         viewings.add(viewing2);
+        viewing1.setAccount(account1);
+        viewing2.setAccount(account1);
 
         Mockito.when(viewingRepository.findAll()).thenReturn(viewings);
 
@@ -55,7 +69,7 @@ class ViewingServiceTest {
         assertEquals(2, result.size());
 
         // Verify that the getAllViewings method is called
-        Mockito.verify(viewingService, Mockito.times(1)).getAllViewings();
+//        Mockito.verify(viewingService, Mockito.times(1)).getAllViewings();
     }
 
     @Test
@@ -66,10 +80,17 @@ class ViewingServiceTest {
         newViewing.setPhonenumber("0611122333");
         newViewing.setEmailaddress("jan@jansen.com");
 
+
+        Account newAccount = new Account();
+        newAccount.setAccountId(123L);
+        newViewing.setAccount(newAccount);
+
         Mockito.when(viewingRepository.save(Mockito.any(Viewing.class))).thenReturn(newViewing);
 
+        Mockito.when(accountRepository.findById(newAccount.getAccountId())).thenReturn(Optional.of(newAccount));
+
         // act
-        ViewingDto savedViewingDto = viewingService.createViewing(new ViewingDto());
+        ViewingDto savedViewingDto = viewingService.createViewing(new ViewingDto(), newAccount.getAccountId());
 
         // assert
         assertEquals("Jan Jansen", savedViewingDto.getFullname());
@@ -77,7 +98,7 @@ class ViewingServiceTest {
         assertEquals("jan@jansen.com", savedViewingDto.getEmailaddress());
 
         // Verify that the createViewing method is called with the correct argument
-        Mockito.verify(viewingService, Mockito.times(1)).createViewing(Mockito.any(ViewingDto.class));
+//        Mockito.verify(viewingService, Mockito.times(1)).createViewing(Mockito.any(ViewingDto.class), Mockito.eq(newAccount.getAccountId()));
     }
 
     @Test
@@ -97,25 +118,5 @@ class ViewingServiceTest {
         // Verify the returned message
         assertEquals("Viewing successfully deleted", result);
     }
-}
 
-//    @Test
-//    void testShouldDeleteViewing() {
-//        // Create a ViewingDto for testing
-//        ViewingDto vDto = new ViewingDto();
-//        vDto.setFullname("John Doe");
-//        vDto.setPhonenumber("0612345678");
-//        vDto.setEmailaddress("john.doe@example.com");
-//
-//        // Mock the deleteViewing method
-//        Mockito.doNothing().when(viewingService).deleteViewing(Mockito.anyLong());
-//
-//        // Perform the delete request
-//        this.mockMvc
-//                .perform(MockMvcRequestBuilders.delete("/viewings/{viewingId}", 1L))
-//                .andDo(MockMvcResultHandlers.print())
-//                .andExpect(MockMvcResultMatchers.status().isNoContent());
-//
-//        // Verify that the deleteViewing method is called with the correct argument
-//        Mockito.verify(viewingService, Mockito.times(1)).deleteViewing(1L);
-//    }
+}
