@@ -18,14 +18,19 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 @ExtendWith(MockitoExtension.class)
 class AccountServiceTest {
 
     @Mock
     private AccountRepository accountRepository;
 
+    @Mock
+    private UserService userService;
+
     @InjectMocks
     private AccountService accountService;
+
 
     @Test
     void testShouldGetAllAccounts() {
@@ -133,6 +138,7 @@ class AccountServiceTest {
         assertEquals("Piet", savedAccountDto.getFirstname());
         assertEquals("Pietje", savedAccountDto.getLastname());
         assertEquals("piet@pietje.com", savedAccountDto.getEmailaddress());
+        assertEquals("username", savedAccountDto.getUsername());
     }
 
     @Test
