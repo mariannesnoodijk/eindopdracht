@@ -7,7 +7,7 @@ VALUES ('username', 'password');
 -- TODO: bcrypt password opzoeken en copy paste ^
 
 -- ACCOUNTS DATABASE
-INSERT INTO accounts(account_id, firstname, lastname, emailaddress, user_username)
+INSERT INTO accounts(account_id, firstname, lastname, email, user_username)
 VALUES (100, 'pietje', 'puk', 'pietjepuk@test.com', 'username');
 -- username in accounts MOET wel al gedefinieerd zijn.
 

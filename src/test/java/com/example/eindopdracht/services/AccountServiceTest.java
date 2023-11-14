@@ -38,7 +38,7 @@ class AccountServiceTest {
         Account account1 = new Account();
         account1.setFirstname("Jan");
         account1.setLastname("Jansen");
-        account1.setEmailaddress("jan@jansen.com");
+        account1.setEmail("jan@jansen.com");
 
         User user = new User();
         user.setUsername("username");
@@ -48,7 +48,7 @@ class AccountServiceTest {
         Account account2 = new Account();
         account2.setFirstname("Piet");
         account2.setLastname("Pietje");
-        account2.setEmailaddress("piet@pietje.com");
+        account2.setEmail("piet@pietje.com");
 
         account1.setUser(user);
         account2.setUser(user);
@@ -73,7 +73,7 @@ class AccountServiceTest {
 
         account.setFirstname("Piet");
         account.setLastname("Pietje");
-        account.setEmailaddress("piet@pietje.com");
+        account.setEmail("piet@pietje.com");
 
         User user = new User();
 
@@ -114,7 +114,7 @@ class AccountServiceTest {
         Account newAccount = new Account();
         newAccount.setFirstname("Piet");
         newAccount.setLastname("Pietje");
-        newAccount.setEmailaddress("piet@pietje.com");
+        newAccount.setEmail("piet@pietje.com");
 
         AccountDto newAccountDto = new AccountDto();
         newAccountDto.setFirstname("Ukkie");

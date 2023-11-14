@@ -1,11 +1,8 @@
 package com.example.eindopdracht.models;
 
-import com.example.eindopdracht.controllers.UserController;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data // Lombok imports automatically the Constructor, Getters and Setter by using @Data
@@ -19,7 +16,7 @@ public class Account {
 
     private String firstname;
     private String lastname;
-    private String emailaddress;
+    private String email;
 
 
     // RELATION BETWEEN ACCOUNT & USER

@@ -49,7 +49,7 @@ class ViewingControllerTest {
         account1.setAccountId(123L);
         account1.setFirstname("Jan");
         account1.setLastname("Jansen");
-        account1.setEmailaddress("jan@jansen.com");
+        account1.setEmail("jan@jansen.com");
 
         accountRepository.save(account1);
 
@@ -78,7 +78,7 @@ class ViewingControllerTest {
         account1.setAccountId(123L);
         account1.setFirstname("Jan");
         account1.setLastname("Jansen");
-        account1.setEmailaddress("jan@jansen.com");
+        account1.setEmail("jan@jansen.com");
 
         account1.setAccountId(
         accountRepository.save(account1).getAccountId());
