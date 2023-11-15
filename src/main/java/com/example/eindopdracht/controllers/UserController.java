@@ -1,12 +1,7 @@
 package com.example.eindopdracht.controllers;
 
-import com.example.eindopdracht.dto.AccountDto;
-import com.example.eindopdracht.dto.PropertyDto;
 import com.example.eindopdracht.dto.UserDto;
-import com.example.eindopdracht.repositories.RoleRepository;
-import com.example.eindopdracht.repositories.UserRepository;
 import com.example.eindopdracht.services.UserService;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +26,6 @@ public class UserController {
     }
 
     @GetMapping // This method handles HTTP GET requests to the /users endpoint
-
     public ResponseEntity<List<UserDto>> getAllUsers() {
         List<UserDto> dDto = userService.getAllUsers();
         return new ResponseEntity<>(dDto, HttpStatus.OK);

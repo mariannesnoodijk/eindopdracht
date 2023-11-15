@@ -82,8 +82,8 @@ public class SecurityConfig {
                         //TODO: Toevoegen AUTH, maar vraag Mark eerst van hoe en wat
 //                                .requestMatchers(HttpMethod.POST, "/auth").hasRole("ADMIN")
                         
-                                .requestMatchers(HttpMethod.POST, "/single/uploadDB").hasRole("ADMIN") // single upload
-                                .requestMatchers(HttpMethod.GET, "/downloadFromDB/{fileName}").hasRole("ADMIN") // single download
+//                                .requestMatchers(HttpMethod.POST, "/single/uploadDB").hasRole("ADMIN") // single upload
+//                                .requestMatchers(HttpMethod.GET, "/downloadFromDB/{fileName}").hasRole("ADMIN") // single download
 //                                .requestMatchers(HttpMethod.POST, "/multiple/uploadDB").hasRole("ADMIN") // multiple upload
 //                                .requestMatchers(HttpMethod.GET, "/downloadAllFromDB").hasRole("ADMIN") // multiple download
 

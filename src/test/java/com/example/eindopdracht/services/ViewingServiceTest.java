@@ -37,12 +37,12 @@ class ViewingServiceTest {
         Viewing viewing1 = new Viewing();
         viewing1.setFullname("Jan Jansen");
         viewing1.setPhonenumber("0611122333");
-        viewing1.setEmailaddress("jan@jansen.com");
+        viewing1.setEmail("jan@jansen.com");
 
         Viewing viewing2 = new Viewing();
         viewing2.setFullname("Jannie de Boer");
         viewing2.setPhonenumber("0611122333");
-        viewing2.setEmailaddress("jannie@deboer.com");
+        viewing2.setEmail("jannie@deboer.com");
 
         Account account1 = new Account();
         account1.setAccountId(123L);
@@ -68,7 +68,7 @@ class ViewingServiceTest {
         Viewing newViewing = new Viewing();
         newViewing.setFullname("Jan Jansen");
         newViewing.setPhonenumber("0611122333");
-        newViewing.setEmailaddress("jan@jansen.com");
+        newViewing.setEmail("jan@jansen.com");
 
         Account newAccount = new Account();
         newAccount.setAccountId(123L);
@@ -84,7 +84,7 @@ class ViewingServiceTest {
         // assert
         assertEquals("Jan Jansen", savedViewingDto.getFullname());
         assertEquals("0611122333", savedViewingDto.getPhonenumber());
-        assertEquals("jan@jansen.com", savedViewingDto.getEmailaddress());
+        assertEquals("jan@jansen.com", savedViewingDto.getEmail());
     }
 
     @Test

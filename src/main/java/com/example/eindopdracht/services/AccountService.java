@@ -78,7 +78,7 @@ public class AccountService {
         aDto.setAccountId(a.getAccountId());
         aDto.setFirstname(a.getFirstname());
         aDto.setLastname(a.getLastname());
-        aDto.setEmailaddress(a.getEmail());
+        aDto.setEmail(a.getEmail());
         aDto.setUsername(a.getUser().getUsername());
     }
 
@@ -86,7 +86,7 @@ public class AccountService {
         account.setAccountId(accountDto.getAccountId());
         account.setFirstname(accountDto.getFirstname());
         account.setLastname(accountDto.getLastname());
-        account.setEmail(accountDto.getEmailaddress());
+        account.setEmail(accountDto.getEmail());
     }
 
 }

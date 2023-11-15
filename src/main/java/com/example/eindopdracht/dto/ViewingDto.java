@@ -2,7 +2,6 @@ package com.example.eindopdracht.dto;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -20,15 +19,14 @@ public class ViewingDto { // This class serves as a data structure for transferr
     //  private String phonenumber = "^\\+(?:[0-9] ?){6,14}[0-9]$";
 
     @Email(message = "This needs to be an email address")
-    private String emailaddress;
+    private String email;
 
     @Future
-    @DateTimeFormat(pattern="dd/mm/yyyy") // Dit checken wanneer Frontend klaar is
     private LocalDate date;
 
     @NotNull
     private LocalTime time;
 
-    @NotNull(message = "ProductId cannot be empty")
+    @NotNull
     private Long accountId;
 }

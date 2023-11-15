@@ -61,7 +61,7 @@ public class ViewingService {
     private static void viewingToViewingDto(Viewing viewing, ViewingDto vDto) {
         vDto.setFullname(viewing.getFullname());
         vDto.setPhonenumber(viewing.getPhonenumber());
-        vDto.setEmailaddress(viewing.getEmailaddress());
+        vDto.setEmail(viewing.getEmail());
         vDto.setDate(viewing.getDate());
         vDto.setTime(viewing.getTime());
         vDto.setAccountId(viewing.getAccount().getAccountId());
@@ -71,7 +71,7 @@ public class ViewingService {
     private static void viewingDtoToViewing(ViewingDto viewingDto, Viewing viewing) {
         viewing.setFullname(viewingDto.getFullname());
         viewing.setPhonenumber(viewingDto.getPhonenumber());
-        viewing.setEmailaddress(viewingDto.getEmailaddress());
+        viewing.setEmail(viewingDto.getEmail());
         viewing.setDate(viewingDto.getDate());
         viewing.setTime(viewingDto.getTime());
         viewing.setViewingId(viewingDto.getViewingId());

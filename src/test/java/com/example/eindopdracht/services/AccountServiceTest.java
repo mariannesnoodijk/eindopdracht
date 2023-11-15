@@ -91,7 +91,7 @@ class AccountServiceTest {
         // Assert
         assertEquals("Piet", accountDto.getFirstname());
         assertEquals("Pietje", accountDto.getLastname());
-        assertEquals("piet@pietje.com", accountDto.getEmailaddress());
+        assertEquals("piet@pietje.com", accountDto.getEmail());
     }
 
     @Test
@@ -119,7 +119,7 @@ class AccountServiceTest {
         AccountDto newAccountDto = new AccountDto();
         newAccountDto.setFirstname("Ukkie");
         newAccountDto.setLastname("Puk");
-        newAccountDto.setEmailaddress("ukkie@puk.com");
+        newAccountDto.setEmail("ukkie@puk.com");
 
         User user = new User();
 
@@ -137,7 +137,7 @@ class AccountServiceTest {
         // assert
         assertEquals("Piet", savedAccountDto.getFirstname());
         assertEquals("Pietje", savedAccountDto.getLastname());
-        assertEquals("piet@pietje.com", savedAccountDto.getEmailaddress());
+        assertEquals("piet@pietje.com", savedAccountDto.getEmail());
         assertEquals("username", savedAccountDto.getUsername());
     }
 

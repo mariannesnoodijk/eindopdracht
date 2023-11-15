@@ -56,7 +56,7 @@ class ViewingControllerTest {
         Viewing newViewing = new Viewing();
         newViewing.setFullname("Jan Jansen");
         newViewing.setPhonenumber("0611122333");
-        newViewing.setEmailaddress("janjansen@test.com");
+        newViewing.setEmail("janjansen@test.com");
         newViewing.setDate(LocalDate.of(2024, 2, 9));
         newViewing.setTime(LocalTime.of(11, 30, 00));
         newViewing.setAccount(account1);
@@ -86,7 +86,7 @@ class ViewingControllerTest {
         Viewing newViewing = new Viewing();
         newViewing.setFullname("Marianne test");
         newViewing.setPhonenumber("0612308024");
-        newViewing.setEmailaddress("test@test.com");
+        newViewing.setEmail("test@test.com");
         newViewing.setDate(LocalDate.of(2024, 2, 9));
         newViewing.setAccount(account1);
 
@@ -95,7 +95,7 @@ class ViewingControllerTest {
         ViewingDto vDto = new ViewingDto();
         vDto.setFullname(newViewing.getFullname());
         vDto.setPhonenumber(newViewing.getPhonenumber());
-        vDto.setEmailaddress(newViewing.getEmailaddress());
+        vDto.setEmail(newViewing.getEmail());
         vDto.setAccountId(newViewing.getAccount().getAccountId());
         vDto.setDate(newViewing.getDate());
         vDto.setTime(newViewing.getTime());
@@ -126,7 +126,7 @@ class ViewingControllerTest {
         ViewingDto vDto = new ViewingDto();
         vDto.setFullname("John Doe");
         vDto.setPhonenumber("0612345678");
-        vDto.setEmailaddress("john.doe@example.com");
+        vDto.setEmail("john.doe@example.com");
 
         // Perform the delete request
         this.mockMvc

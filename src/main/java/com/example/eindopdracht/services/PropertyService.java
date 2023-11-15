@@ -21,12 +21,14 @@ public class PropertyService {
     }
 
     private static void propertyToPropertyDto(Property p, PropertyDto pDto) {
+        pDto.setPropertyId(p.getPropertyId());
         pDto.setAddress(p.getAddress());
         pDto.setPrice(p.getPrice());
         pDto.setDescription(p.getDescription());
     }
 
     private static void propertyDtoToProperty(PropertyDto propertyDto, Property property) {
+        property.setPropertyId(propertyDto.getPropertyId());
         property.setAddress(propertyDto.getAddress());
         property.setPrice(propertyDto.getPrice());
         property.setDescription(propertyDto.getDescription());

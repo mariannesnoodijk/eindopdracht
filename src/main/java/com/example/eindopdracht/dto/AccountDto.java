@@ -13,7 +13,7 @@ public class AccountDto { //This class serves as a data structure for transferri
     @NotEmpty(message = "Last name cannot be empty")
     public String lastname;
     @Email(message = "This needs to be a valid email address")
-    public String emailaddress;
+    public String email;
 
     @NotEmpty
     public String username;

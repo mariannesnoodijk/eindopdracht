@@ -16,7 +16,7 @@ public class Viewing {
 
     private String fullname;
     private String phonenumber;
-    private String emailaddress;
+    private String email;
 
     private LocalDate date;
     private LocalTime time;
