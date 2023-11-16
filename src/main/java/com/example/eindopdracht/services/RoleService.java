@@ -13,10 +13,12 @@ public class RoleService {
 
     private final RoleRepository roleRepository;
 
+    // Constructor to inject the RoleRepository dependency
     public RoleService(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
 
+    // Retrieve all roles
     public List<RoleDto> getAllRoles() {
         List<RoleDto> roleDtos = new ArrayList<>();
         for (Role r : roleRepository.findAll()) {

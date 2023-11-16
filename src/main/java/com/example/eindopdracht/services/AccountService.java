@@ -19,25 +19,35 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final UserService userService;
 
+    // Constructor to inject dependencies
     public AccountService(AccountRepository accountRepository, UserService userService) {
         this.accountRepository = accountRepository;
         this.userService = userService;
     }
 
+    // Create a new account
+    public AccountDto createAccount(AccountDto accountDto) {
+        // Create a user associated with the account
+        UserDto userDto = new UserDto();
+        userDto.setUsername(accountDto.getUsername());
+        userDto.setPassword(accountDto.getPassword());
+        userDto.setRoles(new String[]{"USER"});
+        User user = userService.createUser(userDto);
 
-    public List<AccountDto> getAllAccounts() {
-        List<Account> accounts = accountRepository.findAll();
-        List<AccountDto> accountDtos = new ArrayList<>();
+        // Create and save the account
+        Account account = new Account();
+        accountDtoToAccount(accountDto, account);
+        account.setUser(user);
+        Account savedAccount = accountRepository.save(account);
 
-        for (Account a : accounts) {
-            AccountDto aDto = new AccountDto();
-            accountToAccountDto(a, aDto);
+        // Convert the saved account to AccountDto
+        AccountDto savedAccountDto = new AccountDto();
+        accountToAccountDto(savedAccount, savedAccountDto);
 
-            accountDtos.add(aDto);
-        }
-        return accountDtos;
+        return savedAccountDto;
     }
 
+    // Retrieve an account by ID
     public AccountDto getAccount(Long accountId) {
         Optional<Account> account = accountRepository.findById(accountId);
         if (account.isPresent()) {
@@ -50,30 +60,28 @@ public class AccountService {
         }
     }
 
-    public AccountDto createAccount(AccountDto accountDto) {
-        UserDto userDto = new UserDto();
-        userDto.setUsername(accountDto.getUsername());
-        userDto.setPassword(accountDto.getPassword());
-        userDto.setRoles(new String[]{"USER"});
-        User user = userService.createUser(userDto);
+    // Retrieve all accounts
+    public List<AccountDto> getAllAccounts() {
+        List<Account> accounts = accountRepository.findAll();
+        List<AccountDto> accountDtos = new ArrayList<>();
 
-        Account account = new Account();
-        accountDtoToAccount(accountDto, account);
+        // Convert Account entities to AccountDto
+        for (Account a : accounts) {
+            AccountDto aDto = new AccountDto();
+            accountToAccountDto(a, aDto);
 
-        account.setUser(user);
-        Account savedAccount = accountRepository.save(account);
-
-        AccountDto savedAccountDto = new AccountDto();
-        accountToAccountDto(savedAccount, savedAccountDto);
-
-        return savedAccountDto;
+            accountDtos.add(aDto);
+        }
+        return accountDtos;
     }
 
+    // Delete an account by ID
     public String deleteAccount(@RequestBody Long accountId) {
         accountRepository.deleteById(accountId);
         return "Account successfully deleted";
     }
 
+    // Helper method to convert Account to AccountDto
     private static void accountToAccountDto(Account a, AccountDto aDto) {
         aDto.setAccountId(a.getAccountId());
         aDto.setFirstname(a.getFirstname());
@@ -82,11 +90,11 @@ public class AccountService {
         aDto.setUsername(a.getUser().getUsername());
     }
 
+    // Helper method to convert AccountDto to Account
     private static void accountDtoToAccount(AccountDto accountDto, Account account) {
         account.setAccountId(accountDto.getAccountId());
         account.setFirstname(accountDto.getFirstname());
         account.setLastname(accountDto.getLastname());
         account.setEmail(accountDto.getEmail());
     }
-
 }
