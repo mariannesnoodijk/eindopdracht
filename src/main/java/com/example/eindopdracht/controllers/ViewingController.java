@@ -10,32 +10,42 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController // Handles HTTP requests and returns the response directly to the client
-@RequestMapping("/viewings") // Using @RequestMapping sets the endpoint as a standard, unless specified otherwise
+// Handling of HTTP requests which returns the response directly to the client
+@RestController
+// Setting the endpoint as a standard, unless specified otherwise
+@RequestMapping("/viewings")
 public class ViewingController {
 
     private final ViewingService viewingService;
-
+// Constructor to inject the ViewingService dependency
     public ViewingController(ViewingService viewingService) {
         this.viewingService = viewingService;
     }
 
-    @PostMapping // This method handles HTTP POST requests to the /viewings endpoint creating a viewing
+    // Endpoint to create a new viewing
+    @PostMapping
     public ResponseEntity<ViewingDto> createViewing(@Valid @RequestBody ViewingDto viewingDto) {
+        // Call the service to create a new viewing
         ViewingDto newViewing = viewingService.createViewing(viewingDto, viewingDto.getAccountId());
+        // Return the new viewing and HTTP status code 201 (Created)
         return new ResponseEntity<>(newViewing, HttpStatus.CREATED);
     }
 
-    @GetMapping // This method handles HTTP GET requests to the /viewings endpoint
+    // Endpoint to retrieve all viewings
+    @GetMapping
     public ResponseEntity<List<ViewingDto>> getAllViewings() {
+        // Call the service to retrieve all viewings
         List<ViewingDto> vDto = viewingService.getAllViewings();
+        // Return the list of viewings and HTTP status code 200 (OK)
         return new ResponseEntity<>(vDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{viewingId}") // This method handles HTTP DELETE requests to the /viewings/{viewingId} endpoint, where {id} is a path variable representing the property ID
+    // Endpoint to delete a viewing by ID
+    @DeleteMapping("/{viewingId}")
     public ResponseEntity<ViewingDto> deleteViewing(@PathVariable Long viewingId) {
+        // Call the service to delete a viewing by ID
         viewingService.deleteViewing(viewingId);
-
+        // Return HTTP status code 204 (No Content) indicating successful deletion
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

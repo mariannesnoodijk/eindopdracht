@@ -9,42 +9,51 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController // Handles HTTP requests and returns the response directly to the client
-@RequestMapping("/accounts") // Using @RequestMapping sets the endpoint as a standard, unless specified otherwise
+// Handling of HTTP requests which returns the response directly to the client
+@RestController
+// Setting the endpoint as a standard, unless specified otherwise
+@RequestMapping("/accounts")
 public class AccountController {
 
     private final AccountService accountService;
+    // Constructor to inject the AccountService dependency
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
     }
 
-    @PostMapping// This method handles HTTP POST requests to the /accounts endpoint creating an account
+    // Endpoint to create a new account
+    @PostMapping
     public ResponseEntity<AccountDto> createAccount(@Valid @RequestBody AccountDto accountDto) {
-//        if (!accountService.validateEmailPattern(accountDto.getEmailaddress())) {
-//            throw new IncorrectEmailException("Invalid email address: " + accountDto.getEmailaddress());
-//        }
-
+        // Call the service to create a new account
         AccountDto newAccount = accountService.createAccount(accountDto);
+        // Return the new account and HTTP status code 201 (Created)
         return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{accountId}") // This method handles HTTP GET requests to the /accounts/{accountId} endpoint
+    // Endpoint to retrieve a single account by ID
+    @GetMapping("/{accountId}")
     public ResponseEntity<AccountDto> getOneAccount(@PathVariable Long accountId) {
+        // Call the service to retrieve an account by ID
         AccountDto aDto = accountService.getAccount(accountId);
+        // Return the account and HTTP status code 200 (OK)
         return new ResponseEntity<>(aDto, HttpStatus.OK);
     }
 
-    @GetMapping// This method handles HTTP GET requests to the /accounts endpoint
+    // Endpoint to retrieve all accounts
+    @GetMapping
     public ResponseEntity<List<AccountDto>> getAllAccounts() {
+        // Call the service to retrieve all accounts
         List<AccountDto> aDto = accountService.getAllAccounts();
+        // Return the list of accounts and HTTP status code 200 (OK)
         return new ResponseEntity<>(aDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{accountId}") // This method handles HTTP DELETE requests to the /accounts/{accountId} endpoint
+    // Endpoint to delete an account by ID
+    @DeleteMapping("/{accountId}")
     public ResponseEntity<AccountDto> deleteAccount(@PathVariable Long accountId) {
+        // Call the service to delete an account by ID
         accountService.deleteAccount(accountId);
-
+        // Return HTTP status code 204 (No Content) indicating successful deletion
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }

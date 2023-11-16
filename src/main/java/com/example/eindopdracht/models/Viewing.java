@@ -6,26 +6,28 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Data // Lombok imports automatically the Constructor, Getters and Setter by using @Data
+// Lombok imports automatically the Constructor, Getters and Setter by using @Data
+@Data
 @Entity
 @Table(name = "viewings")
 public class Viewing {
 
-    @Id //  Primary Key of the entity
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // This specifies that the ID is automatically generated
+    // Primary key for the Viewing entity
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long viewingId;
 
+    // Details of the person attending the viewing
     private String fullname;
     private String phonenumber;
     private String email;
 
+    // Date and time of the viewing
     private LocalDate date;
     private LocalTime time;
 
-
-    // RELATION BETWEEN VIEWING & ACCOUNT
-    @ManyToOne(fetch = FetchType.EAGER) // This is the owner of the relation with Account. There is a Foreign Key in the database
+    // Many-to-one relationship with the Account entity
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id")
     private Account account;
-
 }

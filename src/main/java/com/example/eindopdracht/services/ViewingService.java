@@ -19,36 +19,45 @@ public class ViewingService {
     private final ViewingRepository viewingRepository;
     private final AccountRepository accountRepository;
 
+    // Constructor to inject dependencies
     public ViewingService(ViewingRepository viewingRepository, AccountRepository accountRepository) {
         this.viewingRepository = viewingRepository;
         this.accountRepository = accountRepository;
     }
 
+    // Create a new viewing
     public ViewingDto createViewing(ViewingDto viewingDto, Long accountId) {
         Viewing viewing = new Viewing();
         viewingDtoToViewing(viewingDto, viewing);
 
-        // Retrieve the associated account
+        // Find the associated account or throw an exception if not found
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new IdNotFoundException("Account not found with id: " + accountId));
 
-        viewing.setAccount(account); // Associates the viewing with the account
-        viewingDto.setAccountId(account.getAccountId()); // Adds the accountID to the viewingDTO
+        // Set the account for the viewing
+        viewing.setAccount(account);
+        // Set the account ID in the DTO for consistency
+        viewingDto.setAccountId(account.getAccountId());
 
+        // Save the viewing
         Viewing savedViewing = viewingRepository.save(viewing);
 
+        // Convert the saved viewing to DTO
         ViewingDto savedViewingDto = new ViewingDto();
         viewingToViewingDto(savedViewing, savedViewingDto);
+        // Set the account ID in the DTO for consistency
         savedViewingDto.setAccountId(account.getAccountId());
 
         return savedViewingDto;
     }
 
+    // Retrieve all viewings
     public List<ViewingDto> getAllViewings() {
 
         List<Viewing> viewings = viewingRepository.findAll();
         List<ViewingDto> viewingDtos = new ArrayList<>();
 
+        // Convert Viewing entities to ViewingDto
         for (Viewing v : viewings) {
             ViewingDto vDto = new ViewingDto();
             viewingToViewingDto(v, vDto);
@@ -58,6 +67,7 @@ public class ViewingService {
         return viewingDtos;
     }
 
+    // Helper method to convert Viewing to ViewingDto
     private static void viewingToViewingDto(Viewing viewing, ViewingDto vDto) {
         vDto.setFullname(viewing.getFullname());
         vDto.setPhonenumber(viewing.getPhonenumber());
@@ -68,6 +78,7 @@ public class ViewingService {
         vDto.setViewingId(viewing.getViewingId());
     }
 
+    // Helper method to convert ViewingDto to Viewing
     private static void viewingDtoToViewing(ViewingDto viewingDto, Viewing viewing) {
         viewing.setFullname(viewingDto.getFullname());
         viewing.setPhonenumber(viewingDto.getPhonenumber());
@@ -77,7 +88,7 @@ public class ViewingService {
         viewing.setViewingId(viewingDto.getViewingId());
     }
 
-
+    // Delete a viewing by ID
     public String deleteViewing(@RequestBody Long viewingId) {
         viewingRepository.deleteById(viewingId);
         return "Viewing successfully deleted";

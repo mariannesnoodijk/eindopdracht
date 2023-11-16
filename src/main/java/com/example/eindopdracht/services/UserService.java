@@ -22,15 +22,33 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-//    private final AccountRepository accountRepository;
 
+    // Constructor to inject dependencies
     public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository, AccountRepository accountRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-//        this.accountRepository = accountRepository;
     }
 
+    // Create a new user
+    public User createUser(UserDto userDto) {
+        User newUser = new User();
+        newUser.setUsername(userDto.getUsername());
+        newUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
+
+        List<Role> userRoles = newUser.getRoles();
+        for (String rolename : userDto.getRoles()) {
+            // Find and add roles to the user
+            Optional<Role> or = roleRepository.findById("ROLE_" + rolename);
+            if (or.isPresent()) {
+                userRoles.add(or.get());
+            }
+        }
+        // Save the user
+        return userRepository.save(newUser);
+    }
+
+    // Retrieve a user by ID
     public UserDto getUser(String userId) {
         Optional<User> user = userRepository.findById(userId);
         if (user.isPresent()) {
@@ -42,38 +60,22 @@ public class UserService {
             throw new IdNotFoundException("User not found with ID: " + userId);
         }
     }
-    
+
+    // Retrieve all users
     public List<UserDto> getAllUsers() {
         List<User> users = userRepository.findAll();
         List<UserDto> userDtos = new ArrayList<>();
 
+        // Convert User entities to UserDto
         for (User u : users) {
             UserDto uDto = new UserDto();
             userToUserDto(u, uDto);
-
             userDtos.add(uDto);
         }
         return userDtos;
     }
 
-    public User createUser(UserDto userDto) {
-        User newUser = new User();
-        newUser.setUsername(userDto.getUsername());
-        newUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
-
-        List<Role> userRoles = newUser.getRoles();
-        for (String rolename : userDto.getRoles()) {
-            Optional<Role> or = roleRepository.findById("ROLE_" + rolename);
-            if (or.isPresent()) {
-                userRoles.add(or.get());
-            }
-        }
-        return
-        userRepository.save(newUser);
-
-    }
-
-
+    // Helper method to convert User to UserDto
     private static void userToUserDto(User u, UserDto uDto) {
         uDto.setUsername(u.getUsername());
         uDto.setPassword(u.getPassword());
@@ -83,15 +85,4 @@ public class UserService {
         }
         uDto.setRoles(roles.toArray(new String [0]));
     }
-    private static void userDtoToUser(User u, UserDto uDto) {
-        u.setUsername(uDto.getUsername());
-        u.setPassword(uDto.getPassword());
-    }
 }
-
-
-
-
-
-
-

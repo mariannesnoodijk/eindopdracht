@@ -6,8 +6,9 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+// This class serves as a data structure for transferring data related to authorization between different parts of the application
 @Data
-public class ViewingDto { // This class serves as a data structure for transferring data related to viewings between different parts of the application
+public class ViewingDto {
 
     private Long viewingId;
 
@@ -16,7 +17,6 @@ public class ViewingDto { // This class serves as a data structure for transferr
 
     @NotEmpty
     private String phonenumber;
-    //  private String phonenumber = "^\\+(?:[0-9] ?){6,14}[0-9]$";
 
     @Email(message = "This needs to be an email address")
     private String email;

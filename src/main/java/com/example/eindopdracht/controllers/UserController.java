@@ -8,26 +8,33 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController // Handles HTTP requests and returns the response directly to the client
-@RequestMapping("/users") // Using @RequestMapping sets the endpoint as a standard, unless specified otherwise
+// Handling of HTTP requests which returns the response directly to the client
+@RestController
+// Setting the endpoint as a standard, unless specified otherwise
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
-
+    // Constructor to inject the UserService dependency
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-
-    @GetMapping("/{userId}") // This method handles HTTP GET requests to the /users/{userId} endpoint, where {id} is a path variable representing the property ID
+    // Endpoint to retrieve a single account by ID
+    @GetMapping("/{userId}")
     public ResponseEntity<UserDto> getOneUser(@PathVariable String userId) {
+        // Call the service to retrieve a user by ID
         UserDto uDto = userService.getUser(userId);
+        // Return the user and HTTP status code 200 (OK)
         return new ResponseEntity<>(uDto, HttpStatus.OK);
     }
 
-    @GetMapping // This method handles HTTP GET requests to the /users endpoint
+    // Endpoint to retrieve all users
+    @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers() {
+        // Call the service to retrieve all users
         List<UserDto> dDto = userService.getAllUsers();
+        // Return the list of users and HTTP status code 200 (OK)
         return new ResponseEntity<>(dDto, HttpStatus.OK);
     }
 }
