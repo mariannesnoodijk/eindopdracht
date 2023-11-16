@@ -5,29 +5,27 @@ import lombok.Data;
 
 import java.util.List;
 
-@Data // Lombok imports automatically the Constructor, Getters and Setter by using @Data
+// Lombok imports automatically the Constructor, Getters and Setter by using @Data
+@Data
 @Entity
 @Table(name = "accounts")
 public class Account {
 
-    @Id //  Primary Key of the entity
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // This specifies that the ID is automatically generated
+    // Primary key for the Account entity
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountId;
 
+    // Fields representing account details
     private String firstname;
     private String lastname;
     private String email;
 
-
-    // RELATION BETWEEN ACCOUNT & USER
-    @OneToOne // This is the owner side of the relation. There is a Foreign Key in the database.
+    // One-to-one relationship with the User entity
+    @OneToOne
             User user;
 
-    // RELATION BETWEEN ACCOUNT & PROPERTY
-//    @ManyToMany(fetch = FetchType.EAGER) // The FetchType. EAGER option indicates that the associated entity should be fetched eagerly, which means that it will be fetched at the same time as the parent entity.
-//    private List<Property> properties = new ArrayList<>();
-
-    // RELATION BETWEEN ACCOUNT & VIEWING
-    @OneToMany(mappedBy = "account") // This is the target side of the relation with Viewing. There is nothing in the database.
+    // One-to-many relationship with the Viewing entity, mapped by the "account" field in Viewing
+    @OneToMany(mappedBy = "account")
     List<Viewing> viewings;
 }

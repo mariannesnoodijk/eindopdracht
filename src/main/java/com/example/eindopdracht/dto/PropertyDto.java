@@ -1,12 +1,12 @@
 package com.example.eindopdracht.dto;
 
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
+// This class serves as a data structure for transferring data related to authorization between different parts of the application
 @Data
-public class PropertyDto { // This class serves as a data structure for transferring data related to properties between different parts of the application
+public class PropertyDto {
 
     private Long propertyId;
 

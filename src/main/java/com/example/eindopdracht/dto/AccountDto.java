@@ -3,9 +3,9 @@ package com.example.eindopdracht.dto;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
-
+// This class serves as a data structure for transferring data related to authorization between different parts of the application
 @Data
-public class AccountDto { //This class serves as a data structure for transferring data related to user accounts between different parts of the application
+public class AccountDto {
 
     public Long accountId;
     @NotEmpty(message = "First name cannot be empty")
@@ -19,5 +19,4 @@ public class AccountDto { //This class serves as a data structure for transferri
     public String username;
     @NotEmpty
     public String password;
-
 }

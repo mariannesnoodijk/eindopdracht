@@ -5,16 +5,17 @@ import lombok.Data;
 
 import java.util.List;
 
-@Data // Lombok imports automatically the Constructor, Getters and Setter by using @Data
+// Lombok imports automatically the Constructor, Getters and Setter by using @Data
+@Data
 @Entity
 @Table(name="roles")
 public class Role {
 
-    @Id //  Primary Key of the entity
+    // Primary key for the role entity
+    @Id
     private String rolename;
 
-
-    // RELATION BETWEEN ROLE & USER
-    @ManyToMany(mappedBy = "roles") // This is the target side, non owner side, of the relation with User. There is nothing in the database.
+    // Many-to-many relationship with the User entity, mapped by the "roles" field in User
+    @ManyToMany(mappedBy = "roles")
     private List<User> users;
 }

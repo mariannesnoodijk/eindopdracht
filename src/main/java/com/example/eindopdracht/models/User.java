@@ -4,25 +4,24 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.ArrayList;
-import java.util.HashSet; // Set deed het niet, dus veranderd naar List. Waarom List gebruikt? Voor tech documentatie
 import java.util.List;
 
-@Data // Lombok imports automatically the Constructor, Getters and Setter by using @Data
+// Lombok imports automatically the Constructor, Getters and Setter by using @Data
+@Data
 @Entity
 @Table(name = "users")
 public class User {
 
-    @Id //  Primary Key of the entity
+    // Primary key for the User entity
+    @Id
     private String username;
     private String password;
 
-
-    // One-to-One relation between USER & ACCOUNT
-    @OneToOne(mappedBy = "user") // This is the target side of the relation with Account. There is nothing in the database.
+    // One-to-one relationship with the Account entity, mapped by the "user" field in Account
+    @OneToOne(mappedBy = "user")
             Account account;
 
-    // Many-to-Many relation between USER & ROLE
-    @ManyToMany(fetch = FetchType.EAGER) // The owner side of the relation with Role.
-    // The FetchType. EAGER option indicates that the associated entity should be fetched eagerly, which means that it will be fetched at the same time as the parent entity.
+    // Many-to-many relationship with the Role entity
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();
 }
