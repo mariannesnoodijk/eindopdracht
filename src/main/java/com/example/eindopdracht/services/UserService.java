@@ -42,8 +42,7 @@ public class UserService {
             throw new IdNotFoundException("User not found with ID: " + userId);
         }
     }
-
-    // TODO: Wil ik hier wel alle users op kunnen vragen?
+    
     public List<UserDto> getAllUsers() {
         List<User> users = userRepository.findAll();
         List<UserDto> userDtos = new ArrayList<>();
