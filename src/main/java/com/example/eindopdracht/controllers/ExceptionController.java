@@ -7,18 +7,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice // Annotation which allows to handle exceptions across the whole application, not just to an individual controller. It's used to define global exception handling rules.
+// Global exception handler to handle exceptions across multiple controllers
+@ControllerAdvice
 public class ExceptionController {
 
-    //    When an exception of IdNotFoundException is thrown in the application, this method catches it and returns a ResponseEntity with the exception message and an HTTP status of NOT_FOUND (404).
+    // Handling IdNotFoundException
     @ExceptionHandler(value = IdNotFoundException.class)
     public ResponseEntity<Object> exceptionId(IdNotFoundException exception) {
+        // Returning the exception message in the response body with HTTP status code 404 (Not Found)
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    //    When an exception of IncorrectEmailException is thrown in the application, this method catches it and returns a ResponseEntity with the exception message and an HTTP status of NOT_FOUND (404).
+    // Handling IncorrectEmailException
     @ExceptionHandler(value = IncorrectEmailException.class)
     public ResponseEntity<Object> exceptionId(IncorrectEmailException exception) {
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.I_AM_A_TEAPOT);
+        // Returning the exception message in the response body with HTTP status code 422 (Unprocessable Entity)
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }

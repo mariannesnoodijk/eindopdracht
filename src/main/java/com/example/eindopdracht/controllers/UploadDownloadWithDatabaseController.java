@@ -19,35 +19,43 @@ public class UploadDownloadWithDatabaseController {
 
     private final DatabaseService databaseService;
 
+    // Constructor to inject the DatabaseService dependency
     public UploadDownloadWithDatabaseController(DatabaseService databaseService) {
         this.databaseService = databaseService;
     }
 
+    // Endpoint for single file upload to the database
     @PostMapping("single/uploadDB")
     public FileUploadResponse singleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
-
-
-        // next line makes url. example "http://localhost:8080/download/naam.jpg"
+        // Upload the file to the database and retrieve the associated FileDocument
         FileDocument fileDocument = databaseService.uploadFileDocument(file);
-        String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFromDB/").path(Objects.requireNonNull(file.getOriginalFilename())).toUriString();
 
+        // Build the download URL for the uploaded file
+        String url = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/downloadFromDB/")
+                .path(Objects.requireNonNull(file.getOriginalFilename()))
+                .toUriString();
+        // Get the content type of the uploaded file
         String contentType = file.getContentType();
-
-        return new FileUploadResponse(fileDocument.getFileName(), url, contentType );
+        // Return the response with the uploaded file details
+        return new FileUploadResponse(fileDocument.getFileName(), url, contentType);
     }
 
-    //    get for single download
+    // Endpoint for downloading a single file from the database
     @GetMapping("/downloadFromDB/{fileName}")
     ResponseEntity<byte[]> downLoadSingleFile(@PathVariable String fileName, HttpServletRequest request) {
-
+        // Download the file from the database using the specified file name
         FileDocument document = databaseService.singleFileDownload(fileName, request);
 
-
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + document.getFileName()).body(document.getDocFile());
+        // Return the file in the response with the appropriate headers
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + document.getFileName())
+                .body(document.getDocFile());
     }
 
     // TODO: DETERMINE WHETHER A MULTI UPLOAD IS POSSIBLE AND DESIRED
     //    post for multiple uploads to database
+//    // Endpoint for multiple file upload to the database
 //    @PostMapping("/multiple/uploadDB")
 //    List<FileUploadResponse> multipleUpload(@RequestParam("files") MultipartFile [] files) {
 //
@@ -60,6 +68,7 @@ public class UploadDownloadWithDatabaseController {
 //    }
 
     // TODO: HERACTIVEREN ALS MULTI UPLOAD TE DOEN IS
+//    // Endpoint for downloading all files from the database
 //    @GetMapping("/downloadAllFromDB")
 //    public Collection<FileDocument> getAllFromDB(){
 //        return databaseService.getALlFromDB();
