@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @ActiveProfiles("test")
 class AccountServiceIntegrationTest {
 
+    // The MockMvc simulate HTTP requests and tests the behavior of your controllers
     @Autowired
-    MockMvc mockMvc; // With this it uses the h2 database instead of the actual
+    MockMvc mockMvc;
 }
