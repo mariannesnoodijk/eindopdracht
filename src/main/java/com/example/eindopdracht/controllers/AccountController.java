@@ -20,10 +20,6 @@ public class AccountController {
 
     @PostMapping// This method handles HTTP POST requests to the /accounts endpoint creating an account
     public ResponseEntity<AccountDto> createAccount(@Valid @RequestBody AccountDto accountDto) {
-//        if (!accountService.validateEmailPattern(accountDto.getEmailaddress())) {
-//            throw new IncorrectEmailException("Invalid email address: " + accountDto.getEmailaddress());
-//        }
-
         AccountDto newAccount = accountService.createAccount(accountDto);
         return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
     }
@@ -43,8 +39,6 @@ public class AccountController {
     @DeleteMapping("/{accountId}") // This method handles HTTP DELETE requests to the /accounts/{accountId} endpoint
     public ResponseEntity<AccountDto> deleteAccount(@PathVariable Long accountId) {
         accountService.deleteAccount(accountId);
-
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }
