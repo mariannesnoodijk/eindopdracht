@@ -19,9 +19,11 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Import necessary classes and annotations for testing with Mockito and JUnit
 @ExtendWith(MockitoExtension.class)
 class ViewingServiceTest {
 
+    // Mocking the dependencies needed for testing
     @Mock
     private ViewingRepository viewingRepository;
 
@@ -31,9 +33,10 @@ class ViewingServiceTest {
     @Mock
     private AccountRepository accountRepository;
 
+    // Test method for getting all viewings
     @Test
     void testShouldGetAllViewings() {
-        // arrange - creating/adding a new viewing
+        // Arrange - creating/adding new viewings and an account
         Viewing viewing1 = new Viewing();
         viewing1.setFullname("Jan Jansen");
         viewing1.setPhonenumber("0611122333");
@@ -53,18 +56,20 @@ class ViewingServiceTest {
         viewing1.setAccount(account1);
         viewing2.setAccount(account1);
 
+        // Mocking the behavior of the viewingRepository
         Mockito.when(viewingRepository.findAll()).thenReturn(viewings);
 
-        // act
+        // Act - calling the method to be tested
         List<ViewingDto> result = viewingService.getAllViewings();
 
-        // assert
+        // Assert - checking the result
         assertEquals(2, result.size());
     }
 
+    // Test method for creating a new viewing
     @Test
     void testShouldCreateViewing() {
-        // arrange
+        // Arrange - setting up the test data for a new viewing and an associated account
         Viewing newViewing = new Viewing();
         newViewing.setFullname("Jan Jansen");
         newViewing.setPhonenumber("0611122333");
@@ -74,33 +79,34 @@ class ViewingServiceTest {
         newAccount.setAccountId(123L);
         newViewing.setAccount(newAccount);
 
+        // Mocking the behavior of the viewingRepository and accountRepository
         Mockito.when(viewingRepository.save(Mockito.any(Viewing.class))).thenReturn(newViewing);
-
         Mockito.when(accountRepository.findById(newAccount.getAccountId())).thenReturn(Optional.of(newAccount));
 
-        // act
+        // Act - calling the method to be tested
         ViewingDto savedViewingDto = viewingService.createViewing(new ViewingDto(), newAccount.getAccountId());
 
-        // assert
+        // Assert - checking the result
         assertEquals("Jan Jansen", savedViewingDto.getFullname());
         assertEquals("0611122333", savedViewingDto.getPhonenumber());
         assertEquals("jan@jansen.com", savedViewingDto.getEmail());
     }
 
+    // Test method for deleting a viewing
     @Test
     void testShouldDeleteViewing() {
-        // Arrange
+        // Arrange - setting up the test data for a viewing to be deleted
         Long viewingId = 1L;
 
+        // Mocking the behavior of the viewingRepository
         Mockito.doNothing().when(viewingRepository).deleteById(viewingId);
 
-        // Act
+        // Act - calling the method to be tested
         String result = viewingService.deleteViewing(viewingId);
 
-        // Assert
+        // Assert - verifying the interactions and checking the result
         // Verify that the deleteById method of viewingRepository is called with the correct ID
         Mockito.verify(viewingRepository).deleteById(viewingId);
-
         // Verify the returned message
         assertEquals("Viewing successfully deleted", result);
     }
