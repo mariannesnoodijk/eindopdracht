@@ -20,8 +20,4 @@ public class PropertyDto { // This class serves as a data structure for transfer
     private String description;
 
     private Boolean isFavorite;
-
-    // private Boolean available; // TODO: OPTIONAL... GA IK DOEN OF NIET? Like to have
-
-    // private Boolean match; // TODO: OPTIONAL... GA IK DOEN OF NIET? Like to have
 }

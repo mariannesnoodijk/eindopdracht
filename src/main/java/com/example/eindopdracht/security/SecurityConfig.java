@@ -79,9 +79,8 @@ public class SecurityConfig {
 ////                                .requestMatchers(HttpMethod.DELETE, "/viewings/{viewingId}").hasAnyRole("ADMIN", "USER")
 //                                .requestMatchers(HttpMethod.DELETE, "/viewings").permitAll()
 
-                        //TODO: Toevoegen AUTH, maar vraag Mark eerst van hoe en wat
 //                                .requestMatchers(HttpMethod.POST, "/auth").hasRole("ADMIN")
-                        
+//                                .requestMatchers(HttpMethod.POST, "/auth").hasRole("USER")
 //                                .requestMatchers(HttpMethod.POST, "/single/uploadDB").hasRole("ADMIN") // single upload
 //                                .requestMatchers(HttpMethod.GET, "/downloadFromDB/{fileName}").hasRole("ADMIN") // single download
 //                                .requestMatchers(HttpMethod.POST, "/multiple/uploadDB").hasRole("ADMIN") // multiple upload
