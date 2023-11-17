@@ -45,8 +45,9 @@ public class JwtService {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetails userDetails, long accountId) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("accountId", accountId);
         return createToken(claims, userDetails.getUsername());
     }
 
@@ -57,7 +58,7 @@ public class JwtService {
         long currentTime = System.currentTimeMillis();
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(subject)
+                .setSubject(String.valueOf(subject))
                 .setIssuedAt(new Date(currentTime))
                 .setExpiration(new Date(currentTime + validPeriod))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)

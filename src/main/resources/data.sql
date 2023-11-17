@@ -3,7 +3,7 @@ VALUES ('ROLE_USER'), ('ROLE_ADMIN');
 
 -- USERS DATABASE
 INSERT INTO users(username, password)
-VALUES ('admin', '$2a$12$SMY80YVA2Y10RxbZWQKiHetM2B/WjH1GqItMYJircqt/Rqs1mvWWm'),
+VALUES ('admin', '$2a$12$LIqNdVnS15BEHlAlYqePHOyhD7aGaTPtfK.j5HnFHLE0fMqbcrNZS'),
        ('testuser', '$2a$12$aSfpc94Jc.yBUeiC20Hqk.mSddJ.X5bTiXsJQkopj0JOgPD6h3Dc6');
 
 -- ASSIGNING USER TO ROLE
@@ -13,7 +13,8 @@ INSERT INTO users_roles(roles_rolename, users_username)
 
 -- ACCOUNTS DATABASE
 INSERT INTO accounts(account_id, firstname, lastname, email, user_username)
-VALUES (100, 'marianne', 'snoodijk', 'mariannesnoodijk@test.com', 'testuser');
+VALUES (100, 'admin', 'admin', 'admin@test.com', 'admin'),
+       (101, 'marianne', 'snoodijk', 'mariannesnoodijk@test.com', 'testuser');
 
 -- PROPERTIES DATABASE
 INSERT INTO properties(property_id, address, price, description)
