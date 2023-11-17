@@ -55,54 +55,45 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
 
 
-//                                .requestMatchers("/*").hasRole("ADMIN")
-//                                .requestMatchers("/**").hasRole("ADMIN")
+//                        Deze doen het goed, en/of hebben geen USER/ADMIN nodig:
+                                .requestMatchers(HttpMethod.POST, "/single/uploadDB").permitAll()
 
-                                .requestMatchers(HttpMethod.GET, "/users/{userId}").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
-
-                                .requestMatchers(HttpMethod.POST, "/accounts").hasAnyRole("ADMIN", "USER")
-//                                .requestMatchers(HttpMethod.GET, "/accounts/{accountId}").hasAnyRole("ADMIN", "USER")
-                                .requestMatchers(HttpMethod.GET, "/accounts/{accountId}").permitAll()
-//                                .requestMatchers(HttpMethod.GET, "/accounts").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET, "/accounts").permitAll()
-                                .requestMatchers(HttpMethod.DELETE, "/accounts/{accountId}").hasRole("ADMIN")
-
-                                .requestMatchers(HttpMethod.POST, "/properties").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.POST, "/properties").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/properties/{propertyId}").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/properties").permitAll()
-                                .requestMatchers(HttpMethod.PATCH, "/properties/{propertyId}/favorite").hasRole("USER")
-                                .requestMatchers(HttpMethod.DELETE, "/properties/{propertyId}").hasRole("ADMIN")
 
-                                .requestMatchers(HttpMethod.GET, "/roles").hasRole("ADMIN")
-
-//                                .requestMatchers(HttpMethod.POST, "/viewings").hasAnyRole("ADMIN", "USER")
-                                .requestMatchers(HttpMethod.POST, "/viewings").permitAll()
-//                                .requestMatchers(HttpMethod.GET, "/viewings").hasAnyRole("ADMIN", "USER")
-                                .requestMatchers(HttpMethod.GET, "/viewings").permitAll()
-//                                .requestMatchers(HttpMethod.DELETE, "/viewings/{viewingId}").hasAnyRole("ADMIN", "USER")
-                                .requestMatchers(HttpMethod.DELETE, "/viewings").permitAll()
-
-                                .requestMatchers(HttpMethod.POST, "/single/uploadDB").hasRole("ADMIN") // single upload
-                                .requestMatchers(HttpMethod.GET, "/downloadFromDB/{fileName}").hasRole("ADMIN") // single download
-                                .requestMatchers(HttpMethod.POST, "/multiple/uploadDB").hasRole("ADMIN") // multiple upload
-                                .requestMatchers(HttpMethod.GET, "/downloadAllFromDB").hasRole("ADMIN") // multiple download
-
-//                                .requestMatchers(HttpMethod.POST, "/users").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/auth").permitAll()
-//                                .requestMatchers(HttpMethod.GET, "/*").permitAll()
-//                                .requestMatchers(HttpMethod.DELETE, "/*").permitAll()
-
-//                                .requestMatchers("/secret").hasRole("ADMIN")
-//                                .requestMatchers("/hello").authenticated()
-//                        .anyRequest().permitAll()
 
 
-                                .requestMatchers("/*").permitAll()
-                                .requestMatchers("/**").permitAll()
-//                                .anyRequest().denyAll()
-                                .anyRequest().permitAll()
+//                                .requestMatchers(HttpMethod.GET, "/users/**").hasAnyAuthority("ADMIN")
+//                                .requestMatchers(HttpMethod.GET, "/users").hasAnyAuthority("ADMIN")
+////                              TODO: Check onderstaande of klopt. En wil ik dit nog implementeren?
+//                                .requestMatchers(HttpMethod.POST, "users").permitAll()
+//
+//                                .requestMatchers(HttpMethod.POST, "/accounts").hasAnyAuthority("ADMIN", "USER")
+//                                .requestMatchers(HttpMethod.GET, "/accounts/**").hasAnyAuthority("ADMIN", "USER")
+//                                .requestMatchers(HttpMethod.GET, "/accounts").hasAnyAuthority("ADMIN")
+//                                .requestMatchers(HttpMethod.DELETE, "/accounts/**").hasAnyAuthority("ADMIN")
+//
+//                                .requestMatchers(HttpMethod.POST, "/properties").hasAnyAuthority("ADMIN")
+//                                .requestMatchers(HttpMethod.PATCH, "/properties/**/favorite").hasAnyAuthority("USER")
+//                                .requestMatchers(HttpMethod.DELETE, "/properties/**").hasAnyAuthority("ADMIN")
+//
+//                                .requestMatchers(HttpMethod.GET, "/roles").hasAnyAuthority("ADMIN")
+//
+//                                .requestMatchers(HttpMethod.POST, "/viewings").hasAnyAuthority("ADMIN", "USER")
+//                                .requestMatchers(HttpMethod.GET, "/viewings").hasAnyAuthority("ADMIN", "USER")
+//                                .requestMatchers(HttpMethod.DELETE, "/viewings/**").hasAnyAuthority("ADMIN", "USER")
+//
+//                                .requestMatchers(HttpMethod.GET, "/downloadFromDB/**").hasAnyAuthority("ADMIN") // single download
+//                                .requestMatchers(HttpMethod.POST, "/multiple/uploadDB").permitAll() // multiple upload
+//                                .requestMatchers(HttpMethod.GET, "/downloadAllFromDB").hasAnyAuthority("ADMIN") // multiple download
+//                                .anyRequest().authenticated()
+
+
+
+
+
+
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(new JwtRequestFilter(jwtService, userDetailsService()), UsernamePasswordAuthenticationFilter.class);
