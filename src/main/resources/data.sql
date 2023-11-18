@@ -1,15 +1,15 @@
 INSERT INTO roles(rolename)
-VALUES ('ROLE_USER'), ('ROLE_ADMIN');
+VALUES ('ADMIN'), ('USER');
 
 -- USERS DATABASE
 INSERT INTO users(username, password)
-VALUES ('admin', '$2a$12$LIqNdVnS15BEHlAlYqePHOyhD7aGaTPtfK.j5HnFHLE0fMqbcrNZS'),
-       ('testuser', '$2a$12$aSfpc94Jc.yBUeiC20Hqk.mSddJ.X5bTiXsJQkopj0JOgPD6h3Dc6');
+VALUES ('admin', '$2a$12$PiSwq6.yYOsYtW0cFT7wVuwkylCm3DktE21iiEJCyhbmLiZscljQe'),
+       ('testuser', '$2a$12$344tMA39r282qUhmVyylc.gxf/XebGzUBqkitrySQvl90Uuqvm3fG');
 
 -- ASSIGNING USER TO ROLE
 INSERT INTO users_roles(roles_rolename, users_username)
-    VALUES ('ROLE_ADMIN', 'admin'),
-           ('ROLE_USER', 'testuser');
+    VALUES ('ADMIN', 'admin'),
+           ('USER', 'testuser');
 
 -- ACCOUNTS DATABASE
 INSERT INTO accounts(account_id, firstname, lastname, email, user_username)

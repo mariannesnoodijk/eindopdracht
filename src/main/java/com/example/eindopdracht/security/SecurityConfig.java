@@ -56,18 +56,18 @@ public class SecurityConfig {
 
 
 //                        Deze doen het goed, en/of hebben geen USER/ADMIN nodig:
-                                .requestMatchers(HttpMethod.POST, "/single/uploadDB").permitAll()
-
-                                .requestMatchers(HttpMethod.GET, "/properties/{propertyId}").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/properties").permitAll()
-
-                                .requestMatchers(HttpMethod.POST, "/auth").permitAll()
+//                                .requestMatchers(HttpMethod.POST, "/single/uploadDB").permitAll()
+//
+//                                .requestMatchers(HttpMethod.GET, "/properties/{propertyId}").permitAll()
+//                                .requestMatchers(HttpMethod.GET, "/properties").permitAll()
+//
+//                                .requestMatchers(HttpMethod.POST, "/auth").permitAll()
 
 
 //                                .requestMatchers(HttpMethod.GET, "/users/**").hasAnyAuthority("ADMIN")
 //                                .requestMatchers(HttpMethod.GET, "/users").hasAnyAuthority("ADMIN")
 ////                              TODO: Check onderstaande of klopt. En wil ik dit nog implementeren?
-//                                .requestMatchers(HttpMethod.POST, "users").permitAll()
+//                                .requestMatchers(HttpMethod.POST, "/users").permitAll()
 //
 //                                .requestMatchers(HttpMethod.POST, "/accounts").hasAnyAuthority("ADMIN", "USER")
 //                                .requestMatchers(HttpMethod.GET, "/accounts/**").hasAnyAuthority("ADMIN", "USER")
@@ -88,6 +88,7 @@ public class SecurityConfig {
 //                                .requestMatchers(HttpMethod.POST, "/multiple/uploadDB").permitAll() // multiple upload
 //                                .requestMatchers(HttpMethod.GET, "/downloadAllFromDB").hasAnyAuthority("ADMIN") // multiple download
 //                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
 
 
 

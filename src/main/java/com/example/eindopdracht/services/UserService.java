@@ -39,7 +39,7 @@ public class UserService {
         List<Role> userRoles = newUser.getRoles();
         for (String rolename : userDto.getRoles()) {
             // Find and add roles to the user
-            Optional<Role> or = roleRepository.findById("ROLE_" + rolename);
+            Optional<Role> or = roleRepository.findById(rolename);
             if (or.isPresent()) {
                 userRoles.add(or.get());
             }
