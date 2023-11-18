@@ -19,6 +19,15 @@ target/
 *.iml
 *.ipr
 
+# Ignore node_modules directory
+node_modules/
+
+# Ignore Maven target directory
+target/
+
+# Ignore compiled output directory
+out/
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -29,5 +38,3 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
-.vscode/
