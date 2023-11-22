@@ -55,44 +55,34 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
 
 
-//                        Deze doen het goed, en/of hebben geen USER/ADMIN nodig:
-//                                .requestMatchers(HttpMethod.POST, "/single/uploadDB").permitAll()
-//
-//                                .requestMatchers(HttpMethod.GET, "/properties/{propertyId}").permitAll()
-//                                .requestMatchers(HttpMethod.GET, "/properties").permitAll()
-//
-//                                .requestMatchers(HttpMethod.POST, "/auth").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth").permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/users/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/users").hasAnyAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
+
+                        .requestMatchers(HttpMethod.POST, "/accounts").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/accounts/**").hasAnyAuthority("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/accounts").hasAnyAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/accounts/**").hasAnyAuthority("ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/properties").hasAnyAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/properties/{propertyId}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/properties").permitAll()
+                        .requestMatchers(HttpMethod.PATCH, "/properties/**/favorite").hasAnyAuthority("USER")
+                        .requestMatchers(HttpMethod.DELETE, "/properties/**").hasAnyAuthority("ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/viewings").hasAnyAuthority("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/viewings").hasAnyAuthority("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.DELETE, "/viewings/**").hasAnyAuthority("ADMIN", "USER")
+
+                        .requestMatchers(HttpMethod.GET, "/roles").hasAnyAuthority("ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/single/uploadDB").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/downloadFromDB/**").hasAnyAuthority("ADMIN") // single download
 
 
-//                                .requestMatchers(HttpMethod.GET, "/users/**").hasAnyAuthority("ADMIN")
-//                                .requestMatchers(HttpMethod.GET, "/users").hasAnyAuthority("ADMIN")
-////                              TODO: Check onderstaande of klopt. En wil ik dit nog implementeren?
-//                                .requestMatchers(HttpMethod.POST, "/users").permitAll()
-//
-//                                .requestMatchers(HttpMethod.POST, "/accounts").hasAnyAuthority("ADMIN", "USER")
-//                                .requestMatchers(HttpMethod.GET, "/accounts/**").hasAnyAuthority("ADMIN", "USER")
-//                                .requestMatchers(HttpMethod.GET, "/accounts").hasAnyAuthority("ADMIN")
-//                                .requestMatchers(HttpMethod.DELETE, "/accounts/**").hasAnyAuthority("ADMIN")
-//
-//                                .requestMatchers(HttpMethod.POST, "/properties").hasAnyAuthority("ADMIN")
-//                                .requestMatchers(HttpMethod.PATCH, "/properties/**/favorite").hasAnyAuthority("USER")
-//                                .requestMatchers(HttpMethod.DELETE, "/properties/**").hasAnyAuthority("ADMIN")
-//
-//                                .requestMatchers(HttpMethod.GET, "/roles").hasAnyAuthority("ADMIN")
-//
-//                                .requestMatchers(HttpMethod.POST, "/viewings").hasAnyAuthority("ADMIN", "USER")
-//                                .requestMatchers(HttpMethod.GET, "/viewings").hasAnyAuthority("ADMIN", "USER")
-//                                .requestMatchers(HttpMethod.DELETE, "/viewings/**").hasAnyAuthority("ADMIN", "USER")
-//
-//                                .requestMatchers(HttpMethod.GET, "/downloadFromDB/**").hasAnyAuthority("ADMIN") // single download
-//                                .requestMatchers(HttpMethod.POST, "/multiple/uploadDB").permitAll() // multiple upload
-//                                .requestMatchers(HttpMethod.GET, "/downloadAllFromDB").hasAnyAuthority("ADMIN") // multiple download
-//                                .anyRequest().authenticated()
-                                .anyRequest().permitAll()
-
-
-
-
+                        .anyRequest().permitAll()
 
 
                 )

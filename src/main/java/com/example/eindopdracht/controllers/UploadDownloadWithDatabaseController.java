@@ -52,25 +52,4 @@ public class UploadDownloadWithDatabaseController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + document.getFileName())
                 .body(document.getDocFile());
     }
-
-    // TODO: DETERMINE WHETHER A MULTI UPLOAD IS POSSIBLE AND DESIRED
-    //    post for multiple uploads to database
-//    // Endpoint for multiple file upload to the database
-//    @PostMapping("/multiple/uploadDB")
-//    List<FileUploadResponse> multipleUpload(@RequestParam("files") MultipartFile [] files) {
-//
-//        if(files.length > 7) {
-//            throw new RuntimeException("too many files selected");
-//        }
-//
-//        return databaseService.createMultipleUpload(files);
-//
-//    }
-
-    // TODO: HERACTIVEREN ALS MULTI UPLOAD TE DOEN IS
-//    // Endpoint for downloading all files from the database
-//    @GetMapping("/downloadAllFromDB")
-//    public Collection<FileDocument> getAllFromDB(){
-//        return databaseService.getALlFromDB();
-//    }
 }

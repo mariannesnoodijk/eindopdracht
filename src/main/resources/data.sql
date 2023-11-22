@@ -14,7 +14,7 @@ INSERT INTO users_roles(roles_rolename, users_username)
 -- ACCOUNTS DATABASE
 INSERT INTO accounts(account_id, firstname, lastname, email, user_username)
 VALUES (100, 'admin', 'admin', 'admin@test.com', 'admin'),
-       (101, 'marianne', 'snoodijk', 'mariannesnoodijk@test.com', 'testuser');
+       (101, 'Marianne', 'Snoodijk', 'mariannesnoodijk@test.com', 'testuser');
 
 -- PROPERTIES DATABASE
 INSERT INTO properties(property_id, address, price, description)
@@ -31,5 +31,5 @@ VALUES (100, 'Singel 10, Amsterdam', 725000.00, 'Charming apartment with modern 
 
 -- VIEWINGS DATABASE
 INSERT INTO viewings(date, time, account_id, viewing_id, email, fullname, phonenumber)
-VALUES ('2023-12-12', '11:30', 100, 50, 'mariannesnoodijk@test.com', 'marianne snoodijk', '0611122333'),
-       ('2024-06-10', '14:00', 100, 51, 'mariannesnoodijk@test.com', 'marianne snoodijk', '0611122333');
+VALUES ('2023-12-12', '11:30', 100, 50, 'mariannesnoodijk@test.com', 'Marianne Snoodijk', '0611122333'),
+       ('2024-06-10', '14:00', 100, 51, 'mariannesnoodijk@test.com', 'Marianne Snoodijk', '0611122333');
