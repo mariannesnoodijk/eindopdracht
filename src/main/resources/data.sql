@@ -13,7 +13,7 @@ INSERT INTO users_roles(roles_rolename, users_username)
 
 -- ACCOUNTS DATABASE
 INSERT INTO accounts(account_id, firstname, lastname, email, user_username)
-VALUES (100, 'admin', 'admin', 'admin@test.com', 'admin'),
+VALUES (100, 'Admin', 'Admin', 'admin@test.com', 'admin'),
        (101, 'Marianne', 'Snoodijk', 'mariannesnoodijk@test.com', 'testuser');
 
 -- PROPERTIES DATABASE
