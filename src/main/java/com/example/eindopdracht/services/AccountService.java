@@ -31,7 +31,15 @@ public class AccountService {
         UserDto userDto = new UserDto();
         userDto.setUsername(accountDto.getUsername());
         userDto.setPassword(accountDto.getPassword());
-        userDto.setRoles(new String[]{"USER"});
+
+        // Set roles based on the selected role from the frontend
+        String selectedRole = accountDto.getRole();
+        if (selectedRole != null && (selectedRole.equals("ADMIN") || selectedRole.equals("USER"))) {
+            userDto.setRoles(new String[]{selectedRole});
+        } else {
+            userDto.setRoles(new String[]{"USER"});
+        }
+
         User user = userService.createUser(userDto);
 
         // Create and save the account
@@ -88,6 +96,7 @@ public class AccountService {
         aDto.setLastname(a.getLastname());
         aDto.setEmail(a.getEmail());
         aDto.setUsername(a.getUser().getUsername());
+        aDto.setRole(a.getUser().getRoles().get(0).getRolename());
     }
 
     // Helper method to convert AccountDto to Account
