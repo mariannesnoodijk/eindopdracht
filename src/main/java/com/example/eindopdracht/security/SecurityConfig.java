@@ -72,7 +72,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PATCH, "/properties/**/favorite").hasAnyAuthority("USER")
                         .requestMatchers(HttpMethod.DELETE, "/properties/**").hasAnyAuthority("ADMIN")
 
-                        .requestMatchers(HttpMethod.POST, "/viewings").hasAnyAuthority("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/viewings").permitAll()
                         .requestMatchers(HttpMethod.GET, "/viewings").hasAnyAuthority("ADMIN", "USER")
                         .requestMatchers(HttpMethod.DELETE, "/viewings/**").hasAnyAuthority("ADMIN", "USER")
 
